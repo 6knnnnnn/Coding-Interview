@@ -19,6 +19,12 @@ def int_to_roman(num):
     return ''.join(res_list)
 
 
+test1 = [1, 2, 4, 5, 9, 10, 11]
+
+for t in test1:
+    print t, int_to_roman(t)
+
+
 def roman_to_int(roman_str):
     roman = {'M': 1000, 'D': 500,
              'C': 100, 'L': 50,
@@ -34,3 +40,7 @@ def roman_to_int(roman_str):
             num += roman[c1]
     return num + roman[roman_str[-1]]
 
+test2 = ["MD", "IC", "IL", "XL", "XX", "XV"]
+
+for t in test2:
+    print t, roman_to_int(t)

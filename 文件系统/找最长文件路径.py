@@ -16,9 +16,6 @@ class PathNode(object):
         self.depth = depth
         self.length = length
 
-    def __repr__(self):
-        return "{}/".format(self.name)
-
     def is_file(self):
         return '.' in self.name
 
