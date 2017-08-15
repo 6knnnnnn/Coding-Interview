@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# 名人不认识任何人，所有人都认识名人
-# 如果x knows y，x肯定不是名人，如果x doesn't know y，y肯定不是名人，所以依次排除
 
-
-def knows(x, y):
-    return False
-
-
-def findCelebrity(n):
+def find_celebrity(n):
+    # 名人不认识任何人，所有人都认识名人
+    def knows(x, y): # API
+        return x == y
     if n < 0: return 0
     x, y = 0, n - 1
     # two pointers，前后扫
     while x < y:
+        # 如果x认识y，x不是名人，否则y肯定不是名人，所以依次排除
         if knows(x, y):
             x += 1
         else:

@@ -1,2 +1,2 @@
-# Coding-Interview-Notebook
+# Coding-Interview
 A repo for popular coding interview problems.

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
-"""
-返回merge后的结果，输入并没有排序。
-
-Test0: [1, 10], [2, 3] return [1, 10]
-Test1: [1,3],[2,6],[15,18], return [1,6],[8,10],[15,18]
-Test2: [1, 5], [6, 7], return [1, 5], [6, 7]
-"""
-
 
 def merge_intervals(intervals):
+    """
+    返回merge后的结果，输入并没有排序。
+
+    Test0: [1, 10], [2, 3] return [1, 10]
+    Test1: [1,3],[2,6],[15,18], return [1,6],[8,10],[15,18]
+    Test2: [1, 5], [6, 7], return [1, 5], [6, 7]
+    """
     merged = list([])
     if intervals:
         # 先排序
@@ -27,18 +26,17 @@ def merge_intervals(intervals):
                 merged.append(curr)
     return merged
 
-"""
-input里面没有overlap的情况，而且已经排序，要求插入新的interval，必要时merge
-
-Test0: [1, 3], [8, 10], new=[4, 5] -> [1, 3], [4, 5], [8, 10]
-Test1: [1, 5], [7, 10], new = [4, 6] -> [1, 6], [7, 10] (merge)
-Test2: [1, 5], [7, 10], new = [4, 7] -> [1, 10] (merge)
-
-O(N)的做法就是从头扫到尾，找到对应的merge点，merge之后仍要继续，直到不需要在merge了
-"""
-
 
 def insert_interval(intervals, new):
+    """
+    input里面没有overlap的情况，而且已经排序，要求插入新的interval，必要时merge
+
+    Test0: [1, 3], [8, 10], new=[4, 5] -> [1, 3], [4, 5], [8, 10]
+    Test1: [1, 5], [7, 10], new = [4, 6] -> [1, 6], [7, 10] (merge)
+    Test2: [1, 5], [7, 10], new = [4, 7] -> [1, 10] (merge)
+
+    O(N)的做法就是从头扫到尾，找到对应的merge点，merge之后仍要继续，直到不需要在merge了
+    """
     output = list([])
     for i in xrange(len(intervals)):
         x = intervals[i]

@@ -5,6 +5,8 @@ from 区间 import Interval
 # Given a collection of intervals, find the min number of intervals need to remove
 # to make the rest of the intervals non-overlapping.
 # 其实就是经典的activity selection问题，按照end时间排序后，贪心算法
+# Find the activity compatible with the previous selected activity and with the earliest finishing time,
+# so the there will be maximum resources for the remained activities after this one
 # 即这里并非erase，而是select，最后的结果就是尽可能多的兼容的interval，换言之就是erase最少的interval
 
 
@@ -14,11 +16,6 @@ def erase_overlap_intervals(intervals):
     prev = intervals[0]
     erased = 0
     for i in xrange(1, len(intervals)):
-        """
-        
-        Find the activity compatible with the previous selected activity and with the earliest finishing time, 
-        so the there will be maximum resources for the remained activities after this one
-        """
         if intervals[i].start >= prev.end:
             # 此时说明，i开始前prev已经结束了，没有overlap，不需要删除掉当前节点
             # 比如prev = [8, 10], i = [15, 20]

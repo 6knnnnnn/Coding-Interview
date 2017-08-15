@@ -3,6 +3,7 @@
 
 # Valid Word Abbreviation, https://leetcode.com/problems/valid-word-abbreviation/description/
 # 判断一个word和一个abbr是否匹配
+# 非数字位置的字符是否相等，数字位置的字符所组成的长度是否相等
 def valid_word_abbreviation(word, abbr):
     if len(abbr) > len(word):
         return False
@@ -36,7 +37,8 @@ def test_valid_word_abbreviation():
 # Assume you have a dictionary and given a word, find whether its abbreviation
 # is unique in the dictionary. A word's abbreviation is unique if no other word
 # from the dictionary has the same abbreviation.
-# Unique定义：词典中没有别的word，跟target的缩写一样的。如果word相同，同时没有别的word的缩写，也算是unique。
+# Unique定义：词典中没有除了这个word以外，跟target的缩写一样的单词。
+# 如果word不在单词中，或者没有别的word的缩写，也算是unique。
 class ValidWordAbbr(object):
     @staticmethod
     def get_abbr(word):

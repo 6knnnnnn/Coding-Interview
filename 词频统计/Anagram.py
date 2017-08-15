@@ -3,10 +3,16 @@
 # Anagrams 元素出现次数一样，而且排序后也一定一样
 
 
+def valid_anagram(s1, s2):
+    # hash map O(N) 时间+空间
+    # 排序，O(NlogN) 时间，O(N)空间（string immutable）
+    print s1, s2
+
+
 # Given an array of strings, group anagrams together.
 # https://leetcode.com/problems/group-anagrams
-def group_anagrams(str_list):
-    # 排序后分组
+def group_anagrams_sort(str_list):
+    # 排序后分组，O(N * M * logM)，M平均长度，N单词个数
     d = {}
     for s in str_list:
         sort = "".join(sorted(s))
@@ -16,6 +22,27 @@ def group_anagrams(str_list):
             d[sort] = list([s])
     return d.values()
 
+
+def group_anagrams_prime(str_list):
+    # 26个字母，每一个安排一个prime number，不同字母组合的乘积，肯定不一样
+    # 所以算出所有str的素数乘积，乘积相等的就是anagrams，时间O(M * N)
+    primes = [2, 3, 5, 7, 11 ,13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
+              53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 107]
+    ana_map = dict([])
+    for s in str_list:
+        product = 1
+        for c in s:
+            product *= primes[ord(c)-97]
+        if product not in ana_map:
+            ana_map[product] = list([])
+        ana_map[product].append(s)
+    return ana_map.values()
+
+
+def test_group():
+    str_list = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    print group_anagrams_prime(str_list)
+    print group_anagrams_sort(str_list)
 
 # https://leetcode.com/problems/find-all-anagrams-in-a-string/description/
 # Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
