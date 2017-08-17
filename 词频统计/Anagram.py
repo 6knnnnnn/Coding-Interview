@@ -5,8 +5,8 @@
 
 def valid_anagram(s1, s2):
     # hash map O(N) 时间+空间
-    # 排序，O(NlogN) 时间，O(N)空间（string immutable）
-    print s1, s2
+    # 排序，O(NlogN) 时间，O(N)空间（string immutable除非是char array）
+    return sorted(s1) == sorted(s2)
 
 
 # Given an array of strings, group anagrams together.
@@ -44,10 +44,7 @@ def test_group():
     print group_anagrams_prime(str_list)
     print group_anagrams_sort(str_list)
 
-# https://leetcode.com/problems/find-all-anagrams-in-a-string/description/
-# Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
-# 可以用暴力解法，但如果输入是：aaaa....a, p=aaa，那么会很费时，O(M * N)
-# O(N)解法，滑动窗口找距离，空间O(M)，时间O(N)
+
 class AnagramsWindow(object):
     def __init__(self, target):
         from collections import deque
@@ -91,6 +88,10 @@ class AnagramsWindow(object):
 
 
 def substring_anagrams(s, p):
+    # https://leetcode.com/problems/find-all-anagrams-in-a-string/description/
+    # Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+    # 可以用暴力解法，但如果输入是：aaaa....a, p=aaa，那么会很费时，O(M * N)
+    # O(N)解法，滑动窗口找距离，空间O(M)，时间O(N)
     res = []
     window = AnagramsWindow(p)
     for i, c in enumerate(s):

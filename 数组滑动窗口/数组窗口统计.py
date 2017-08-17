@@ -19,7 +19,7 @@ class MovingAverage(object):
         return self.sum / self.size
 
 
-def max_sliding_window(nums, k):
+def sliding_window_max(nums, k):
     """
     https://leetcode.com/problems/sliding-window-maximum/description/
     窗口内只保留“必要”的元素：双端队列deque存的是index，防止重复value；“过期”机制来pop出不必要的元素

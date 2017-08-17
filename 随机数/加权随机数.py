@@ -58,7 +58,7 @@ class RandomWeightHash(RandomWeight):
     # 其实跟增删查随机数那道题有点类似，就是更新的时候
     # 如果比原来权重小了，把需要删除的元素放倒后边去然后pop
     # 如果比原来权重大了，直接加到最后
-    # 空间换时间，O(K * W)空间，即N= key总数K * 平均权重W，查询O(1)
+    # 空间换时间，O(K * W)空间，即key总数K * 平均权重W，查询O(1)
     # 更新理论上最坏情况O(W)，也就是对应key的weight为多少
     def __init__(self):
         RandomWeight.__init__(self)
