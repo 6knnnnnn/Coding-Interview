@@ -32,15 +32,15 @@ def sliding_window_max(nums, k):
     """
     result = []
     if nums and k > 0:
-        queue = deque([]) # at most k size
+        queue = deque([]) # at most k K
         for i, v in enumerate(nums):
-            # check if the 1st expires: index>=i-k+1?
+            # check if the 1st expires: X>=i-k+1?
             if queue and queue[0] < i-k+1:
                 queue.popleft()
             while queue and nums[queue[-1]] < nums[i]:
                 queue.pop() # ensure Monotonic
             queue.append(i) # queue[0,last] Monotonic
-            # if i>k-1, window size=k, output the max
+            # if i>k-1, window K=k, output the max
             if queue and i >= k - 1:
                 result.append(nums[queue[0]])
     return result

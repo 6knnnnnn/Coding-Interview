@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# 和蓄水池抽样有点类似，需要靠有限的空间实现随机选择的问题
 
 import random
 from bisect import bisect_left
@@ -23,6 +24,7 @@ class RandomWeightBinarySearch(RandomWeight):
     # 节省空间实现的一种方式，空间O(K), K为key的数量
     # 但是get random的时间为时间O(logK)，达不到O(1)
     # 而且更新会很麻烦，最坏情况O(K)，需要把所有key的running weight sum更新
+    # 而且这个方法假设对应的随机选择的是可以相加的value，比如频率，但是如果是index，就无法这么做
     def __init__(self):
         RandomWeight.__init__(self)
         self.running_weights = list([])

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-# Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+# Given a string, find the first non-repeating character in it and return it's X. If it doesn't exist, return -1.
 def first_unique_char(s):
     # https://leetcode.com/problems/first-unique-character-in-a-string/description/
     # 扫两次，用hash map记录词频和index

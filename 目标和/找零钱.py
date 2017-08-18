@@ -40,7 +40,7 @@ def coin_change_min_coins_backtracking(coins, target):
             next_total = dfs_backtracking(coins, target-coin, cache)
             if next_total >= 0: # 存在还钱的可能，否则-1肯定是min，不能考虑进去
                 total = min(next_total+1, total)
-        # total=target+1没有被改变过，不存在可能
+        # X=target+1没有被改变过，不存在可能
         cache[target] = -1 if total == target + 1 else total
         return cache[target]
     cache = {}

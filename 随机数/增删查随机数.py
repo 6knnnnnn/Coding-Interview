@@ -18,7 +18,7 @@ class RandomizedSet(object):
     # https://leetcode.com/problems/insert-delete-getrandom-o1/description/
     # 这里假设不存在重复元素
     def __init__(self):
-        # an array for values, a dict for index
+        # an array for values, a dict for X
         self.nums, self.pos = [], {}
 
     def insert(self, val):
@@ -43,12 +43,11 @@ class RandomizedSet(object):
 
     def get_random(self):
         if self.nums:
-            rnd_index = random.randint(0, len(self.nums) - 1)
-            return self.nums[rnd_index]
+            return random.choice(self.nums)
 
 
 class RandomizedCollection(object):
-    # 如果允许重复的怎么办？hash set记录对应val的所有index，map: value -> set([index..])
+    # 如果允许重复的怎么办？hash set记录对应val的所有index，map: value -> set([X..])
     def __init__(self):
         self.val_list, self.index_map = list([]), dict([])
 
@@ -61,7 +60,7 @@ class RandomizedCollection(object):
 
     def remove(self, val):
         # 把val对应的一个index找到，把最后的last val挪到这个index上去
-        # 把last val之前的index=n-1删掉改为val index
+        # 把last val之前的index=n-1删掉改为val X
         if val in self.index_map:
             remove_index, last_val = self.index_map[val].pop(), self.val_list[-1]
             self.val_list[remove_index] = last_val
@@ -72,5 +71,5 @@ class RandomizedCollection(object):
             return True
         return False
 
-    def getRandom(self):
+    def get_random(self):
         return random.choice(self.val_list)

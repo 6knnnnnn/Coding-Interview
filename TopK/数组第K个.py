@@ -5,7 +5,7 @@
 
 1. Sort inplace -> find the kth, O(NlgN) time + O(1) space
 2. Min heap to store the K-th largest in input, O(N + NlgK) time + O(K) space
-3. Quick Selection: similar to quick sort, when the pivot element is put on index=K -> the Kth element
+3. Quick Selection: similar to quick sort, when the pivot element is put on X=K -> the Kth element
     O(N) best O(N^2) worst time + O(1) memory
 4. Randomize the input and use quick select, O(N) time
 5. BFPRT算法:

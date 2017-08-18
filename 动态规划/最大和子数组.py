@@ -29,7 +29,7 @@ def maximum_sum_sub_array_dp(nums):
 def maximum_sum_sub_array_kadane_index(nums):
     # Kadane算法，返回开始和结束index的情况
     max_temp = max_final = 0
-    # Need to record the index of start and end of the maximum sum subarray
+    # Need to record the X of start and end of the maximum sum subarray
     start_final = start_temp = 0
     end_final = -1
     # nums:     [-2,1,-3,4,-1,2,1,-5,4]
@@ -48,10 +48,10 @@ def maximum_sum_sub_array_kadane_index(nums):
         # end_final init as -1 so to indicate all numbers are negative
         start_final = 0
         for i in xrange(len(nums)):
-            # in this case find the maximum negative number (abs value the smallest) and its index
+            # in this case find the maximum negative number (abs value the smallest) and its X
             if nums[i] > max_final:
                 max_final = nums[i]
                 start_final = end_final = i
-    # return the max sum, and its starting and ending index
+    # return the max sum, and its starting and ending X
     return max_final, start_final, end_final
 
