@@ -50,3 +50,14 @@ def coin_change_min_coins_backtracking(coins, target):
 def coin_change_all_possible(coins, target):
     # 此时需要求得是，所有可能的换钱组合，需要一个DP[coins][target] table
     return
+
+
+def perfect_squares(num):
+    # https://leetcode.com/problems/perfect-squares/description/
+    # 给定一个正整数num，从所有比num小的平方数中，找到和为num的组合的最小个数
+    # 本质上是对于不同币种，即1, 4, 9, 16...的找零钱问题
+    # 不同的是，肯定有一中还钱方法，因为有1存在，最不济num/1就是最后结果
+    if num < 1:
+        return 0
+    coins = [i**2 for i in xrange(1, int(num**0.5)+1)]
+    return coin_change_min_coins_dp(coins, num)
