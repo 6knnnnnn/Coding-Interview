@@ -14,3 +14,8 @@ def reverse_integer(x):
         x = x / 10
 
     return y if pos else -y
+
+
+def add_digits_until_single_one(num):
+    # https://leetcode.com/problems/add-digits/description/
+    pass

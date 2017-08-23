@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 """
-这道题目在Lintcode中是Load balancer
 • 要在o(1)的时间内插入删除,只能hash。那hash可以getRandom吗?
 – 不太好做
 • 什么数据结构比较好getRandom?
@@ -10,6 +9,9 @@
 – 与最后插入的一个元素交换
 • 那怎么o(1)时间在数组中找到要删除元素(要交换)的位置?
 – 用hash将元素的位置记下来
+
+就是两个对应关系，记录value->index 和 index->value
+value -> index = hash map, index -> value = array
 """
 import random
 

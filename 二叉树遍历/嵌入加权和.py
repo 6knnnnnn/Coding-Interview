@@ -98,7 +98,7 @@ class NestedWeightSumReverse(object):
             else:
                 for n in node.getList():
                     dfs_helper(n, level + 1, dMap)
-        dMap = { -1: 0} # -1纪录最大的max depth
+        dMap = {-1: 0} # -1纪录最大的max depth
         result = 0
         for node in nested_list:
             dfs_helper(node, 1, dMap)
@@ -109,7 +109,7 @@ class NestedWeightSumReverse(object):
 
     @staticmethod
     def bfs(nested_list):
-        # 跟top-down一样，只是多了一次遍历stack，找到最大的max depth
+        # 跟top-down一样，只是多了一次遍历queue，找到最大的max depth
         if not nested_list:
             return 0
         queue = deque([])
@@ -117,7 +117,7 @@ class NestedWeightSumReverse(object):
         for n in nested_list:
             queue.append((n, 1))
         max_depth = -1
-        queue2 = list([])
+        queue2 = deque([])
         while queue:
             queue2.append(queue.popleft())
             node, d = queue2[-1]

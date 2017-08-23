@@ -7,9 +7,10 @@
 如果两个字符串长度差距大于1，肯定不对
 """
 
-# https://leetcode.com/problems/one-edit-distance/description/
-def isOneEditDistance(s, t):
-    def isOneModified(s, t):
+
+def is_one_edit_distance(s, t):
+    # https://leetcode.com/problems/one-edit-distance/description/
+    def is_one_modified(s, t):
         modified = False
         for i in xrange(len(t)):
             if s[i] != t[i]:
@@ -18,7 +19,7 @@ def isOneEditDistance(s, t):
                 modified = True
         return modified
 
-    def isOneDeleted(longer, short):
+    def is_one_delete(longer, short):
         for i in xrange(len(short)):
             if longer[i] != short[i]:
                 # the 1st different, compare the rest
@@ -27,7 +28,7 @@ def isOneEditDistance(s, t):
 
     if abs(len(s) - len(t)) > 1: return False
     if len(s) == len(t):  # same length
-        return isOneModified(s, t)
-    return isOneDeleted(s, t) if len(t) < len(s) \
-        else isOneDeleted(t, s)
+        return is_one_modified(s, t)
+    return is_one_delete(s, t) if len(t) < len(s) \
+        else is_one_delete(t, s)
 

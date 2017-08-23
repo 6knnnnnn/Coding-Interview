@@ -22,7 +22,7 @@
 而且，蓄水池平均时间复杂度为O(1)，因为每次只需要一个新的元素即可。
 """
 
-from 链表节点 import ListNode
+from Utility import ListNode
 import random
 
 
@@ -94,8 +94,10 @@ class LinkedListRandomNodeSimple(object):
         # 但蓄水池不需要，每次都可以保证O(1)，即便是需要更新蓄水池，也是O(K)时间几乎常数
         result, node, index = self.head, self.head.next, 1
         while node:
-            # 假定总长度为N，每次的长度index为X，看是否为0，概率为1/X，直到最后1/N
-            # result只是记录了随机数为0的时候的节点
+            # 假定总长度为N，node从第二个节点开始，即最开始index=1（从第一个节点开始，随机100%是这个节点，所以跳过）
+            # 之后每次index为X，取[0..index]的随机数，为0的概率为1/X+1，不是0的概率为1-1/(X+1)=X/X+1
+            # 那么从第2个直到最后N，每次都不是0的概率 = 1/2 * 2/3 * 3/4 ... (N-1)/N * N/(N+1) = 1/(N+1)
+            # result只是临时记录了随机数为0的时候的节点，之后如果再次随机抽到0，则更新result
             if random.randint(0, index) is 0:
                 result = node
             node = node.next
@@ -131,7 +133,7 @@ class RandomPickIndex(object):
         而且这里限定了空间，所以每次都要遍历所有元素找到target
         如果target没有出现在nums里面，返回-1；如果只出现一次，那只能是那个唯一的index
         如果出现N次，count记录的是当前target出现的次数
-        每次在0到count之间随机选择，判断是否为0，所以概率就是1/count，最后的最后，概率就是1/N
+        每次在0到count之间随机选择，判断是否为0，所以概率就是1/count，最后的最后，概率就是1/N（上边的证明）
         """
         result = -1
         count = 0
