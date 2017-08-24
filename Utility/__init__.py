@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
+class TreeNode(object):
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 class ListNode(object):
     def __init__(self, x):
         self.val = x

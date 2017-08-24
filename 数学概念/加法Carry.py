@@ -8,6 +8,43 @@ from Utility import ListNode
 class AddLinkedList(object):
 
     @staticmethod
+    def plus_one_linked_list_stack(head):
+        # https://leetcode.com/problems/plus-one-linked-list/description/
+        # head为最大位置的digit，以此类推，用stack，到最后一位时候，+1，如果carry为1，依次pop stack
+        if not head:
+            return
+        stack = list([])
+        new_head = ListNode(1)
+        new_head.next = node = head
+        while node:
+            stack.append(node)
+            node = node.next
+        # 遍历到最后node
+        carry = 1
+        while stack:
+            node = stack.pop()
+            node.val += carry
+            if node.val >= 10:
+                node.val -= 10
+            else:
+                # 此时carry为0，且stack还有元素，即没有回到最开始的head，不需要用new head
+                return head
+        return new_head # 否则返回new head，初始化为1
+
+    @staticmethod
+    def plus_one_linked_list_recur(head):
+        if not head:
+            return ListNode(1)
+        carry = AddLinkedList.plus_one_linked_list_recur(head.next)
+        if carry != head.next:
+            head.val += 1 # carry from next
+        if head.val <= 9: # no carry needed
+            return head
+        head.val -= 10 # head.val == 10
+        carry.next = head
+        return carry
+
+    @staticmethod
     def add_two_numbers_original_order_stack_way(l1, l2):
         # https://leetcode.com/problems/add-two-numbers-ii/description/
         # 如果是原始的顺序，可以用一个stack来逆序遍历；或者将两个输入逆序，相加后再逆序回来
@@ -116,3 +153,30 @@ def add_two_strings(num1, num2):
         i, j = i-1, j-1
     return ''.join(reverse_list[::-1])
 
+
+def add_binary(a, b):
+    if not a or len(a) == 0:
+        return b
+    if not b or len(b) == 0:
+        return a
+    i, j, carry = len(a)-1, len(b)-1, 0
+    res = list([]) # 可能需要第一位是carry
+    while carry or i >=0 or j >= 0:
+        carry += 1 if i >= 0 and a[i] != '0' else 0
+        carry += 1 if j >= 0 and b[j] != '0' else 0
+        if carry <= 1:
+            res.append(str(carry))
+            carry = 0
+        elif carry == 2:
+            res.append('0')
+            carry = 1
+        elif carry == 3:
+            res.append('1')
+            carry = 1
+        i, j = i - 1, j - 1
+    return "".join(res[::-1])
+
+test = [["100","1"], ["1","1"], ["0", "111"], ["111", "1"], ["111", "1111"]]
+
+for t in test:
+    print t[0], t[1], add_binary(t[0], t[1])

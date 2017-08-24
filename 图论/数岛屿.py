@@ -5,13 +5,13 @@ def number_islands(matrix):
     # https://leetcode.com/problems/number-of-islands/description/
     # 用一个DFS方法，因为只是01 cell，把所有遍历过的1变成别的flag比如2
     # 这样之后还可以把输入matrix还原。如果是变成0，无法还原
-    def sink(matrix, i, j):
-        if 0<=i<len(matrix) and 0<=j<len(matrix[0]) and matrix[i][j] == '1':
-            matrix[i][j] = '2'
-            sink(matrix, i + 1, j)
-            sink(matrix, i - 1, j)
-            sink(matrix, i, j + 1)
-            sink(matrix, i, j - 1)
+    def sink(lands, i, j):
+        if 0<=i<len(lands) and 0<=j<len(lands[0]) and lands[i][j] == '1':
+            lands[i][j] = '2'
+            sink(lands, i + 1, j)
+            sink(lands, i - 1, j)
+            sink(lands, i, j + 1)
+            sink(lands, i, j - 1)
     total = 0
     for i in xrange(len(matrix)):
         for j in xrange(len(matrix[i])):
@@ -23,7 +23,7 @@ def number_islands(matrix):
     return total
 
 
-def numIslands2(m, n, positions):
+def number_islands_2(m, n, positions):
     # https://leetcode.com/problems/number-of-islands-ii/description/
     # 问题关键点是，如果新加入的1，能够让两个或者多个岛屿相连怎么办？并查集
     def new_island(matrix, i, j, m, n):
@@ -44,4 +44,4 @@ def numIslands2(m, n, positions):
     return result
 
 pos = [[0,0],[0,1],[1,2],[2,1]]
-print numIslands2(3, 3, pos)
+print number_islands_2(3, 3, pos)
