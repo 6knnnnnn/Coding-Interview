@@ -27,4 +27,25 @@ def single_number_third(nums):
     建立一个32位的数字，来统计每一位上1出现的个数，如果某一位上为1+该整数出现了三次，对3去余为0
     所以，把每个数的对应位都加起来对3取余，最终剩下来的那个数就是单独的数字
     """
-    pass
+    def convert(bit_map):
+        res = 0
+        total = len(bit_map)
+        for i, b in enumerate(bit_map):
+            if b == 1 or b == '1':
+                res += 2 ** (total - i - 1)
+        return res
+    bit_map = [0]*32
+    for i in xrange(32):
+        bit_sum = 0
+        for n in nums:
+            # 找到所有数字对应i位置的1的个数，累加到bit sum中
+            # (n >> i) & 1 就是数字n对应i位置的1
+            bit_sum += (n >> i) & 1
+        # 对所有出现次数为3的数字，对应i位置的1的累加和肯定是3的倍数
+        # 所以bit_sum % 3就是那个只出现了一次的数的对应bit位置的数（非0即1）
+        bit_map[i] = bit_sum % 3
+    return convert(bit_map[::-1])
+
+
+nums = [-2,-2,1,1,-3,1,-3,-3,-4,-2]
+print single_number_third(nums)

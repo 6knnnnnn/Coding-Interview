@@ -49,3 +49,20 @@ def first_bad_version(v):
             left = mid + 1 # 去右边
     # 只剩下两个元素
     return left if is_bad_version(left) else right
+
+
+def valid_perfect_square(num):
+    # https://leetcode.com/problems/valid-perfect-square/description/
+    # 二分查找，判断一个数是否可以开平方为一个整数
+    left = 0
+    right = num
+    while left <= right:
+        mid = (left + right) >> 1
+        sq_mid = mid ** 2
+        if sq_mid > num:
+            right = mid - 1
+        elif sq_mid < num:
+            left = mid + 1
+        else:
+            return True
+    return False

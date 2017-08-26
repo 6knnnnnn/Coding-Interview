@@ -21,3 +21,8 @@ sol = Shuffle(range(10))
 
 for i in xrange(10):
     print sol.shuffle()
+
+
+# 完美洗牌问题
+def perfect_shuffle(nums):
+    pass
