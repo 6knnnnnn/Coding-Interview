@@ -7,6 +7,8 @@ class TreeNode(object):
         self.left = left
         self.right = right
 
+    def __repr__(self):
+        return "{}\n\tleft={}\n\tright={}".format(self.val, self.left, self.right)
 
 class ListNode(object):
     def __init__(self, x):

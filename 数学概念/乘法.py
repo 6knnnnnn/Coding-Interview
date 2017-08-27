@@ -4,8 +4,6 @@
 def multiply_strings(num1, num2):
     # https://leetcode.com/problems/multiply-strings/description/
     # 乘法，M*N位，最后结果最多有M+N位。同时，每一位i j的乘积，num1[i]*num2[j]，要考虑i和j所对应的数位
-    # 比如 123 * 45，i=3 j=2 nums1[i] * num2[j] = 1*4 = 4 但还要考虑对应的位置i+j-1=4
-    # 所以nums1[3] * num2[2]=4000，需要更新的是结果中i+j-1=4位置的数字
     if num1 == '0' or num2 == '0':
         return '0'
     m, n = len(num1), len(num2)
@@ -13,17 +11,36 @@ def multiply_strings(num1, num2):
     # 逆序遍历
     for i in xrange(m - 1, -1, -1):
         for j in xrange(n - 1, -1, -1):
-            p = int(num1[i]) * int(num2[j])
-            # 此时的p对应的数位是i+j+1
-            sum = p + res[i + j + 1]
-            # update res[i+j], res[i+j+1]
-            res[i + j] += sum / 10  # 35/10=3
-            res[i + j + 1] = sum % 10  # 35%10=5
-    for i in xrange(len(res)): res[i] = str(res[i])
-    if res[0] == '0':
-        # 第一位为0，也就是M+N-1位个非0数字
-        return ''.join(res[1:])
-    return ''.join(res)
+            # 此时i*j对应的数位是i+j+1
+            res[i + j + 1] += int(num1[i]) * int(num2[j])
+            # 进位 res[i+j+1] -> res[i+j]
+            res[i + j] += res[i + j + 1] / 10  # +(35/10=3)
+            res[i + j + 1] %= 10  # 35%10=5
+    for i in xrange(len(res)):
+        res[i] = str(res[i])
+    # 第一位为0
+    return ''.join(res[1:]) if res[0] == '0' else ''.join(res)
+
+
+def multiply_string_two_pass(num1, num2):
+    # 上一种解法一直，不过先做乘法，在做进位
+    # 123 * 45 = [0, 0, 5, 10, 15] + [0, 4, 8, 12, 0] = [0, 4, 13, 22, 15]
+    # 之后再进位，不过不需要处理res[0]，最高位，不可能为10
+    # 如果某一位大于10，该位对除以10的结果加到下一位上去，同时该位%10，比如22，下一位+2，该位%10=2
+    if num1 == '0' or num2 == '0':
+        return '0'
+    m, n = len(num1), len(num2)
+    res = [0] * (m + n)
+    for i in xrange(m - 1, -1, -1):
+        for j in xrange(n - 1, -1, -1):
+            res[i + j + 1] += int(num1[i]) * int(num2[j])
+    for i in xrange(len(res)-1, 0, -1):
+        # 进位
+        res[i-1] += res[i] / 10
+        res[i] %= 10
+    for i in xrange(len(res)-1): # 变成string
+        res[i] = str(res[i])
+    return ''.join(res[1:]) if res[0] == '0' else ''.join(res)
 
 
 def complex_number_multiplication(a, b):

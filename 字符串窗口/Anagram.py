@@ -56,6 +56,7 @@ class AnagramsWindow(object):
             self.current[c] = 0 # 初始化均为0
         self.total = len(target)
         # 这里的距离衡量的依据是，有几个char的数量是不等的，所以最多为keys的数量
+        # 这一点和min substring window的概念有点像，都是找两个string之间的distance
         self.distance = self.distinct_keys = len(self.current.keys())
 
     def handle_change(self, c, is_remove):
@@ -76,7 +77,8 @@ class AnagramsWindow(object):
     def slide_right(self, new):
         self.queue.append(new)
         left = self.queue.popleft() if len(self.queue) == self.total+1 else None
-        if left != new: # 相同则不需要改变
+        if left != new:
+            # 相同则不需要改变，避免重复字符的情况，比如aaaa...a里面找aaa
             self.handle_change(left, True)
             self.handle_change(new, False)
 

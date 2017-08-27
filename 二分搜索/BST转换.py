@@ -61,7 +61,7 @@ class SortedListToBST(object):
             if head and head != tail:
                 s = f = head
                 while f != tail and f.next != tail:
-                    # 快慢指针，找到中点
+                    # 快慢指针，找到中点，适用于许多需要linked list partition的问题
                     s, f = s.next, f.next.next
                 root = TreeNode(s.val)
                 root.left = dfs(head, s)

@@ -8,6 +8,8 @@ def merge_intervals(intervals):
     Test0: [1, 10], [2, 3] return [1, 10]
     Test1: [1,3],[2,6],[15,18], return [1,6],[8,10],[15,18]
     Test2: [1, 5], [6, 7], return [1, 5], [6, 7]
+
+    follow up: 如果数据结构不是array而是linked list，仍旧需要排序，其实merge sort的时候就可以进行区间合并
     """
     merged = list([])
     if intervals:
@@ -31,11 +33,14 @@ def insert_interval(intervals, new):
     """
     input里面没有overlap的情况，而且已经排序，要求插入新的interval，必要时merge
 
-    Test0: [1, 3], [8, 10], new=[4, 5] -> [1, 3], [4, 5], [8, 10]
+    Test0: [1, 3], [8, 10], new = [4, 5] -> [1, 3], [4, 5], [8, 10]
     Test1: [1, 5], [7, 10], new = [4, 6] -> [1, 6], [7, 10] (merge)
     Test2: [1, 5], [7, 10], new = [4, 7] -> [1, 10] (merge)
 
     O(N)的做法就是从头扫到尾，找到对应的merge点，merge之后仍要继续，直到不需要在merge了
+    或者，根据上一题的方法，先插入，然后直接套用merge interval
+
+    follow up: 如果数据结构不是array而是linked list，遍历的时候其实一个意思，如果是inplace操作反而更省时因为不用extend
     """
     output = list([])
     for i in xrange(len(intervals)):

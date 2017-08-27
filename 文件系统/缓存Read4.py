@@ -3,14 +3,14 @@
 
 def read4(buf_list):
     # 给定一个buffer list，从文件中读取4个字符到这个buffer中（如果有的话）
-    # 返回的是读进来的字符数，所以值域是[0, 4]
+    # 返回的是读进来的字符数，所以值域是[0, 4]，inplace改变了buffer list
     return len(buf_list)
 
 
 def read(buf, n):
     # https://leetcode.com/problems/read-n-characters-given-read4
     # 想要读进来n个，返回的是最后实际读取了多少个字符，可能不到n
-    # buf: 目标 buffer list (List[str])，吧字符读进去
+    # buf: 目标 buffer list (List[str])，把字符读进去
     i = 0  # 目前读取的总字符串数量
     while i < n:
         temp_buff = ['', '', '', ''] # 每次都是临时的
@@ -19,7 +19,7 @@ def read(buf, n):
             break  # EOF 没有字符可以读了
         # n-i = how many remaining? 可能存在读了3个但是只需要2个的情况，找最小
         count = min(count, n - i)
-        # Copy from buf4 to buf.
+        # 把临时buffer的内容copy到b目标buf里面，此时只copy前count个，因为可能多读了
         buf[i:] = temp_buff[:count]
         i += count
     return i
@@ -35,6 +35,7 @@ class ReadMultipleTime(object):
         self.queue = deque([])
 
     def read(self, buf, n):
+        # 仍旧返回最后读取了多少个字符
         total = 0
         temp_buf = [''] * 4
         while total < n:
@@ -46,5 +47,5 @@ class ReadMultipleTime(object):
                 break # 如果还是没有历史，此时说明文件没有东西可以读了
             if self.queue: # 有历史了，先从历史里面找
                 buf[total] = self.queue.popleft()
-                total += 1 # 知道total == n
+                total += 1 # 直到 total == n，如果有的话
         return total

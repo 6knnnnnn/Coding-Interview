@@ -46,3 +46,25 @@ def sparse_matrix_multiplication(A, B):
                     C[i][j] += A[i][k] * B[k][j]
     return C
 
+
+def sparse_matrix_multiplication_bucket(A, B):
+    """
+    用一个hash table bucket记录B矩阵的非0元素的信息，
+        key = row num, bucket = 另一个hash table，key=非0元素的列，value就是对应的值
+    """
+    if not A or not B: return None
+    rowA, colA, colB = len(A), len(A[0]), len(B[0])
+    C = [[0] * colB for _ in xrange(rowA)]
+    table_b = {}
+    for i, row in enumerate(B):
+        table_b[i] = {}  # build map for B, key=colB
+        for j, valB in enumerate(row):
+            if valB:
+                table_b[i][j] = valB
+    for i, row in enumerate(A):
+        for j, valA in enumerate(row):
+            if valA:
+                # 这样子只有当A[i][j] B[j][k]均不为0的时候，才相乘
+                for k, valB in table_b[j].iteritems():
+                    C[i][k] += valA * valB
+    return C

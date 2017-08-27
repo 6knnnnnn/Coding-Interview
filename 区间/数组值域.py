@@ -14,13 +14,13 @@ Test case2: [0, 1, 3, 50, 75], -10, 99 = ["-10->-1","2","4->49","51->74", "76->9
 def missing_ranges(A, lower, upper):
     result = []
     # 如果upper是最大的，要考虑到upper+1，inclusive
-    # 即便不是最大，而是在A中间，那么之后比较的时候会忽略掉，因为upper在最后
+    # 即便不是最大，而是在A中间，那么之后比较的时候会忽略掉，因为真正的upper在最后
     A.append(upper + 1)
     # 如果lower是最小的，从lower-1开始考虑，inclusive
-    # 即便不是最小，而是在A中间，那么之后比较的时候会忽略掉，因为lower在最前
+    # 即便不是最小，而是在A中间，那么之后比较的时候会忽略掉，因为真正的lower在最前
     prev = lower - 1
     for n in A:
-        # 我们只考虑 n > prev 的情况，所以如果lower(prev) > n or upper(n) > prev，都会忽略
+        # 我们只考虑 n > prev 的情况，所以如果lower/prev > n or upper/n > prev，都会忽略
         # if n==prev+1, 一个都没少，连续的consecutive
         if n == prev + 2:
             # 少了一个[1， 3...] -> 2
@@ -31,15 +31,13 @@ def missing_ranges(A, lower, upper):
     return result
 
 
-"""
-https://leetcode.com/problems/summary-ranges/description/
-Given a sorted integer array without duplicates, return the summary of its ranges.
-Test case1: [0,1,2,4,5,7], return ["0->2","4->5","7"]
-Test case1: [1,2,3,4,5,6,7,8], return ["1->8"]
-"""
-
-
 def summary_range(nums):
+    """
+    https://leetcode.com/problems/summary-ranges/description/
+    Given a sorted integer array without duplicates, return the summary of its ranges.
+    Test case1: [0,1,2,4,5,7], return ["0->2","4->5","7"]
+    Test case1: [1,2,3,4,5,6,7,8], return ["1->8"]
+    """
     resL = []
     if nums:
         i, n = 0, len(nums)
