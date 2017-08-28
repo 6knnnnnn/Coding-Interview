@@ -10,6 +10,7 @@ class TreeNode(object):
     def __repr__(self):
         return "{}\n\tleft={}\n\tright={}".format(self.val, self.left, self.right)
 
+
 class ListNode(object):
     def __init__(self, x):
         self.val = x
