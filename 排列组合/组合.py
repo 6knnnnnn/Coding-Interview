@@ -12,14 +12,25 @@ def combinations(k, n):
     """
     https://leetcode.com/problems/combinations/description/
     从1...N中选择K个组成一组数，找到所有的可能
+    依次对N，N-1，N-2...N-K做DFS + backtracking，时间复杂度Ckn = N!/(N-K)!
     """
-    def dfs_backtracking(global_results, curr_comb, start, n, k):
-        if k == 0:
-            global_results.append(curr_comb)
-
+    def dfs(global_results, curr_combination, start, n, k):
+        """ start 就是当前从第几个数开始做组合，比如 N = 5
+        curr = [1, 2, 3]    start = 4, from 4 to 5: [1,2,3,4] [1,2,3,5]
+        接着下一次：
+        curr = [1, 2, 4]    start = 5, from 5 to 5: [1,2,4,5]
+        """
+        if k == len(curr_combination):
+            # 当前组合是一个结果，copy生成一个新的加入到全局中
+            global_results.append(list(curr_combination))
+        elif len(curr_combination) < k:
+            for i in xrange(start, n+1):
+                curr_combination.append(i)
+                dfs(global_results, curr_combination, i + 1, n, k)
+                curr_combination.pop()
     results = list([])
-    if k > 0:
-        dfs_backtracking(results, [], 1, n, k)
+    if 0 < k <= n and n > 0:
+        dfs(results, [], 1, n, k)
     return results
 
 
@@ -86,5 +97,3 @@ def factor_combinations(n):
     res = list([])
     dfs(n, 2, [], res)
     return res
-
-print factor_combinations(30)

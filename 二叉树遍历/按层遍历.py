@@ -137,3 +137,28 @@ def binary_tree_vertical_order_traversal_dfs(root):
     for index in index_list:
         result_list.append(col_index_table[index])
     return result_list
+
+
+def find_largest_value_in_each_tree_row(root):
+    """
+    https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/
+    按层遍历，找到每一层的最大值。follow up可能是 按照高度遍历，找到每个高度对应的max value
+    用一个hash table记录level->max，每次遍历到一个新的level，更新该level的max，空间O(H)，时间O(N)
+    或者用一个list/stack保存当前 row level max。也可以用DFS做。
+    """
+    row_max = list([])
+    if root:
+        queue = deque([root])
+        # row max 记录最新level max
+        while queue:
+            size = len(queue)
+            row_max.append(queue[0].val)
+            while size:
+                size -= 1
+                node = queue.popleft()
+                row_max[-1] = max(row_max[-1], node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+    return row_max
