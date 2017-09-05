@@ -2,9 +2,9 @@
 from collections import deque
 
 
-# https://leetcode.com/problems/flatten-nested-list-iterator/description/
 class NestedIteratorDFS(object):
     """
+    https://leetcode.com/problems/flatten-nested-list-iterator/description/
     DFS的做法就是，用一个deque，初始化的时候，把所有的元素放到deque里面
     但是这样并不是真的迭代器，其实等价与用一个额外空间来存放整体的元素，而非一个一个的迭代
     """
@@ -39,3 +39,35 @@ class NestedIteratorBFS(object):
 
     def has_next(self):
         pass
+
+
+class Flatten2DVector(object):
+    """
+    https://leetcode.com/problems/flatten-2d-vector/description/
+    为一个2D数组设计一个iterator
+    """
+    def __init__(self, vec2d):
+        self.row = self.col = 0
+        self.vec = vec2d
+        self.total_row = len(self.vec)
+
+    def next(self):
+        if self.row >= self.total_row:
+            # row越界了
+            raise Exception("No more element")
+        if self.col >= len(self.vec[self.row])-1:
+            # 对于当前合法row，col越界了，那么需要找到下一个合法的row的第一个col
+            if self.row == self.total_row - 1:
+                raise Exception("No more element")
+            self.col, self.row = 0, self.row + 1
+            while self.row < self.total_row and len(self.vec[self.row]) == 0:
+                self.row += 1
+            if self.row == self.total_row:
+                raise Exception("No more element")
+        else:
+            # 对于当前合法row，col还没有越界
+            self.col += 1
+        return self.vec[self.row][self.col]
+
+    def hasNext(self):
+        return self.row < self.total_row and self.col < len(self.vec[self.row])

@@ -83,3 +83,20 @@ class SerializeBST(object):
         data = data.split(",")
         q = deque([int(d) for d in data])
         return self.dfs_deserialize(q)
+
+
+def subtree_of_another_tree(tree1, tree2):
+    """
+    https://leetcode.com/problems/subtree-of-another-tree/description/
+    结构和node值一样，且不能有子树，比如第二个和第一个是subtree，但是和第三个不是
+         3          4           3
+        / \        / \         / \
+       4   5      1   2       4   5
+      / \                    / \
+     1   2                  1   2
+                               /
+                              6
+    M N 为两棵树的节点数
+    解法1：纯暴力，每次从tree1的root开始遍历，看是否能跟tree2匹配，时间复杂度O(M*N)
+    解法2：序列化两棵树，用KMP来看较短的是否是较长的substring，时间复杂度O(M+N)，要用额外空间M+N
+    """

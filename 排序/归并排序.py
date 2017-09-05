@@ -49,6 +49,8 @@ def sort_linked_list(head):
 
 def smaller_sum_in_array(nums):
     """
+    https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/
+    Count of Smaller Numbers After Self
     数组小和问题
     """
     return

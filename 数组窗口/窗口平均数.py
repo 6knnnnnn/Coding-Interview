@@ -8,6 +8,10 @@ from collections import deque
 
 
 class MovingAverage(object):
+    """
+    https://leetcode.com/problems/moving-average-from-data-stream
+    用一个queue保存需要的数字
+    """
     def __init__(self, size):
         self.size = size
         self.queue = deque([])
