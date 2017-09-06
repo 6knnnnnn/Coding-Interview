@@ -16,3 +16,16 @@ def valid_square(p1, p2, p3, p4):
             distance_count[dist] = distance_count.get(dist, 0)+1
     key_set, value_set = distance_count.keys(), distance_count.values()
     return len(key_set) == 2 and 2 in value_set and 4 in value_set
+
+
+def maximum_square(matrix):
+    """
+    https://leetcode.com/problems/maximal-square/description/
+    找到一个只包含01的矩阵中，能够形成的最大的正方形面积，比如下图，面积为4
+    1 0 1 0 0
+    1 0 1 1 1
+    1 1 1 1 1
+    1 0 0 1 0
+    :param matrix:
+    :return:
+    """

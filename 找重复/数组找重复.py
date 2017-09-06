@@ -6,8 +6,8 @@ def find_duplicated_number(nums):
     https://leetcode.com/problems/find-the-duplicate-number/description/
     数组长度为N+1，值域1 to N，假定只有一个重复元素，但是可能重复多次，找到这个重复的值
     解法1：hash map，时间空间O(N)
-    解法2：排序后，数组的index和value应该match，第一个不match的就是重复元素
-    解法3：一个for loop，里面是二分搜索，每次找到比mid小的个数，如果个数小于mid，说明重复的在右边，反之在左边
+    解法2：排序后，数组的index和value应该match，第一个不match的就是重复元素，O(NlogN)
+    解法3：一个for loop，里面是二分搜索，每次找到比mid小的个数，如果个数小于mid，说明重复的在右边，反之在左边，时间O(NlogN)
     :param nums:
     :return:
     """
@@ -44,30 +44,38 @@ def contain_duplicates_within_k(nums, k):
 def contain_duplicates_within_k_t(nums, k, t):
     """
     https://leetcode.com/problems/contains-duplicate-ii/description/
-    找到两个索引i和j，判断是否满足nums[i]和nums[j]的距离<=t，以及i和j的距离<=k，即坐标差不能大于k，值差不能大于t
-    可能会有负数
+    找到两个索引i和j，判断是否满足nums[i]和nums[j]的距离<=t，以及i和j的距离<=k，即坐标差不能大于k，值差不能大于t（可能会有负数）
     解法1：两层循环 + 双指针，O(N^2)时间 O(1)空间
     解法2：hash map，key仍旧是某一个number，但是这样子每次都要判断[number-t, number, number+t]是否存在，时间复杂度O(N*T)
     解法3：维持一个大小为K的 TreeMap 窗口，每次新的元素进来，挪出去index最小的元素，加入最新的元素，同时判断新的数值是否能够找到
     number - t 或者 number + t的存在，如果有就返回True。时间复杂度O(N * logK) 空间O(K)
-    解法4：bucket sort，每个slot的值域是[0, t+1]，对于一个数将其分到第num/(t+1)桶中，比如t=4，0~4为桶0，5~9为桶1，10~14为桶2
-    对于某个数，只需要查找相同的和相邻的上下桶的元素，就可以判断有无满足条件的num[i]和num[j]，时间空间O(N)
+    解法4：bucket sort，每个slot的值域是[a, a+t]，每个slot对应的bucket只存放一个元素，即属于这个slot的数字的最近的index
+    对于某个数X，首先求得其对应的slot，即第 X / t，比如t=4，X=1~4为一个slot，5~9为一个slot，10~14为一个slot
+    所以对于属于同一个slot里面的任意两个元素 X and Y，他们的差值最大也只是t，即|X-Y|<=t
+    关键点就是要保证，bucket中总共的元素数量<=K，即如果key的数量超过K，需要删除掉expired number，也就是当前index往前数K个数字
+    如果X对应的slot里面有元素Y，而我们每次遍历元素又保证只记录最新的K个数字，此时这两个数X和Y的距离<=K，满足条件
+    如果X对应的slot里面没有元素，然而相邻的上下的slot里面有满足要求的数组的数字，也满足条件。否则，把X放到bucket中。
+    时间O(N)，空间O(K)因为只有最新的K个元素在bucket里面
+    Edge case: t=0，即|X-Y|=0 -> X=Y，那么此时t=t+1 -> slot=1即意味着任何X/1=X，其实等价于t=1，因为需要检查上下两个slot的元素
     """
     if k < 1 or t < 0:
         return False
     bucket_map = dict([])
+    slot_width = t if t else t + 1
     for i, num in enumerate(nums):
-        slot = num / (t+1)
-        # 首先确定slot存在于bucket中，如果不存在则需要把当前num加入到slot对应的bucket中
+        slot = num / slot_width
+        # 如果对应的slot里面有元素，说明 | X-Y | <= t AND Xi - Yi <= k
         if slot in bucket_map:
-            upper, lower = slot - 1, slot + 1
-            # 看相邻两个slot中
-            if upper in bucket_map and abs(num - bucket_map[upper]) <= t:
-                return True
-            if lower in bucket_map and abs(num - bucket_map[lower]) <= t:
-                return True
-        if len(bucket_map) >= k:
-            last_slot = nums[i-k] / (t+1)
+            return True
+        upper, lower = slot - 1, slot + 1
+        # 看相邻两个slot中，是否存在满足条件的任意一个元素，
+        if upper in bucket_map and abs(num - bucket_map[upper]) <= t:
+            return True
+        if lower in bucket_map and abs(num - bucket_map[lower]) <= t:
+            return True
+        if i >= k:
+            # 确保bucket中只有k个元素，即删除nums[i-k]
+            last_slot = nums[i-k] / slot_width
             bucket_map.pop(last_slot)
         bucket_map[slot] = num
     return False

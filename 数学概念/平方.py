@@ -27,3 +27,22 @@ def valid_perfect_square(num):
         else:
             return True
     return False
+
+
+def happy_number(num):
+    """
+    https://leetcode.com/problems/happy-number/description/
+    所谓的happy number就是，每一位的digit的平方相加，组成新的数字，由此过程不断地loop，直到能够得到1为止，即最后不能够在loop了。
+    或者回到某个中间状态，即产生cycle。用hash set记录历史，如果存在历史，返回False。
+    Example: 19 is a happy number: 1^2 + 9^2 = 82, 8^2 + 2^2 = 68, 6^2 + 8^2 = 100, 1^2 + 0^2 + 0^2 = 1
+    """
+    d_set = set([])
+    while num not in d_set:
+        d_set.add(num)
+        m = 0
+        for i in str(num):
+            m += int(i) ** 2
+        if m == 1:
+            return True
+        num = m
+    return False
