@@ -26,6 +26,5 @@ def maximum_square(matrix):
     1 0 1 1 1
     1 1 1 1 1
     1 0 0 1 0
-    :param matrix:
-    :return:
+    解法和Maximal Rectangle那道题目类似，都是以某一行
     """

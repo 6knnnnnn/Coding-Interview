@@ -49,8 +49,8 @@ class FindLeavesBinaryTree(object):
     @staticmethod
     def bfs(root):
         """
-        一个hash map，记录child->parent关系，以及parent的孩子节点数量，一个leaf node queue，本层需要处理的"叶子"节点。
-        每次遍历所有的leaf node queue，找到本层叶子节点的parent并更新它的child num减1，如果parent变成了下一层的叶子节点
+        一个hash map，记录child->parent关系，以及parent的孩子节点数量，一个leaf target queue，本层需要处理的"叶子"节点。
+        每次遍历所有的leaf target queue，找到本层叶子节点的parent并更新它的child num减1，如果parent变成了下一层的叶子节点
         即parent child num = 0，放到queue里面
         """
         results = list([])

@@ -79,7 +79,7 @@ def binary_tree_vertical_order_traversal_bfs(root, sort=False):
     根据root的左右子树，找到一个相对的column number，用一个hash table记录所有column number一样的节点
     如果题目不要求顺序输出，比如上边的[3,0,1]，如果是[1, 0, 3]输出没问题的话也可以用DFS
     但如果要求顺序，DFS比较难以实现，BFS可以用stack，每个元素包括node.val column index
-    以及用一个hash table记录 column index -> list of node value
+    以及用一个hash table记录 column index -> list of target value
     空间O(N)，如果最后对table key进行排序的话，时间O(N + C*logC)
     C即column的总数，C<=N/2，最坏情况即是一个满树，最后一行都是叶子节点，最坏情况O(N*logN)
     如果不排序，而是用两个变量记录最大最小column的范围，额外的O(N)次比较，整体还是O(N)

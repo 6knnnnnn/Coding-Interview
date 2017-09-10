@@ -28,7 +28,7 @@ import random
 
 class LinkedListRandomNodeReservoir(object):
     """
-    https://leetcode.com/problems/linked-list-random-node/description/
+    https://leetcode.com/problems/linked-list-random-target/description/
     其实就是蓄水池抽样的变体，此时吐球的机器就是linked list iterator
     可能要考虑linked list是可变的情况，比如新加入或者删除更新一个node，此时可以从新初始化蓄水池
     """

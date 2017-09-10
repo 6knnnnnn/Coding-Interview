@@ -1,13 +1,29 @@
 # -*- coding: utf-8 -*-
 
+from collections import defaultdict
+
 
 def target_sum(nums, target):
     """
     https://leetcode.com/problems/target-sum/description/
-    给定一组数组，和目标，只用+和-运算符，判断能够得到target的组合数量，第一位可以是正负号
+    给定一组数组l里面为非负数，和目标target，只用+和-运算符，判断能够得到target的组合数量，第一位可以是正负号
+    http://www.cnblogs.com/grandyang/p/6395843.html
+    dp[i][j]表示从0到第i-1个数字，且和为j的情况总数
+    初始化dp[0][0]=1，即只有一种方式
     :param target:
     :return:
     """
+    def backtracking(nums, target, start_i, dp):
+        if start_i == len(nums):
+            return target == 0
+        if dp[start_i].get(target, 0) > 0:
+            return dp[start_i][target]
+        upper = backtracking(nums, target + nums[start_i], start_i + 1, dp)
+        lower = backtracking(nums, target - nums[start_i], start_i + 1, dp)
+        dp[start_i][target] = upper + lower
+        return dp[start_i][target]
+    dp = defaultdict(dict)
+    return backtracking(nums, target, 0, dp)
 
 
 class ExpressionTargetSum(object):
