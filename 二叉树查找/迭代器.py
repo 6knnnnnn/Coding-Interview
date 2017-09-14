@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class PreSucBST(object):
+class InOrderSuccessorBST(object):
     @staticmethod
     def in_order_successor_iterative(root, p):
         """
@@ -29,9 +29,9 @@ class PreSucBST(object):
         if not root:
             return None
         if root.val <= p.val:
-            return PreSucBST.in_order_successor_recursive(root.right, p)
+            return InOrderSuccessorBST.in_order_successor_recursive(root.right, p)
         else:
-            left = PreSucBST.in_order_successor_recursive(root.left, p)
+            left = InOrderSuccessorBST.in_order_successor_recursive(root.left, p)
             return left if left else root
 
     @staticmethod
@@ -39,9 +39,9 @@ class PreSucBST(object):
         if not root:
             return None
         if root.val >= p.val:
-            return PreSucBST.in_order_predecessor_recursive(root.left, p)
+            return InOrderSuccessorBST.in_order_predecessor_recursive(root.left, p)
         else:
-            right = PreSucBST.in_order_predecessor_recursive(root.right, p)
+            right = InOrderSuccessorBST.in_order_predecessor_recursive(root.right, p)
             return right if right else root
 
 

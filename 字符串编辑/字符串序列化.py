@@ -92,3 +92,16 @@ def test1():
             for j in xrange(len(result)):
                 if result[j] != compare[j]:
                     print i, "\n", len(result[j]), result[j], "\n", len(compare[j]), compare[j], "\n----------"
+
+
+def caesar_cipher(s, k):
+    """
+    凯撒密码 https://en.wikipedia.org/wiki/Caesar_cipher
+    abc + 2 -> cde, a + 26 -> a, a + 27 -> b, xyz + 2 -> zab
+    """
+    res = list([])
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    for c in s:
+        i = (ord(c) - 97 + k) % 26
+        res.append(alphabet[i])
+    return "".join(res)

@@ -27,3 +27,44 @@ def test():
         res = char_compression(s)
         print s, res, s == res
 
+
+class CompressedStringIterator(object):
+    """
+    https://leetcode.com/problems/design-compressed-string-iterator/description/
+    char-count,char-count...
+    StringIterator iterator = new StringIterator("L1e2t1C1o1d1e1");
+    iterator.next(); // return 'L'
+    iterator.next(); // return 'e'
+    iterator.next(); // return 'e'
+    iterator.next(); // return 't'
+    iterator.next(); // return 'C'
+    iterator.next(); // return 'o'
+    iterator.next(); // return 'd'
+    iterator.hasNext(); // return true
+    iterator.next(); // return 'e'
+    iterator.hasNext(); // return false
+    iterator.next(); // return ' '
+    """
+
+    def __init__(self, compress_str):
+        self.s = compress_str
+        self.cur = ''
+        # count用来计数当前char的剩余数量，pos记录的是compress_str对应的index
+        # Edge case就是，如果出现a20的情况，需要parse 20为一个整体
+        self.pos = self.count = 0
+
+    def next(self):
+        if not self.has_next():
+            return ' '
+        if self.count == 0:
+            self.cur = self.s[self.pos]
+            self.pos += 1
+            while self.pos < len(self.s) \
+                    and self.s[self.pos] in '0123456789':
+                self.count = self.count * 10 + int(self.s[self.pos])
+                self.pos += 1
+        self.count -= 1
+        return self.cur
+
+    def has_next(self):
+        return self.pos < len(self.s) or self.count > 0

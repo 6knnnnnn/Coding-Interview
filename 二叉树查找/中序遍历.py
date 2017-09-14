@@ -81,3 +81,10 @@ class ValidateBST(object):
             # 更新当前节点去往右子树，prev记录当前节点，也就是之后右子树的root
             curr, prev = curr.right, curr
         return True
+
+
+def most_frequent_element_in_binary_search_tree(root):
+    """
+    也是中序遍历，保存两个变量，当前element frequency，全部element最大frequency
+    之所以中序遍历所以因为，如果有新的元素，就可以换掉当前元素了，因为是sorted
+    """
