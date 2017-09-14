@@ -29,3 +29,9 @@ def intersections_of_two_linked_list(head1, head2):
             return longer
         longer, shorter = longer.next, shorter.next
     return None
+
+
+def intersection_iterator(head1, head2):
+    """
+    给两个sorted list, 实现iterator 返回 intersect，有点类似于merge sort
+    """

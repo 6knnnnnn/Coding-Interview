@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Utility import Interval
+from Utility.entity import Interval
 
 # Given a collection of intervals, find the min number of intervals need to remove
 # to make the rest of the intervals non-overlapping.
@@ -40,7 +40,13 @@ def has_meeting_overlap(interval_list):
 
 
 def min_meeting_rooms(interval_list):
-    # https://leetcode.com/problems/meeting-rooms-ii/description/
+    """
+    https://leetcode.com/problems/meeting-rooms-ii/description/
+    这道题目可以扩展为，找出meeting最多的时间段，也就是哪个时间段所需要的meeting room最多
+    解法就是，当更新total的时候，每次都是+1，用一个变量记录更新后的total所对应的meeting
+    最后知道了最大的total，最后的这个meeting就是这个时间段的最后一个meeting interval
+    往前找到有overlap的total个meeting即可
+    """
     start, end = list([]), list([])
     for i in interval_list:
         start.append(i.start)
@@ -66,9 +72,3 @@ def min_meeting_rooms(interval_list):
             j += 1
     return total
 
-
-sample = [[1,2], [2,5], [4,5]]
-
-interval_list = Interval.list_to_interval(sample)
-
-print min_meeting_rooms(interval_list)
