@@ -98,5 +98,5 @@ def symmetric_tree(root):
                     return False
         return True
     return bfs(root)
-    # return not root or dfs(root.left, root.right)
+    # return not root or bottom_up_get_depth(root.left, root.right)
 

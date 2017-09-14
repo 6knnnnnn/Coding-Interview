@@ -13,7 +13,7 @@ def multiply_strings(num1, num2):
         for j in xrange(n - 1, -1, -1):
             # 此时i*j对应的数位是i+j+1
             res[i + j + 1] += int(num1[i]) * int(num2[j])
-            # 进位 res[i+j+1] -> res[i+j]
+            # 进位 diameter[i+j+1] -> diameter[i+j]
             res[i + j] += res[i + j + 1] / 10  # +(35/10=3)
             res[i + j + 1] %= 10  # 35%10=5
     for i in xrange(len(res)):

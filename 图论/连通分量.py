@@ -3,7 +3,7 @@
 # 用"注水sink"的方式，把已经遍历过得cell标记，但标记之后什么逻辑处理要看题意
 # DFS + BFS
 
-from collections import deque
+from collections import deque, defaultdict
 
 
 def number_islands(matrix):
@@ -125,9 +125,75 @@ def walls_and_gates_distance(rooms, inf=2147483647):
     return rooms
 
 
-b = [[2147483647,-1,0,2147483647],
-     [2147483647,2147483647,2147483647,-1],
-     [2147483647,-1,2147483647,-1],
-     [0,-1,2147483647,2147483647]]
+def friend_circles(matrix):
+    """
+    https://leetcode.com/problems/friend-circles/description/
+    找到一个班级内部的"朋友圈子"，即联通分量的个数
+    用一个hash set记录某个edge是否遍历过了，即matrix[i][j] in visited，这道题目和数岛屿类似
+    """
+    def dfs(matrix, visited, i):
+        # 遍历所有可能的节点，找到和i相邻的
+        for j in xrange(len(matrix)):
+            if matrix[i][j] and j not in visited:
+                visited.add(j)
+                dfs(matrix, visited, j)
+    visited = set([])
+    count = 0
+    for i in xrange(len(matrix)):
+        if i not in visited:
+            visited.add(i)
+            dfs(matrix, visited, i)
+            count += 1
+    return count
 
-print walls_and_gates_distance(b)
+
+def number_of_connected_components_in_undirected_graph(edges, n):
+    """
+    https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/
+    Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], return 2.
+    Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1.
+    找到联通分量的个数，类似于friend circles，只是friend circles的输入是matrix而这里是array
+    暴力解法：把array转化为matrix，然后遍历，空间O(N * N)，时间O(E)，也就是edges的数量
+    优化解法：用相邻list或者哈希set map表示edge，时间均为O(E)
+    """
+    def bfs(edges, n):
+        # use adj list to represent graph
+        graph = defaultdict(list)
+        for x, y in edges:
+            graph[x].append(y)
+            graph[y].append(x)
+        total = 0
+        for i in xrange(n):
+            # 如果i在graph中，说明是一个新的source
+            total += 1 if i in graph else 0
+            # 在每次遍历i的时候，把i所有的相邻node j从graph里面pop出来，直到i所有的相邻节点都访问结束了
+            # 此时就是找到了i所能达到的所有节点的联通component
+            same_component = [i]
+            for j in same_component:
+                # same_component是一个不断地更新的list
+                if j in graph:
+                    adj_nodes = graph.pop(j)
+                    # 把所有j的相连的node从graph拿出来，加入到same_component中，因为他们都可以从i出发遍历
+                    same_component += adj_nodes
+        return total
+
+    def dfs(node, g, visited_set):
+        if node not in visited_set:
+            visited_set.add(node)
+            for adj in g[node]:
+                dfs(adj, g, visited_set)
+    visited = set([])
+    # adj list represent a graph
+    graph = defaultdict(list)
+    for x, y in edges:
+        graph[x].append(y)
+        graph[y].append(x)
+    total = 0
+    for i in xrange(n):
+        # if not visited, not connected from all previous trees/components
+        if i not in visited:
+            # DFS to visit all connected nodes
+            dfs(i, graph, visited)
+            total += 1
+    return total
+

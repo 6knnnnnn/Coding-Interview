@@ -162,3 +162,70 @@ def find_largest_value_in_each_tree_row(root):
                 if node.right:
                     queue.append(node.right)
     return row_max
+
+
+def binary_tree_right_side_view(root):
+    """
+    https://leetcode.com/problems/binary-tree-right-side-view/description/
+       1            <---
+     /   \
+    2     3         <---
+     \     \
+      5     4       <---
+    结果：[1, 3, 4]，也就是从右边看整棵树的结构。按层遍历，从左到右，每层最后一个就是所需要的节点。
+    """
+    res_list = list([])
+    if root:
+        q = deque([root])
+        while q:
+            size = len(q)
+            while size > 0:
+                size -= 1
+                node = q.popleft()
+                if node.left: q.append(node.left)
+                if node.right: q.append(node.right)
+                if size == 0: res_list.append(node.val)
+    return res_list
+
+
+class SumLeftLeaves(object):
+    def __init__(self):
+        self.total = 0
+
+    def sum_of_left_leaves(self, root):
+        """
+        https://leetcode.com/problems/sum-of-left-leaves/description/
+        这道题目有点类似于 Binary Tree Right Side View，本题要求每一层的第一个左边的节点，而且是叶子节点。
+            3
+           / \
+          9  20
+         /  /  \
+        10 15   7，结果为10 + 15 = 25
+        """
+        def dfs(root, is_left):
+            if not root:
+                return
+            if root.left or root.right:
+                dfs(root.left, True)
+                dfs(root.right, False)
+            elif is_left:
+                self.total += root.val
+
+        def bfs(root):
+            # 跟DFS一个意思，加入新的node到stack中去
+            total = 0
+            if root:
+                stack = list([(root, 0)])
+                while stack:
+                    n, is_left = stack.pop()
+                    if not n.left and not n.right:
+                        if is_left:
+                            total += n.val
+                    if n.left: stack.append((n.left, 1))
+                    if n.right: stack.append((n.right, 0))
+            return total
+
+        self.total = 0
+        # root 本身不算是left child leaf
+        dfs(root, False)
+        return self.total

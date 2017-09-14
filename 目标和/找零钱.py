@@ -3,6 +3,7 @@
 
 def coin_change_min_coins_dp(coins, target):
     """
+    https://leetcode.com/problems/coin-change/description/
     DP为target长度的一维数组，最小为0（不可换）
     DP[X]代表目标钱数为X时，根据已有的coins种类，最小换钱数，DP[0] = 0 即目标为0则一张都不用换，也就是换钱方法数只有一种
     对于每一个X，遍历所有货币coin求出剩余目标钱数remain

@@ -52,3 +52,9 @@ class Interval(object):
     @staticmethod
     def get_end_key(interval):
         return interval.end
+
+
+class UndirectedGraphNode:
+    def __init__(self, x):
+        self.label = x
+        self.neighbors = []
