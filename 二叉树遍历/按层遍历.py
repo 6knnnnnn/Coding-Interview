@@ -229,3 +229,27 @@ class SumLeftLeaves(object):
         # root 本身不算是left child leaf
         dfs(root, False)
         return self.total
+
+
+def average_levels_binary_tree(root):
+    """
+    https://leetcode.com/problems/average-of-levels-in-binary-tree/description/
+    按层遍历，求每层的总和以及node数量
+    """
+    res = list([])
+    if root:
+        q = deque([root])  # FIFO
+        while q:
+            # a new level, init sum and count
+            size = len(q)
+            s = c = 0
+            while size:  # iterate this level only
+                node = q.popleft()
+                size -= 1
+                s, c = s+node.val, c+1
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            res.append(float(s) / float(c))  # new avg
+    return res
