@@ -100,3 +100,25 @@ def symmetric_tree(root):
     return bfs(root)
     # return not root or dfs(root.left, root.right)
 
+
+def lowest_common_ancestor_binary_tree(root, p, q):
+    """
+    https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
+    只有两种情况：1）如果p q分别在某一个node的两端，node即是LCA；2）p和q其中一个是另一个的ancestor
+    时间O(N)，空间平均情况O(logN)，最坏情况O(N)，即这个tree是一个unbalanced的，从root遍历到p或者q是一个chain
+    """
+    def dfs(node, p, q):
+        if node is None or node == p or node == q:
+            # 如果root为None，不存在LCA，返回None
+            # 或者，此时的root为p和q的任意一个，那么对应的root就是LCA（情况2）
+            return node
+        # 分别去左边和右边，尝试找p和q的LCA
+        left = dfs(node.left, p, q)
+        right = dfs(node.right, p, q)
+        # 如果左边和右边分别找到了"LCA"（即不为None，带引号是因为不确定），只能是情况1，即root是p和q的LCA
+        # p和q在root的两侧；原因：如果p和q在同一侧，那么左边和右边有一边的"LCA"为None，不可能不是None
+        if left and right:
+            return node
+        # 情况2，返回其中一个不是None的
+        return left if left else right
+

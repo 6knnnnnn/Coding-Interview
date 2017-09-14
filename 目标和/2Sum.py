@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from collections import deque
+
 
 def two_sum_hash(nums, target):
     # 如果没有排序，用哈希map记录目标target与每个n的差，作为key，value就是对应n的index
@@ -19,7 +21,7 @@ def two_sum_hash(nums, target):
 def two_sum_sorted_2_pointers(nums, target):
     # 如果只是找一个index pair即可，那么可以两头scan，缩小搜索区间，时间O(N)
     # 或者可以用二分搜索，但此时最坏情况为O(N*logN)，即每一个元素都要logN一次
-    # 如果要找所有的pair？二分搜索可以O(N*logN)
+    # 如果要找所有的pair？二分搜索可以O(N*logN)，普通扫描需要O(N^2）
     i, j = 0, len(nums) - 1
     while nums[i] + nums[j] != target:
         if i == j:
@@ -188,3 +190,61 @@ def four_sum_four_list(A, B, C, D):
         for j in D:  # if not in map, 0
             count += smap.get(-i - j, 0)
     return count
+
+
+def two_sum_binary_search_tree(root, target):
+    """
+    https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/
+    Input:
+        5
+       / \
+      3   6
+     / \   \
+    2   4   7
+    Target = 9 -> True Target = 28 -> False Target = 11 -> True 也就是可能是任意两个节点
+    解法1：遍历所有node，把所有的value放到一个array里面，然后用2sum的方法做，时间空间O(N)
+    解法2：对于每一个node，求出target-node.val=diff，然后对这个diff做二分搜索，时间O(NlogN)，空间O(N)
+    """
+    def convert_to_array(root, target):
+        nums = list([])
+        if root:
+            stack = list([root])
+            while stack:
+                node = stack.pop()
+                nums.append(node.val)
+                if node.left:
+                    stack.append(node.left)
+                if node.right:
+                    stack.append(node.right)
+        return two_sum_hash(nums, target)
+
+    def binary_search(root, target):
+        def bst(node, root, k):
+            while root:
+                if k == root.val:
+                    if root != node:
+                        # 如果root和node不是同一个，找到了目标node
+                        return True
+                    # 是同一个node，那么要继续向node的左边和右边找
+                    return bst(None, node.left, k) or bst(None, node.right, k)
+                elif k > root.val:
+                    root = root.right
+                else:
+                    root = root.left
+            return False
+        if root:
+            queue = deque([root])
+            while queue:
+                size = len(queue)
+                while size:
+                    size -= 1
+                    node = queue.popleft()
+                    diff = target - node.val
+                    # do binary search on left and right
+                    if bst(node, root, diff):
+                        return True
+                    if node.left:
+                        queue.append(node.left)
+                    if node.right:
+                        queue.append(node.right)
+        return False
