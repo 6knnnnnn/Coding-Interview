@@ -10,11 +10,13 @@ class CodingProblemEntity(object):
         # 可能有多个source，或者同一个题目的不同变体问题i ii iii iv等等
         self.problem_name_set = set([])
         self.solution_location = solution_location
+        if solution_location.endswith('.py'):
+            self.solution_location = solution_location[0:-3]
 
     def __repr__(self):
         problem_name_list = sorted(list(self.problem_name_set))
         problem_name_list_str = "\n\t".join(problem_name_list)
-        return "######%s\n\t%s" % (self.solution_location, problem_name_list_str)
+        return "###### %s\n\t%s" % (self.solution_location, problem_name_list_str)
 
     def add_new_problem(self, problem_name):
         self.problem_name_set.add(problem_name)
