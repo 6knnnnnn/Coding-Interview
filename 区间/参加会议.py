@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Utility.entity import Interval
+from utility.entity import Interval
 
 # Given a collection of intervals, find the min number of intervals need to remove
 # to make the rest of the intervals non-overlapping.

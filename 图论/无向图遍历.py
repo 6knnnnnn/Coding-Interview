@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # 关键点：不要遍历到之前已经遍历过得节点
 
-from Utility.entity import UndirectedGraphNode
+from utility.entity import UndirectedGraphNode
 from collections import deque, defaultdict
 
 
@@ -82,5 +82,3 @@ def test_valid_graph_tree():
              ]
     for n, edges in input:
         print graph_valid_tree(edges, n)
-
-test_valid_graph_tree()

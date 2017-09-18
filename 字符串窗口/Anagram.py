@@ -52,7 +52,7 @@ class AnagramsWindow(object):
         self.target = {} # 需要比较的目标
         self.current = {} # 当前window所包含的char count map
         for c in target:
-            self.target[c] = self.target.get(c, 0)+1 # char count
+            self.target[c] = self.target.get(c, 0)+1 # letter count
             self.current[c] = 0 # 初始化均为0
         self.total = len(target)
         # 这里的距离衡量的依据是，有几个char的数量是不等的，所以最多为keys的数量

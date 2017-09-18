@@ -18,3 +18,6 @@ def valid_parentheses(s):
 
 def generate_parentheses(n):
     pass
+
+
+def remove_invalid_parenthesis()

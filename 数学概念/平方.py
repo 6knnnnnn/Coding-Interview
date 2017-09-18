@@ -46,3 +46,19 @@ def happy_number(num):
             return True
         num = m
     return False
+
+
+def square_root(x):
+    """
+    https://leetcode.com/problems/sqrtx/description/
+    求一个数字的平方根，Newton binary approximate approach，不断的逼近最后的平方根
+    """
+    left, right, ans = 1, x, 0
+    while left <= right:
+        mid = (left + right) >> 1
+        if mid * mid <= x:
+            left = mid + 1
+            ans = mid
+        else:
+            right = mid - 1
+    return ans

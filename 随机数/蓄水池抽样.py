@@ -22,7 +22,7 @@
 而且，蓄水池平均时间复杂度为O(1)，因为每次只需要一个新的元素即可。
 """
 
-from Utility import ListNode
+from utility import ListNode
 import random
 
 

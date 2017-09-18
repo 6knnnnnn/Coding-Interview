@@ -3,6 +3,7 @@ import os
 
 leet_code_url = "https://leetcode.com/problems"
 same_problem_series = "iiiv"
+header = "####"
 
 
 class CodingProblemEntity(object):
@@ -16,7 +17,7 @@ class CodingProblemEntity(object):
     def __repr__(self):
         problem_name_list = sorted(list(self.problem_name_set))
         problem_name_list_str = "\n\t".join(problem_name_list)
-        return "###### %s\n\t%s" % (self.solution_location, problem_name_list_str)
+        return "%s %s\n\t%s" % (header, self.solution_location, problem_name_list_str)
 
     def add_new_problem(self, problem_name):
         self.problem_name_set.add(problem_name)
@@ -57,6 +58,8 @@ def parse_file_content_as_entity(file_path, content):
                 problem_name_list[i] = "%s%s" % (word[0].upper(), word[1:])
                 if word[0] in '0123456789' and len(word) >= 2:
                     problem_name_list[i] = "%s%s%s" % (word[0], word[1].upper(), word[2:])
+                elif word in same_problem_series:
+                    problem_name_list[i] = word.upper()
             problem_full_name = " ".join(problem_name_list)
             problem_entity.add_new_problem(problem_full_name)
     return problem_entity
@@ -68,7 +71,7 @@ def write_to_readme(readme_file_path, problem_entity_list):
         readme_file.close()
     new_content_list = list([])
     for line in old_content.split("\n"):
-        if len(line) > 6 and line[0:6] == "######":
+        if len(line) > len(header) and line[0:len(header)] == header:
             break
         new_content_list.append(line)
     new_content_list += problem_entity_list

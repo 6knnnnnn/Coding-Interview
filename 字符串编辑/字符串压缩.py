@@ -31,7 +31,7 @@ def test():
 class CompressedStringIterator(object):
     """
     https://leetcode.com/problems/design-compressed-string-iterator/description/
-    char-count,char-count...
+    letter-count,letter-count...
     StringIterator iterator = new StringIterator("L1e2t1C1o1d1e1");
     iterator.next(); // return 'L'
     iterator.next(); // return 'e'

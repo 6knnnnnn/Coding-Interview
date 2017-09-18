@@ -2,7 +2,7 @@
 
 # Karatsuba algorithm
 
-from Utility import ListNode
+from utility import ListNode
 
 
 class AddLinkedList(object):

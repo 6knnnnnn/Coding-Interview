@@ -106,6 +106,7 @@ def lowest_common_ancestor_binary_tree(root, p, q):
     https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
     只有两种情况：1）如果p q分别在某一个node的两端，node即是LCA；2）p和q其中一个是另一个的ancestor
     时间O(N)，空间平均情况O(logN)，最坏情况O(N)，即这个tree是一个unbalanced的，从root遍历到p或者q是一个chain
+    Edge case: 如果不存在ancestor返回None，如果p q 相等返回p 或者 q
     """
     def dfs(node, p, q):
         if node is None or node == p or node == q:

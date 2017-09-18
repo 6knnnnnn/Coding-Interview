@@ -18,7 +18,7 @@ def reverse_space_n(s):
 def reverse_space_1(char_list):
     # The input is a list of strings with length = 1
     # https://leetcode.com/problems/reverse-words-in-a-string-ii/description/
-    # 如果输入是一个list of char，如何做到O(1)空间？首先把整个list反转，然后反转每一个单词，也就是遇到空格前的部分全部反转
+    # 如果输入是一个list of letter，如何做到O(1)空间？首先把整个list反转，然后反转每一个单词，也就是遇到空格前的部分全部反转
     i, j = 0, len(char_list) - 1
     while i < j:
         char_list[i], char_list[j] = char_list[j], char_list[i]

@@ -75,7 +75,7 @@ def surrounded_regions(board):
             return
         # 所有在边界上的O都不会变成X，从这些边界开始
         # python string immutable，所以需要额外的空间来存储，最后改变board每一行
-        # 除非输入是一个list of list，即每一行里面的元素为list of char
+        # 除非输入是一个list of list，即每一行里面的元素为list of letter
         board_copy = [list(row) for row in board ]
         for i in xrange(m):
             if board_copy[i][0] == 'O':

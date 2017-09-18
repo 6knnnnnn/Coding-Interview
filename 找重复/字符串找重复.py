@@ -23,7 +23,7 @@ def longest_substring_without_repeating_chars(s):
     需要2 pointers: start是当前无重复子串的开始index，i是当前遍历index
     """
     max_len = start = 0
-    char_index = {}  # history char index
+    char_index = {}  # history letter index
     for i, c in enumerate(s):
         # if c in char_index and char_index[c] >= start:
         if char_index.get(c, -1) >= start:

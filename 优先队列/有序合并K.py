@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Utility import ListNode
+from utility import ListNode
 
 
 def merge_k_sorted_linked_list(list_heads):

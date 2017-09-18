@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Utility import TreeNode
+from utility import TreeNode
 
 
 class ArrayNode(object):
