@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
+https://leetcode.com/problems/decode-ways/description/
+'A' -> 1 'B' -> 2 ... 'Z' -> 26，12 可以被decode为 AB，或者 L
+
 DP[X] 表示从后往前遍历数字到x位置，所拥有的最多的变换decode方式，肯定依赖于DP[X-1]，有可能也依赖于DP[X-2]
 最小为0，最后一个为1，即只有一种方式，其他均为0
 如果在x位置有2个连续0的非法情况

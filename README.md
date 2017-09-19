@@ -9,15 +9,17 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Find Peak Element
 	First Bad Version
 	Valid Perfect Square
-#### 二叉树查找/中序遍历
-	Convert Bst To Greater Tree
-	Validate Binary Search Tree
+#### 二叉树查找/BST查找
+	Closest Binary Search Tree Value
 #### 二叉树查找/二叉树第K个
 	Kth Smallest Element In A Bst
 	Second Minimum Target In A Binary Tree
 #### 二叉树查找/迭代器
 	Binary Search Tree Iterator
 	Inorder Successor In Bst
+#### 二叉树遍历/中序遍历BST
+	Convert Bst To Greater Tree
+	Validate Binary Search Tree
 #### 二叉树遍历/序列化
 	Subtree Of Another Tree
 #### 二叉树遍历/按层遍历
@@ -43,6 +45,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Diameter Of Binary Tree
 	Sum Root To Leaf Numbers
 #### 优先队列/有序合并K
+	Merge K Sorted Arrays
 	Merge K Sorted Lists
 #### 位运算/基本位运算
 	Number Complement
@@ -52,6 +55,13 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Total Hamming Distance
 #### 位进制转换/CountAndSay
 	Count And Say
+#### 位进制转换/DecodeWays
+	Decode Ways
+#### 位进制转换/Excel表格
+	Excel Sheet Column Number
+	Excel Sheet Column Title
+#### 位进制转换/整数英文单词
+	Integer To English Words
 #### 位进制转换/翻转整数
 	Add Digits
 	Reverse Integer
@@ -63,6 +73,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 几何问题/直方图面积
 	Largest Rectangle In Histogram
 	Maximal Rectangle
+#### 动态规划/买卖股票
+	Best Time To Buy And Sell Stock
 #### 动态规划/入室抢劫
 	House Robber
 #### 动态规划/最大乘积子数组
@@ -90,6 +102,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Number Of Islands
 	Surrounded Regions
 	Walls And Gates
+#### 字典树/单词搜索
+	Design Search Autocomplete System
 #### 字典树/字典树实现
 	Add And Search Word Data Structure Design
 	Implement Trie Prefix Tree
@@ -152,6 +166,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Plus One Linked List
 #### 数学概念/平方
 	Happy Number
+	Sqrtx
 	Sum Of Square Numbers
 	Valid Perfect Square
 #### 数学概念/矩阵乘法
@@ -183,8 +198,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Spiral Matrix
 #### 目标和/2Sum
 	3Sum
+	3Sum Closest
 	3Sum Smaller
 	4Sum
+	Two Sum
 	Two Sum III Data Structure Design
 	Two Sum IV Input Is A Bst
 #### 目标和/二叉树路径和

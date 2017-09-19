@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from utility import ListNode
+from utility.entity import ListNode
+from heapq import heappop, heapreplace, heapify
+from Queue import PriorityQueue
 
 
 def merge_k_sorted_linked_list(list_heads):
@@ -10,9 +12,8 @@ def merge_k_sorted_linked_list(list_heads):
     然后每次从里面找到最小的head，更新方式为，找到head的下一个node加入到队列中去（如果有的话）
     follow up可能是，merge K sorted arrays，类似的想法，heap里面需要存放对应的哪个array，以及该array的遍历index
     """
-    from heapq import heappop, heapreplace, heapify
     new_head = result_node = ListNode(0)
-    heap = [(n.val, n) for n in list_heads if n]
+    heap = [(n.val, n) for n in list_heads if n] # n.val就是heap的priority
     # 初始化max heap
     heapify(heap)
     while heap:
@@ -28,3 +29,28 @@ def merge_k_sorted_linked_list(list_heads):
         result_node = result_node.next
     return new_head.next
 
+
+def merge_k_sorted_array(arrays):
+    """
+    https://leetcode.com/problems/merge-k-sorted-arrays/description/
+    给定一个array，里面有K个sorted array，merge他们
+    用一个priority queue，里面每一个node有三个信息：目前所属于的array index，在这个array里面属于第几个元素，元素的值
+    """
+    k = len(arrays)
+    pq = PriorityQueue(k)
+    for i, array in enumerate(arrays):
+        pq.put((array[0], i, 0))
+    result = []
+    while not pq.empty():
+        # value array_i element_i
+        value, array_i, element_i = pq.get()
+        result.append(value)
+        if element_i < len(arrays[array_i]) - 1:
+            # 说明此时对应的array还没遍历结束，需要继续
+            new_element = (arrays[array_i][element_i + 1], array_i, element_i + 1)
+            pq.put(new_element)
+    return result
+
+
+arrays = [[40,50,60],[1,2,3],[15,25],[4,5,20]]
+print merge_k_sorted_array(arrays)

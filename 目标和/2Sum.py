@@ -4,6 +4,7 @@ from collections import deque
 
 
 def two_sum_hash(nums, target):
+    # https://leetcode.com/problems/two-sum/description/
     # 如果没有排序，用哈希map记录目标target与每个n的差，作为key，value就是对应n的index
     diff_index_map = {}
     result = []
@@ -55,18 +56,18 @@ class TwoSum(object):
     # https://leetcode.com/problems/two-sum-iii-data-structure-design/description/
     # 还是用哈希，因为可能有重复元素，但是目标是重复元素的两倍
     def __init__(self):
-        self.num_count = {}
+        self.num_count_map = {}
 
     def add(self, num):
-        self.num_count[num] = self.num_count.get(num, 0) + 1
+        self.num_count_map[num] = self.num_count_map.get(num, 0) + 1
 
     def find(self, val):
-        for k, v in self.num_count.items():
+        for k, v in self.num_count_map.items():
             diff = val - k
             if k == diff:
                 if v > 1:  # 重复元素，看个数
                     return True
-            elif diff in self.num_count:
+            elif diff in self.num_count_map:
                 return True
         return False
 
@@ -74,8 +75,8 @@ class TwoSum(object):
 def three_sum(nums, target=0):
     # https://leetcode.com/problems/3sum/description/
     # 此时求的是target=0的情况，但是推导到其他target也是可以的
-    # 暴力解法三个for loop，O(N^3)，优化：先排序，再用两层loop，里面的循环类似于two sum sorted
-    # 这道题目的关键点就是需要去重复
+    # 暴力解法三个for loop，O(N^3)，优化：先排序，再用两层loop，里面的循环类似于two sum sorted，时间复杂度O(N^2)
+    # 这道题目的关键点就是需要去重复，即不要重复遍历相同的数字
     res = []
     nums.sort()
     for i in xrange(len(nums)-2):
@@ -85,7 +86,7 @@ def three_sum(nums, target=0):
             while l < r:
                 s = nums[i] + nums[l] + nums[r]
                 if s < target:
-                    l +=1
+                    l += 1
                 elif s > target:
                     r -= 1
                 else:
@@ -106,6 +107,7 @@ def test_3sum():
 
 
 def three_sum_closet(nums, target):
+    # https://leetcode.com/problems/3sum-closest/description/
     # 和3Sum一样解法，只是需要更新closet的值
     nums.sort()
     import sys
@@ -203,7 +205,7 @@ def two_sum_binary_search_tree(root, target):
     2   4   7
     Target = 9 -> True Target = 28 -> False Target = 11 -> True 也就是可能是任意两个节点
     解法1：遍历所有node，把所有的value放到一个array里面，然后用2sum的方法做，时间空间O(N)
-    解法2：对于每一个node，求出target-node.val=diff，然后对这个diff做二分搜索，时间O(NlogN)，空间O(N)
+    解法2：对于每一个node，求出target - node.val=diff，然后对这个diff做二分搜索，时间O(NlogN)，空间O(N)
     """
     def convert_to_array(root, target):
         nums = list([])

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from utility import ListNode
+from utility.entity import ListNode
 
 
 def merge_sort_into_another(nums1, m, nums2, n):
