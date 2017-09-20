@@ -2,6 +2,7 @@
 
 
 def find_celebrity(n):
+    # https://leetcode.com/problems/find-the-celebrity/description/
     # 名人不认识任何人，所有人都认识名人
     def knows(x, y): # API
         return x == y
