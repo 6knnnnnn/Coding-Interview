@@ -19,6 +19,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Inorder Successor In Bst
 #### 二叉树遍历/中序遍历BST
 	Convert Bst To Greater Tree
+	Most Frequent Element In Binary Search Tree
 	Validate Binary Search Tree
 #### 二叉树遍历/序列化
 	Subtree Of Another Tree
@@ -55,8 +56,6 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Total Hamming Distance
 #### 位进制转换/CountAndSay
 	Count And Say
-#### 位进制转换/DecodeWays
-	Decode Ways
 #### 位进制转换/Excel表格
 	Excel Sheet Column Number
 	Excel Sheet Column Title
@@ -65,6 +64,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 位进制转换/翻转整数
 	Add Digits
 	Reverse Integer
+#### 几何问题/DecodeWays
+	Decode Ways
 #### 几何问题/岛屿周长
 	Island Perimeter
 #### 几何问题/正方形
@@ -79,6 +80,9 @@ A repo for popular coding interview problems mainly from Leetcode.
 	House Robber
 #### 动态规划/最大乘积子数组
 	Product Of Array Except Self
+#### 动态规划/粉刷墙
+	Paint Fence
+	Paint House
 #### 区间/区间搜索
 	Search For A Range
 #### 区间/参加会议
@@ -88,6 +92,9 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Summary Ranges
 #### 回文/Manacher
 	Shortest Palindrome
+#### 回文/判断回文
+	Palindrome Linked List
+	Palindrome Number
 #### 图论/WordLadder
 	Word Ladder
 #### 图论/无向图遍历
@@ -102,11 +109,11 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Number Of Islands
 	Surrounded Regions
 	Walls And Gates
-#### 字典树/单词搜索
-	Design Search Autocomplete System
 #### 字典树/字典树实现
 	Add And Search Word Data Structure Design
 	Implement Trie Prefix Tree
+#### 字典树/自动补全
+	Design Search Autocomplete System
 #### 字符串匹配/WordDistance
 	Shortest Word Distance
 #### 字符串匹配/WordPattern
@@ -140,6 +147,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 找重复/字符串找重复
 	First Unique Character In A String
 	Longest Substring Without Repeating Characters
+#### 找重复/数组删重复
+	Remove Element
 #### 找重复/数组找重复
 	Contains Duplicate
 	Find The Duplicate Number
@@ -156,6 +165,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Merge Sorted Array
 	Sort List
 #### 排序/计数排序
+	Sort Characters By Frequency
 	Sort Colors
 #### 数学概念/乘法
 	Complex Number Multiplication
@@ -177,16 +187,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 数学概念/运算符解析
 	Evaluate Reverse Polish Notation
 #### 数组窗口/数组窗口统计
+	Contiguous Array
 	Sliding Window Maximum
 #### 数组窗口/最值子序列
 	Longest Consecutive Sequence
-#### 数组窗口/窗口平均数
-	Moving Average From Data Stream
-#### 文件系统/找最长文件路径
-	Longest Absolute File Path
-#### 文件系统/缓存Read4
-	Read N Characters Given Read4
-	Read N Characters Given Read4 II Call Multiple Times
 #### 旋转/对角线打印
 	Diagonal Traverse
 #### 旋转/旋转数组
@@ -196,6 +200,15 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Rotate Image
 	Sparse Matrix Multiplication
 	Spiral Matrix
+#### 栈与队列/函数调用时间
+	Exclusive Time Of Functions
+#### 栈与队列/文件路径
+	Longest Absolute File Path
+	Simplify Path
+#### 益智游戏/找名人
+	Find The Celebrity
+#### 益智游戏/种花
+	Can Place Flowers
 #### 目标和/2Sum
 	3Sum
 	3Sum Closest
@@ -210,12 +223,25 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Coin Change
 	Perfect Squares
 #### 目标和/目标和子数组
+	Continuous Subarray Sum
 	Maximum Size Subarray Sum Equals K
+	Minimum Size Subarray Sum
 #### 目标和/运算符目标和
 	Expression Add Operators
 	Target Sum
+#### 系统设计/TinyURL
+	Encode And Decode Tinyurl
+#### 系统设计/缓存Read4
+	Read N Characters Given Read4
+	Read N Characters Given Read4 II Call Multiple Times
+#### 系统设计/调度算法
+	Lru Cache
 #### 走棋盘/Dungeon游戏
 	Dungeon Game
+#### 链表节点/删除节点
+	Remove Duplicates From Sorted Array
+	Remove Duplicates From Sorted List
+	Remove Nth Node From End Of List
 #### 链表节点/链表重叠
 	Intersection Of Two Linked Lists
 #### 随机数/增删查随机数

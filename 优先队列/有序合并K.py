@@ -52,5 +52,34 @@ def merge_k_sorted_array(arrays):
     return result
 
 
+class NestedSortedArrayIterator(object):
+    def __init__(self, arrays):
+        """
+        类似于merge_k_sorted_array，这里面实现一个iterator用来遍历元素。
+        """
+        self.arrays = arrays
+        self.pq = PriorityQueue(len(arrays))
+        for i, array in enumerate(arrays):
+            self.pq.put((array[0], i, 0))
+
+    def next(self):
+        if not self.has_next():
+            raise IndexError("All elements iterated. No more element.")
+        value, array_i, element_i = self.pq.get()
+        if element_i < len(self.arrays[array_i]) - 1:
+            # 说明此时对应的array还没遍历结束，需要加入到PriorityQueue里面之后继续
+            new_element = (self.arrays[array_i][element_i + 1], array_i, element_i + 1)
+            self.pq.put(new_element)
+        return value
+
+    def has_next(self):
+        return not self.pq.empty()
+
+
 arrays = [[40,50,60],[1,2,3],[15,25],[4,5,20]]
-print merge_k_sorted_array(arrays)
+
+
+iter = NestedSortedArrayIterator(arrays)
+
+while iter.has_next():
+    print iter.next()

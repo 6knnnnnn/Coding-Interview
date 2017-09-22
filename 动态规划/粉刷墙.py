@@ -5,7 +5,23 @@ def paint_fence(n, k):
     """
     https://leetcode.com/problems/paint-fence/description/
     有N个fence，K种颜色，每次最多有两个相邻fence是同一个颜色，求最后有多少种喷漆的方式。
+    如果N = 0，返回0，如果N = 1，只有K种可能，不存在diff的情况
+    如果N = 2，第一个fence有K种可能，第二个fence要看情况：如果跟1相同，K*1种可能，否则，K*(K-1)种可能
+    所以对于N >= 3，以此类推，根据上一个fence涂颜色的可能性same and diff，对于本次来说：
+        same_current = total_previous
+        diff_current = total_previous * (k - 1)
+        total_current = same_current + diff_current
     """
+    if n == 0:
+        return 0
+    if n == 1:
+        return k
+    same_prev, diff_prev = k, k*(k-1)
+    for i in xrange(3, n+1):
+        same_curr = total_prev = same_prev + diff_prev
+        diff_curr = total_prev * (k-1)
+        same_prev, diff_prev = same_curr, diff_curr
+    return same_prev + diff_prev
 
 
 def paint_house(costs):

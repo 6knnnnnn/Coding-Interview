@@ -37,3 +37,41 @@ def maximum_size_sub_array_sum_equals_k(nums, k):
                 # 只把index放入到map中一次，即最左边的index
                 index_map[run_sum[j]] = j
     return max_len
+
+
+def contiguous_subarray_sum_to_multiple_k(nums, k):
+    """
+    https://leetcode.com/problems/continuous-subarray-sum/description/
+    找到一个只包含非负整数的数组中，是否存在长度大于2的subarray，满足累加和是k的倍数
+    """
+
+
+
+def minimum_size_sub_array_sum(nums, k):
+    """
+    https://leetcode.com/problems/minimum-size-subarray-sum/description/
+    一个只包含正整数的array，找到里面所有满足累加和 >= k的子数组当中，长度最小的
+    比如 [2,3,1,2,4,3] and k = 7，最小的subarray是 [4, 3]
+    设定一个长度可以变化的windows，比如用deque，head和tail在nums中的对应位置分别为i和j
+    expand规则：当window里面的累加和<k的时候，j不断地向右移动，直到[i, j-1] < k but [i, j] >= k
+    shrink规则：当window里面的累加和>=k的时候，i不断地向右移动，直到[i, j] >=k but [i+1, j] < k
+    每次找到一个满足[i, j] >= k 的 window，更新min len作为最后的结果。
+    时间复杂度O(N)，空间复杂度O(N)，因为需要一个queue，或者只用两个变量记录i j，空间O(1)
+    """
+    i = j = win_sum = 0
+    min_len = len(nums) + 1
+    while j < len(nums):
+        # while win_sum < k, expand
+        while win_sum < k:
+            win_sum += nums[j]
+            j += 1
+            if j == len(nums):
+                break
+        # now win_sum >= k, shrink [i, j]
+        if win_sum >= k:
+            while win_sum >= k and i < j:
+                win_sum -= nums[i]
+                i += 1
+            # exit while, win_sum < k or i == j
+            min_len = min(min_len, j - i + 1)
+    return 0 if min_len == len(nums) + 1 else min_len

@@ -48,3 +48,32 @@ def sliding_window_max(nums, k):
 
 def sliding_window_median(nums, k):
     pass
+
+
+def contiguous_array_equal_number_of_0_1(nums):
+    """
+    https://leetcode.com/problems/contiguous-array/description/
+    找到一个bit array中，所有包含0和1的个数相等的subarray的最大长度
+    把0当做是-1，求得累加和，用一个hash map记录某个累加和count对应的最左边的index
+    当遍历到第j个元素的时，如果求得的count存在于hash map中假设值为i，说明此时存在一个subarray满足0和1等长
+    此时的subarray就是从[i...j]。感觉就像是，从i开始单调递增的直线，从j开始单调递减
+    直到某个点从新开始递增，或者长度超过了之前的单调递增的部分（说明找到了一个极值，但不一定是最值）
+       /\
+      / \ /
+     /  \/
+    /
+     i  j，即 j - i + 1 = len of subarray
+    比如 [ 1, 0, 0, 0, 1, 1, 0]，最后结果为[1, 0, 0, 0, 1, 1]，即[0, 5]
+    """
+    max_len = count = 0
+    sum_index_map = {0: 0}
+    for index, num in enumerate(nums, 1):
+        # 0最开始指向0，即如果到达index的时候，累加和=0，说明从开始到index是一个满足条件的subarray，即[0, index]
+        # 所以这里面index是从1开始的
+        count += 1 if num == 1 else -1
+        if count in sum_index_map:  # same running sum
+            new_len = index - sum_index_map[count]
+            max_len = max(max_len, new_len)
+        else:
+            sum_index_map[count] = index  # first time
+    return max_len
