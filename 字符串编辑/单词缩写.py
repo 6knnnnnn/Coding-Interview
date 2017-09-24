@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 
-# Valid Word Abbreviation, https://leetcode.com/problems/valid-word-abbreviation/description/
-# 判断一个word和一个abbr是否匹配
-# 非数字位置的字符是否相等，数字位置的字符所组成的长度是否相等
 def valid_word_abbreviation(word, abbr):
+    """
+    判断一个word和一个abbr是否匹配
+    非数字位置的字符是否相等，数字位置的字符所组成的长度是否相等
+    https://leetcode.com/problems/valid-word-abbreviation/description/
+    """
     if len(abbr) > len(word):
         return False
     i = j = 0

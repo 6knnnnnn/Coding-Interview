@@ -253,3 +253,88 @@ def average_levels_binary_tree(root):
                     q.append(node.right)
             res.append(float(s) / float(c))  # new avg
     return res
+
+
+class TreeLinkNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+        self.next = None
+
+
+def populating_next_right_pointers_in_each_node(root):
+    """
+    https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+    假设一个二叉树，里面的节点除了left和right之外，还有一个next节点，该节点初始的时候为None
+    现在要把整个二叉树的每一个节点的next指向该节点在该层的下一个right节点，也就是从左向右遍历的顺序
+         1                           1 -> NULL
+       /  \                        /  \
+      2    3                      2 -> 3 -> NULL
+     /    / \                    /    / \
+    4    6  7                   4 -> 6->7 -> NULL
+
+    如果是一个满二叉树，DFS和BFS都能很简单的解决。如果可以是任意的二叉树，BFS能解两种情况，但DFS这种情况edge case很复杂。
+    但如果要求是O(1)空间的话，需要有一些trick：
+        这里面，每一层相当于一个linked list，而且遍历当前层的时候，也是在为下一层做准备，相当于同时遍历两层。
+        即每次遍历第x层的时候，除了把本层的next连接起来之外，也要把x+1层的node用next连起来
+        满二叉树的情况要简单一些，因为有left则必有right，但如果不是满二叉树，会有edge case要考虑。
+        所以这里用到4个变量：
+        下一层的开始节点head：相当于linked list的假头，这个head.next指向的是，下一层的开始节点
+        当前层的当前遍历节点curr_level_node，以及下一层的当前遍历节点next_level_node
+        has_next_level，一个flag，判断是否还有下一层，防止死循环，因为到最后一层的时候，head.next永远指向的是最后一层的第一个
+        如果不判断是否是最后一层，则curr_level_node会无限的返回到head.next
+    """
+    def bfs_constant_space_any_tree(root):
+        curr_level_node = root
+        next_level_node = head = TreeLinkNode(-1)
+        has_next_level = 0
+        while curr_level_node:
+            # 如果有left或者right，next_level_node.next需要先指向left然后指向right，以及挪动next_level_node
+            if curr_level_node.left:
+                next_level_node.next = curr_level_node.left
+                next_level_node = next_level_node.next
+                has_next_level = 1
+            if curr_level_node.right:
+                next_level_node.next = curr_level_node.right
+                next_level_node = next_level_node.next
+                has_next_level = 1
+            # move on to the next on current level
+            curr_level_node = curr_level_node.next
+            if not curr_level_node and has_next_level:
+                # 如果curr_level_node为None，即本层结束下层开始，curr_level_node从head.next开始
+                # 而 next_level_node还是从这个head开始
+                next_level_node = head
+                curr_level_node = head.next
+                has_next_level = 0
+
+    def bfs_constant_space_complete_tree(root):
+        # 对于某一个满二叉树node来说，如果不是leaf，那么必有left and right，而且left.next = right
+        # 但是对于right.next来说，需要根据当前node.next来判断：如果node.next存在，那么node.right.next = node.next.left
+        # 所以需要两个变量，一个记录当前层的开始节点level_start，另一个是当前层的遍历节点curr。
+        level_start = root
+        while level_start:
+            curr = level_start
+            while curr:
+                if curr.left:
+                    # 有left必有right
+                    curr.left.next = curr.right
+                if curr.right and curr.next:
+                    # 有right，同时也有next，那么把right -> next.left
+                    curr.right.next = curr.next.left
+                curr = curr.next
+            level_start = level_start.left
+
+    def bfs_extra_space(root):
+        queue = deque([root])
+        while queue:
+            size = len(queue)
+            while size:
+                size -= 1
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                # 如果queue空了，说明本层遍历结束，当前node的下一个为None
+                node.next = queue[0] if size else None

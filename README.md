@@ -30,6 +30,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Binary Tree Vertical Order Traversal
 	Binary Tree Zigzag Level Order Traversal
 	Find Largest Value In Each Tree Row
+	Populating Next Right Pointers In Each Node
 	Sum Of Left Leaves
 #### 二叉树遍历/树结构
 	Binary Tree Upside Down
@@ -83,6 +84,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 动态规划/粉刷墙
 	Paint Fence
 	Paint House
+#### 动态规划/递增子序列
+	Increasing Triplet Subsequence
 #### 区间/区间搜索
 	Search For A Range
 #### 区间/参加会议
@@ -129,8 +132,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 字符串编辑/单词反转
 	Reverse Words In A String
 #### 字符串编辑/单词缩写
-	
 	Unique Word Abbreviation
+	Valid Word Abbreviation
 #### 字符串编辑/字符串压缩
 	Design Compressed String Iterator
 #### 字符串编辑/字符串序列化
@@ -148,6 +151,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	First Unique Character In A String
 	Longest Substring Without Repeating Characters
 #### 找重复/数组删重复
+	Remove Duplicates From Sorted Array
 	Remove Element
 #### 找重复/数组找重复
 	Contains Duplicate
@@ -238,8 +242,9 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Lru Cache
 #### 走棋盘/Dungeon游戏
 	Dungeon Game
+#### 链表节点/交换节点
+	Reverse Nodes In K Group
 #### 链表节点/删除节点
-	Remove Duplicates From Sorted Array
 	Remove Duplicates From Sorted List
 	Remove Nth Node From End Of List
 #### 链表节点/链表重叠

@@ -3,14 +3,6 @@
 from utility.entity import ListNode
 
 
-def remove_duplicates_from_sorted_array(nums):
-    """
-    https://leetcode.com/problems/remove-duplicates-from-sorted-array
-    :param nums:
-    :return:
-    """
-
-
 def remove_duplicates_from_sorted_list(head):
     """
     https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/
