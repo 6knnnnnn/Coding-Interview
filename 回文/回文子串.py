@@ -20,3 +20,10 @@ class LongestPalindromicSubstring(object):
             extend(s, i, i) # if result is odd len
             extend(s, i, i+1) # if result if even len
         return s[self.start : self.start + self.maxL]
+
+
+def palindromic_substrings():
+    """
+    https://leetcode.com/problems/palindromic-substrings/description/
+
+    """

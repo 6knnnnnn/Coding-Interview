@@ -6,7 +6,7 @@ def find_peak_element(nums):
     """
     https://leetcode.com/problems/find-peak-element/description/
     比相邻元素大的，就叫peak元素。假定输入里面相邻的元素不相等，即必定存在peak element
-    而且nums[-1] = nums[n] = -∞，也就是只要nums[0]>nums[1]或者nums[n-1] > nums[n-2]，他俩也可以算是peak
+    这里假设 -∞ nums[0...n-1] -∞，也就是只要nums[0]>nums[1]或者nums[n-1] > nums[n-2]，他俩也可以算是peak
     Peak element的定义，用图表示就是3种情况：
     1）一段上升直线达到peak后开始下降 2）一直上升，直到最后结束（最后一个是peak）3）一直下降，peak为第一个
     暴力解法，遍历所有，比较相邻的，找到peak

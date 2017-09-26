@@ -41,3 +41,21 @@ def palindrome_number(x):
         y = y * 10 + x % 10
         x = x / 10
     return cp == y
+
+
+def palindrome_permutation(s):
+    """
+    https://leetcode.com/problems/palindrome-permutation/description/
+    判断一个string是否能够组成回文排列，也就是根据字母的个数的奇偶性来判断
+    """
+    count_set = set([])
+    for c in s:
+        if c in count_set:
+            count_set.remove(c)
+        else:
+            count_set.add(c)
+    if len(s) % 2 == 0:
+        # string的长度为偶数，判断每个字母的个数是否全都是偶数
+        return len(count_set) == 0
+    # 否则，string长度为奇数，判断是否只有一个字母的个数是奇数
+    return len(count_set) == 1

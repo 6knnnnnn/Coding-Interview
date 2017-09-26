@@ -79,20 +79,21 @@ def write_to_readme(readme_file_path, problem_entity_list):
     with open(readme_file_path, 'w') as readme_file:
         readme_file.write(new_content)
         readme_file.close()
-    return len(new_content_list)
 
 
 def batch(working_dir):
     all_file_paths = sorted(list_all_files(working_dir))
     problem_entity_list = list([])
+    total_problems = 0
     for file_path in all_file_paths:
         content = str(read_content_from_file(file_path))
         problem_entity = parse_file_content_as_entity(file_path[len(working_dir):], content)
         if len(problem_entity.problem_name_set):
+            total_problems += len(problem_entity.problem_name_set)
             problem_entity_list.append(str(problem_entity))
     readme_file_path = os.path.join(working_dir, "README.md")
-    total = write_to_readme(readme_file_path, problem_entity_list)
-    print "%s lines in total in the new README.md" % total
+    write_to_readme(readme_file_path, problem_entity_list)
+    print "%s problems in total." % total_problems
 
 if __name__ == '__main__':
     batch("../")

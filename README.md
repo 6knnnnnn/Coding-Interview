@@ -98,6 +98,9 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 回文/判断回文
 	Palindrome Linked List
 	Palindrome Number
+	Palindrome Permutation
+#### 回文/回文子串
+	Palindromic Substrings
 #### 图论/WordLadder
 	Word Ladder
 #### 图论/无向图遍历
@@ -158,6 +161,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Find The Duplicate Number
 #### 排列组合/子集
 	Subsets
+#### 排列组合/排列
+	Next Permutation
+	Palindrome Permutation
+	Permutations
 #### 排列组合/组合
 	Combinations
 	Factor Combinations
