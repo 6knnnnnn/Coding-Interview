@@ -2,7 +2,7 @@
 
 
 """
-如果是min heap，直接用heapq，如果需要max heap，最好用PriorityQueue
+如果是min heap，直接用heapq，如果需要max heap，最好用PriorityQueue，或者把key取负号，比如数值型就加负号
 Python里面使用优先队列/heap的方法：
 1. from heapq import xxx
 基本操作：默认是min heap，如果是max heap，可以把priority异号，即变成它的相反数（假设是数值型的）

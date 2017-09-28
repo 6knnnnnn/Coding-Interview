@@ -2,12 +2,10 @@
 
 
 class TrieNode(object):
-    """
-    https://leetcode.com/problems/implement-trie-prefix-tree/description/
-    字典树结构，需要注意的是，每个word的结尾时刻，需要加一个flag判断，是否是word（而非仅仅是一个path）
-    """
+    # 字典树结构，需要注意的是，每个word的结尾时刻，需要加一个flag判断，是否是word（而非仅仅是一个path）
     def __init__(self, letter):
         self.letter = letter
+        # 其实不一定需要这个letter和is word flag，而是另一种更好的实现方式
         self.is_word = False
         self.child_node_map = dict([])
 

@@ -14,14 +14,16 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 二叉树查找/二叉树第K个
 	Kth Smallest Element In A Bst
 	Second Minimum Target In A Binary Tree
-#### 二叉树查找/迭代器
-	Binary Search Tree Iterator
-	Inorder Successor In Bst
-#### 二叉树遍历/中序遍历BST
+#### 二叉树遍历/中序遍历
 	Convert Bst To Greater Tree
 	Most Frequent Element In Binary Search Tree
 	Validate Binary Search Tree
+#### 二叉树遍历/先序遍历
+	Flatten Binary Tree To Doubly Linked List
+	Flatten Binary Tree To Linked List
 #### 二叉树遍历/序列化
+	Serialize And Deserialize Binary Tree
+	Serialize And Deserialize Bst
 	Subtree Of Another Tree
 #### 二叉树遍历/按层遍历
 	Average Of Levels In Binary Tree
@@ -46,6 +48,11 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Binary Tree Paths
 	Diameter Of Binary Tree
 	Sum Root To Leaf Numbers
+#### 二叉树遍历/迭代器
+	Binary Search Tree Iterator
+	Inorder Successor In Bst
+#### 优先队列/数组第K个
+	Kth Largest Element In An Array
 #### 优先队列/有序合并K
 	Merge K Sorted Arrays
 	Merge K Sorted Lists
@@ -57,6 +64,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Total Hamming Distance
 #### 位进制转换/CountAndSay
 	Count And Say
+#### 位进制转换/DecodeWays
+	Decode Ways
 #### 位进制转换/Excel表格
 	Excel Sheet Column Number
 	Excel Sheet Column Title
@@ -65,8 +74,6 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 位进制转换/翻转整数
 	Add Digits
 	Reverse Integer
-#### 几何问题/DecodeWays
-	Decode Ways
 #### 几何问题/岛屿周长
 	Island Perimeter
 #### 几何问题/正方形
@@ -84,6 +91,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 动态规划/粉刷墙
 	Paint Fence
 	Paint House
+#### 动态规划/费布那齐数列
+	Add Binary
 #### 动态规划/递增子序列
 	Increasing Triplet Subsequence
 #### 区间/区间搜索
@@ -115,13 +124,18 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Number Of Islands
 	Surrounded Regions
 	Walls And Gates
+#### 字典树/单词搜索
+	Word Search
 #### 字典树/字典树实现
 	Add And Search Word Data Structure Design
 	Implement Trie Prefix Tree
 #### 字典树/自动补全
 	Design Search Autocomplete System
-#### 字符串匹配/WordDistance
-	Shortest Word Distance
+#### 字符串匹配/IP地址
+	Restore Ip Addresses
+	Validate Ip Address
+#### 字符串匹配/KMP
+	Implement Strstr
 #### 字符串匹配/WordPattern
 	Isomorphic Strings
 #### 字符串匹配/括号处理
@@ -129,6 +143,9 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 字符串匹配/格式检查
 	Compare Version Numbers
 	Valid Number
+#### 字符串匹配/正则表达式
+	Regular Expression Matching
+	Wildcard Matching
 #### 字符串窗口/Anagram
 	Find All Anagrams In A String
 	Group Anagrams
@@ -143,6 +160,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Text Justification
 #### 字符串编辑/编辑距离
 	One Edit Distance
+	Shortest Word Distance
 #### 嵌入式结构/嵌入式求和
 	Nested List Weight Sum
 #### 嵌入式结构/解析器
@@ -159,12 +177,14 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 找重复/数组找重复
 	Contains Duplicate
 	Find The Duplicate Number
+	Intersection Of Two Arrays
 #### 排列组合/子集
 	Subsets
 #### 排列组合/排列
 	Next Permutation
 	Palindrome Permutation
 	Permutations
+	Previous Permutation
 #### 排列组合/组合
 	Combinations
 	Factor Combinations

@@ -79,3 +79,48 @@ def contain_duplicates_within_k_t(nums, k, t):
             bucket_map.pop(last_slot)
         bucket_map[slot] = num
     return False
+
+
+def intersection_2_arrays(nums1, nums2):
+    """
+    https://leetcode.com/problems/intersection-of-two-arrays/description/
+    https://leetcode.com/problems/intersection-of-two-arrays-ii/description/
+    找两个数组的交集，顺序随意
+    """
+    def unique(nums1, nums2):
+        """
+        不需要记录重复的交集，直接哈希set，时间空间O(N)，或者排序其中一个，然后遍历另一个进行二分搜索，空间O(1)时间O(N * logN)
+        """
+        S1, S2 = set(nums1), set(nums2)
+        res = list([])
+        for n in S1:
+            if n in S2:
+                res.append(n)
+        return res
+
+    def duplicate(m, n):
+        """
+        重复的交集需要记录
+        解法1：为一个数组建立一个词频map，遍历另一个数组，每次把对应number的count减1，如果为0则从map中删除，时间空间O(N)
+        解法2：将两个数组进行排序，之后用双指针，类似于merge sort，只是这里面不需要把长的数组合并到结果里，
+            因为如果短的遍历完了，说明之后就没有交集了。时间O(N * logN + N)
+        解法3：如果已经排好序了，可以通过二分查找优化找到下一个开始的index，for each element in nums1, do BS in nums2
+            此时的时间复杂度为O（M * logN)，假设N > M，也就是二分遍历较长的数组，顺序遍历较短的数组
+            https://discuss.leetcode.com/topic/46280/o-nlgn-solution-using-sorting-and-binary-search-with-explanation/3
+        Follow up问题：If input array too big to fit in memory, external sorting, e.g. merge sort with chunks
+        """
+        m.sort()
+        n.sort()
+        i, j, resL = 0, 0, []
+        while i < len(m) and j < len(n):
+            if m[i] == n[j]:
+                resL.append(m[i])
+                i, j = i+1, j+1
+            elif m[i] > n[j]:
+                j += 1
+            else:
+                i += 1
+        return resL
+
+
+

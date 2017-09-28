@@ -2,17 +2,12 @@
 
 # 序列化问题需要考虑两点：用什么来当分隔符和None字符，用什么遍历顺序来序列化和反序列化。
 from collections import deque
-
-
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+from utility.entity import TreeNode
 
 
 class SerializeBT(object):
     index = 0
+    # https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
 
     def dfs_serialize(self, str_list, node):
         if node:
@@ -46,6 +41,7 @@ class SerializeBT(object):
 
 
 class SerializeBST(object):
+    # https://leetcode.com/problems/serialize-and-deserialize-bst
     # 跟Deserialize Binary Tree相比，BST的特殊性？Preorder之后，root-left-right，所有left小于root，right反之
     # 所以序列化的时候直接用pre-order，而且不用考虑None的情况；反序列化的时候，第一个val就是root
     # 之后所有比root小的，都是left subtree的节点，反之都是right subtree的节点

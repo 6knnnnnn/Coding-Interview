@@ -86,6 +86,14 @@ def next_higher_permutation(nums):
             reverse(nums, i, len(nums) - 1)
 
 
+def previous_lower_permutation(s):
+    """
+    https://leetcode.com/problems/previous-permutation/description/
+    :param s:
+    :return:
+    """
+
+
 def palindrome_permutation_generate(s):
     """
     https://leetcode.com/problems/palindrome-permutation-ii/description/

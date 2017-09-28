@@ -18,6 +18,7 @@ import heapq
 
 
 def find_kth_largest_min_heap(nums, k):
+    # https://leetcode.com/problems/kth-largest-element-in-an-array
     heap = []
     for num in nums:
         heapq.heappush(heap, num)
@@ -38,6 +39,7 @@ class QuickSelect(object):
             low = l
             while l < r:
                 if nums[l] < nums[r]:
+                    # swap
                     nums[l], nums[low] = nums[low], nums[l]
                     low += 1
                 l += 1

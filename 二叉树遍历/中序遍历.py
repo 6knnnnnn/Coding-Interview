@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from utility import TreeNode
 import sys
 
 

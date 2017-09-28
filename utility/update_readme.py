@@ -47,7 +47,7 @@ def parse_file_content_as_entity(file_path, content):
     for line in lines:
         problem_leetcode_source = line.strip()
         if len(problem_leetcode_source) > len(leet_code_url) and problem_leetcode_source.find(leet_code_url) >= 0:
-            # 找到一个新的leet code proble source
+            # 找到一个新的leet code problem source
             problem_name = problem_leetcode_source[len(leet_code_url):]
             problem_name = problem_name.split("/")[1]
             problem_name_list = problem_name.split("-")
@@ -86,6 +86,8 @@ def batch(working_dir):
     problem_entity_list = list([])
     total_problems = 0
     for file_path in all_file_paths:
+        if str(file_path).find('__init__') >= 0:
+            continue
         content = str(read_content_from_file(file_path))
         problem_entity = parse_file_content_as_entity(file_path[len(working_dir):], content)
         if len(problem_entity.problem_name_set):
