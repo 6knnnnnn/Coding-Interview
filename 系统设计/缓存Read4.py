@@ -19,7 +19,7 @@ def read(buf, n):
             break  # EOF 没有字符可以读了
         # n-i = how many remaining? 可能存在读了3个但是只需要2个的情况，找最小
         count = min(count, n - i)
-        # 把临时buffer的内容copy到b目标buf里面，此时只copy前count个，因为可能多读了
+        # 把临时buffer的内容copy到目标buf里面，此时只copy前count个，因为可能多读了
         buf[i:] = temp_buff[:count]
         i += count
     return i

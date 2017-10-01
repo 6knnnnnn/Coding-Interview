@@ -19,36 +19,41 @@ def two_sum_hash(nums, target):
     return result
 
 
-def two_sum_sorted_2_pointers(nums, target):
-    # 如果只是找一个index pair即可，那么可以两头scan，缩小搜索区间，时间O(N)
-    # 或者可以用二分搜索，但此时最坏情况为O(N*logN)，即每一个元素都要logN一次
-    # 如果要找所有的pair？二分搜索可以O(N*logN)，普通扫描需要O(N^2）
-    i, j = 0, len(nums) - 1
-    while nums[i] + nums[j] != target:
-        if i == j:
-            return []
-        if nums[i] + nums[j] > target:
-            j -= 1
-        else:
-            i += 1
-    return [i + 1, j + 1]
-
-
-def two_sum_sorted_binary_search(numbers, target):
-    for i in xrange(len(numbers)):
-        # left 从i+1开始，i以及i之前的都已经考虑过了
-        l, r = i + 1, len(numbers) - 1
-        diff = target - numbers[i]
-        while l <= r:  # binary search
-            mid = (l + r) / 2
-            if numbers[mid] == diff:
-                # 如果是所有的pair，此时应该加到结果中
-                return [i + 1, mid + 1]
-            elif numbers[mid] < diff:
-                l = mid + 1
+def two_sum_sorted(nums, target):
+    """
+    https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
+    如果只是找一个index pair即可，那么可以两头scan，缩小搜索区间，时间O(N)
+    或者可以用二分搜索，但此时最坏情况为O(N*logN)，即每一个元素都要logN一次
+    如果要找所有的pair？二分搜索可以O(N*logN)，普通扫描需要O(N^2）
+    """
+    def _2_pointers(nums, target):
+        i, j = 0, len(nums) - 1
+        while nums[i] + nums[j] != target:
+            if i == j:
+                return []
+            if nums[i] + nums[j] > target:
+                j -= 1
             else:
-                r = mid - 1
-    return []
+                i += 1
+        return [i + 1, j + 1]
+
+    def _binary_search(numbers, target):
+        for i in xrange(len(numbers)):
+            # left 从i+1开始，i以及i之前的都已经考虑过了
+            l, r = i + 1, len(numbers) - 1
+            diff = target - numbers[i]
+            while l <= r:  # binary search
+                mid = (l + r) >> 2
+                if numbers[mid] == diff:
+                    # 如果是所有的pair，此时应该加到结果中，并break
+                    return [i + 1, mid + 1]
+                elif numbers[mid] < diff:
+                    l = mid + 1
+                else:
+                    r = mid - 1
+        return []
+
+    return _binary_search(nums, target)
 
 
 class TwoSum(object):
@@ -234,6 +239,7 @@ def two_sum_binary_search_tree(root, target):
                 else:
                     root = root.left
             return False
+
         if root:
             queue = deque([root])
             while queue:
@@ -243,6 +249,8 @@ def two_sum_binary_search_tree(root, target):
                     node = queue.popleft()
                     diff = target - node.val
                     # do binary search on left and right
+                    # 从root开始找某个key，之所以需要node，是因为可能存在相等的情况，比如target=4，BST里面有node.val=2
+                    # 如果之后继续找val=2的node2，有可能node2就是node本身，即重复找到同一个node了，此时并不合法
                     if bst(node, root, diff):
                         return True
                     if node.left:

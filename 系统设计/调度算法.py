@@ -84,4 +84,156 @@ def test1():
     print cache.get("user4") # removed from
     print cache.head
 
-test1()
+
+class KeyNode(object):
+    def __init__(self, key, value, freq=1):
+        # KeyNode中保存key（键），value（值），freq（频度），prev（前驱），next（后继）
+        self.key, self.value, self.freq = key, value, freq
+        self.prev = self.next = None
+
+
+class FreqNode(object):
+    def __init__(self, freq, prev, next):
+        # FreqNode中保存freq（频度）、prev（前驱）、next（后继）
+        # first（指向最新的KeyNode），last（指向最老的KeyNode）
+        self.freq, self.prev, self.next = freq, prev, next
+        self.first = self.last = None
+
+
+class LFUCache(object):
+    def __init__(self, capacity):
+        """
+        https://leetcode.com/problems/lfu-cache/description/
+        这道题目要求是O(1)的时间复杂度，如果用priority queue，最好也是O(logk)的复杂度
+        出处：http://bookshadow.com/weblog/2016/11/22/leetcode-lfu-cache/
+
+        keyDict：从key到KeyNode的映射，freqDict：从freq到FreqNode的映射，head：指向最小的FreqNode
+
+        head --- FreqNode1 ---- FreqNode2 ---- ... ---- FreqNodeN
+                      |               |                       |
+                    first           first                   first
+                      |               |                       |
+                   KeyNodeA        KeyNodeE                KeyNodeG
+                      |               |                       |
+                   KeyNodeB        KeyNodeF                KeyNodeH
+                      |               |                       |
+                   KeyNodeC         last                   KeyNodeI
+                      |                                       |
+                   KeyNodeD                                 last
+                      |
+                    last
+        """
+        self.capacity = capacity
+        self.keyDict = dict()
+        self.freqDict = dict()
+        self.head = None
+
+    def get(self, key):
+        # 若keyDict中包含key，则更新节点频度，返回对应的value，否则，返回-1
+        if key in self.keyDict:
+            keyNode = self.keyDict[key]
+            value = keyNode.value
+            self.increase(key, value)
+            return value
+        return -1
+
+    def put(self, key, value):
+        """
+        如果capacity为0，忽略当前操作，结束
+        如果keyDict中包含key，则替换其value，更新节点频度，结束
+        否则，如果当前keyDict的长度 == capacity，移除head.last（频度最低且最老的KeyNode）
+        新增KeyNode(key, value)，加入keyDict，并更新freqDict
+        """
+        if self.capacity == 0:
+            return
+        if key in self.keyDict:
+            self.increase(key, value)
+            return
+        if len(self.keyDict) == self.capacity:
+            self.removeKeyNode(self.head.last)
+        self.insertKeyNode(key, value)
+
+    def increase(self, key, value):
+        """
+        Increments the freq of an existing KeyNode<key, value> by 1.
+        """
+        keyNode = self.keyDict[key]
+        keyNode.value = value
+        freqNode = self.freqDict[keyNode.freq]
+        nextFreqNode = freqNode.next
+        keyNode.freq += 1
+        if nextFreqNode is None or nextFreqNode.freq > keyNode.freq:
+            nextFreqNode = self.insertFreqNodeAfter(keyNode.freq, freqNode)
+        self.unlinkKey(keyNode, freqNode)
+        self.linkKey(keyNode, nextFreqNode)
+
+    def insertKeyNode(self, key, value):
+        """
+        Inserts a new KeyNode<key, value> with freq 1.
+        """
+        keyNode = self.keyDict[key] = KeyNode(key, value)
+        freqNode = self.freqDict.get(1)
+        if freqNode is None:
+            freqNode = self.freqDict[1] = FreqNode(1, None, self.head)
+            if self.head:
+                self.head.prev = freqNode
+            self.head = freqNode
+        self.linkKey(keyNode, freqNode)
+
+    def delete_freq_node(self, freq_node):
+        """
+        Delete freqNode.
+        """
+        prev, next = freq_node.prev, freq_node.next
+        if prev: prev.next = next
+        if next: next.prev = prev
+        if self.head == freq_node: self.head = next
+        del self.freqDict[freq_node.freq]
+
+    def insertFreqNodeAfter(self, freq, node):
+        """
+        Insert a new FreqNode(freq) after node.
+        :rtype: FreqNode
+        """
+        newNode = FreqNode(freq, node, node.next)
+        self.freqDict[freq] = newNode
+        if node.next: node.next.prev = newNode
+        node.next = newNode
+        return newNode
+
+    def removeKeyNode(self, keyNode):
+        """
+        Remove keyNode
+        :rtype: void
+        """
+        self.unlinkKey(keyNode, self.freqDict[keyNode.freq])
+        self.keyDict.pop(keyNode.key)
+
+    def unlinkKey(self, keyNode, freqNode):
+        """
+        Unlink keyNode from freqNode
+        :rtype: void
+        """
+        next, prev = keyNode.next, keyNode.prev
+        if prev: prev.next = next
+        if next: next.prev = prev
+        if freqNode.first == keyNode:
+            freqNode.first = next
+        if freqNode.last == keyNode:
+            freqNode.last = prev
+        if freqNode.first is None:
+            self.delete_freq_node(freqNode)
+
+    def linkKey(self, keyNode, freqNode):
+        """
+        Link keyNode to freqNode
+        :rtype: void
+        """
+        firstKeyNode = freqNode.first
+        keyNode.prev = None
+        keyNode.next = firstKeyNode
+        if firstKeyNode:
+            firstKeyNode.prev = keyNode
+        freqNode.first = keyNode
+        if freqNode.last is None:
+            freqNode.last = keyNode

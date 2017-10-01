@@ -2,9 +2,15 @@
 A repo for popular coding interview problems mainly from Leetcode.
 
 
+#### 二分搜索/有序数组旋转
+	Find Minimum In Rotated Sorted Array
+	Find Minimum In Rotated Sorted Array II
+	Search In Rotated Sorted Array
+	Search In Rotated Sorted Array II
 #### 二分搜索/有序矩阵
 	Kth Smallest Element In A Sorted Matrix
 	Search A 2D Matrix
+	Search A 2D Matrix II
 #### 二分搜索/非排序BS
 	Find Peak Element
 	First Bad Version
@@ -79,26 +85,36 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 几何问题/正方形
 	Maximal Square
 	Valid Square
+#### 几何问题/点和直线
+	The Skyline Problem
 #### 几何问题/直方图面积
 	Largest Rectangle In Histogram
 	Maximal Rectangle
+	Maximal Square
+#### 几何问题/蓄水池容积
+	Container With Most Water
+	Trapping Rain Water
 #### 动态规划/买卖股票
 	Best Time To Buy And Sell Stock
+	Best Time To Buy And Sell Stock II
+	Best Time To Buy And Sell Stock III
 #### 动态规划/入室抢劫
 	House Robber
+	House Robber II
+	House Robber III
 #### 动态规划/最大乘积子数组
 	Product Of Array Except Self
 #### 动态规划/粉刷墙
 	Paint Fence
 	Paint House
-#### 动态规划/费布那齐数列
-	Add Binary
 #### 动态规划/递增子序列
 	Increasing Triplet Subsequence
+	Longest Continuous Increasing Subsequence
 #### 区间/区间搜索
 	Search For A Range
 #### 区间/参加会议
 	Meeting Rooms
+	Meeting Rooms II
 #### 区间/数组值域
 	Missing Ranges
 	Summary Ranges
@@ -108,41 +124,51 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Palindrome Linked List
 	Palindrome Number
 	Palindrome Permutation
+	Valid Palindrome
+	Valid Palindrome II
 #### 回文/回文子串
 	Palindromic Substrings
 #### 图论/WordLadder
 	Word Ladder
+	Word Ladder II
 #### 图论/无向图遍历
 	Clone Graph
 	Graph Valid Tree
 #### 图论/有向图遍历
 	Alien Dictionary
 	Course Schedule
+	Course Schedule II
 #### 图论/连通分量
 	Friend Circles
 	Number Of Connected Components In An Undirected Graph
 	Number Of Islands
+	Number Of Islands II
 	Surrounded Regions
 	Walls And Gates
 #### 字典树/单词搜索
 	Word Search
+	Word Search II
 #### 字典树/字典树实现
 	Add And Search Word Data Structure Design
 	Implement Trie Prefix Tree
 #### 字典树/自动补全
 	Design Search Autocomplete System
-#### 字符串匹配/IP地址
-	Restore Ip Addresses
-	Validate Ip Address
 #### 字符串匹配/KMP
 	Implement Strstr
-#### 字符串匹配/WordPattern
-	Isomorphic Strings
+#### 字符串匹配/单词拆分
+	Word Break
 #### 字符串匹配/括号处理
+	Generate Parentheses
 	Valid Parentheses
 #### 字符串匹配/格式检查
 	Compare Version Numbers
+	Restore Ip Addresses
 	Valid Number
+	Validate Ip Address
+#### 字符串匹配/模式匹配
+	Isomorphic Strings
+	Word Pattern
+	Word Pattern II
 #### 字符串匹配/正则表达式
 	Regular Expression Matching
 	Wildcard Matching
@@ -151,18 +177,24 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Group Anagrams
 #### 字符串编辑/单词反转
 	Reverse Words In A String
+	Reverse Words In A String II
+	Reverse Words In A String III
 #### 字符串编辑/单词缩写
 	Unique Word Abbreviation
 	Valid Word Abbreviation
 #### 字符串编辑/字符串压缩
+	Decode String
 	Design Compressed String Iterator
 #### 字符串编辑/字符串序列化
 	Text Justification
 #### 字符串编辑/编辑距离
 	One Edit Distance
 	Shortest Word Distance
+	Shortest Word Distance II
+	Shortest Word Distance III
 #### 嵌入式结构/嵌入式求和
 	Nested List Weight Sum
+	Nested List Weight Sum II
 #### 嵌入式结构/解析器
 	Mini Parser
 #### 嵌入式结构/迭代器
@@ -176,14 +208,17 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Remove Element
 #### 找重复/数组找重复
 	Contains Duplicate
+	Contains Duplicate II
 	Find The Duplicate Number
 	Intersection Of Two Arrays
+	Intersection Of Two Arrays II
 #### 排列组合/子集
-	Subsets
+	Subsets II
 #### 排列组合/排列
 	Next Permutation
-	Palindrome Permutation
+	Palindrome Permutation II
 	Permutations
+	Permutations II
 	Previous Permutation
 #### 排列组合/组合
 	Combinations
@@ -202,8 +237,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Complex Number Multiplication
 	Multiply Strings
 #### 数学概念/加法
+	Add Binary
 	Add Strings
 	Add Two Numbers
+	Add Two Numbers II
 	Plus One Linked List
 #### 数学概念/平方
 	Happy Number
@@ -215,6 +252,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 数学概念/素数
 	Count Primes
 	Ugly Number
+	Ugly Number II
 #### 数学概念/运算符解析
 	Evaluate Reverse Polish Notation
 #### 数组窗口/数组窗口统计
@@ -230,7 +268,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 旋转/旋转矩阵
 	Rotate Image
 	Sparse Matrix Multiplication
-	Spiral Matrix
+	Spiral Matrix II
 #### 栈与队列/函数调用时间
 	Exclusive Time Of Functions
 #### 栈与队列/文件路径
@@ -244,12 +282,15 @@ A repo for popular coding interview problems mainly from Leetcode.
 	3Sum
 	3Sum Closest
 	3Sum Smaller
-	4Sum
+	4Sum II
 	Two Sum
+	Two Sum II Input Array Is Sorted
 	Two Sum III Data Structure Design
 	Two Sum IV Input Is A Bst
 #### 目标和/二叉树路径和
 	Path Sum
+	Path Sum II
+	Path Sum III
 #### 目标和/找零钱
 	Coin Change
 	Perfect Squares
@@ -262,17 +303,20 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Target Sum
 #### 系统设计/TinyURL
 	Encode And Decode Tinyurl
+#### 系统设计/电话号码本
+	Design Phone Directory
 #### 系统设计/缓存Read4
 	Read N Characters Given Read4
 	Read N Characters Given Read4 II Call Multiple Times
 #### 系统设计/调度算法
+	Lfu Cache
 	Lru Cache
 #### 走棋盘/Dungeon游戏
 	Dungeon Game
 #### 链表节点/交换节点
 	Reverse Nodes In K Group
 #### 链表节点/删除节点
-	Remove Duplicates From Sorted List
+	Remove Duplicates From Sorted List II
 	Remove Nth Node From End Of List
 #### 链表节点/链表重叠
 	Intersection Of Two Linked Lists
@@ -288,8 +332,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Repeated Dna Sequences
 #### 频率统计/单一数字
 	Single Number
+	Single Number II
 #### 频率统计/数组主要元素
 	Majority Element
+	Majority Element II
 #### 频率统计/未出现的数
 	First Missing Positive
 	Missing Number

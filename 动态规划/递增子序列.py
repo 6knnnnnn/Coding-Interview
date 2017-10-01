@@ -3,6 +3,23 @@
 import sys
 
 
+def longest_continuous_increasing_subsequence(nums):
+    """
+    https://leetcode.com/problems/longest-continuous-increasing-subsequence/description/
+    找到数组中，最长的连续递增子序列的长度（必须严格递增）。用双指针。
+    """
+    res = i = 0
+    if nums:
+        while i < len(nums):
+            j = i + 1
+            while j < len(nums) and nums[j] > nums[j - 1]:
+                j += 1
+            # i...j-1, j 之后就是非递增了，所以当前长度j-1-i+1=j-i
+            res = max(j - i, res)
+            i = j
+    return res
+
+
 def increasing_triplet_subsequence(nums):
     """
     https://leetcode.com/problems/increasing-triplet-subsequence/description/

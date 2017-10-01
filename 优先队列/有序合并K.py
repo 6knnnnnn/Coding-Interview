@@ -34,7 +34,7 @@ def merge_k_sorted_array(arrays):
     """
     https://leetcode.com/problems/merge-k-sorted-arrays/description/
     给定一个array，里面有K个sorted array，merge他们
-    用一个priority queue，里面每一个node有三个信息：目前所属于的array index，在这个array里面属于第几个元素，元素的值
+    用一个priority queue，里面每一个node有三个信息：元素的值，目前所属于的array index，在这个array里面属于第几个元素
     """
     k = len(arrays)
     pq = PriorityQueue(k)
@@ -52,7 +52,7 @@ def merge_k_sorted_array(arrays):
     return result
 
 
-class NestedSortedArrayIterator(object):
+class KSortedArrayIterator(object):
     def __init__(self, arrays):
         """
         类似于merge_k_sorted_array，这里面实现一个iterator用来遍历元素。
@@ -79,7 +79,7 @@ class NestedSortedArrayIterator(object):
 arrays = [[40,50,60],[1,2,3],[15,25],[4,5,20]]
 
 
-iter = NestedSortedArrayIterator(arrays)
+iter = KSortedArrayIterator(arrays)
 
 while iter.has_next():
     print iter.next()

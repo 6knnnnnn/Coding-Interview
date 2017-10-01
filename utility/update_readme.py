@@ -51,9 +51,6 @@ def parse_file_content_as_entity(file_path, content):
             problem_name = problem_leetcode_source[len(leet_code_url):]
             problem_name = problem_name.split("/")[1]
             problem_name_list = problem_name.split("-")
-            if problem_name_list[-1] in same_problem_series:
-                # 如果是变体题目，理论上应该都在一个文件夹内，此时problem_full_name需要删掉最后的题号
-                problem_name_list.pop()
             for i, word in enumerate(problem_name_list):
                 problem_name_list[i] = "%s%s" % (word[0].upper(), word[1:])
                 if word[0] in '0123456789' and len(word) >= 2:

@@ -78,3 +78,9 @@ def max_points_in_a_line(points):
                 max_point = max(max_point, line.point_count)
 
     return max_point
+
+
+def skyline(buildings):
+    """
+    https://leetcode.com/problems/the-skyline-problem/description/
+    """

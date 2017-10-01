@@ -68,3 +68,32 @@ class CompressedStringIterator(object):
 
     def has_next(self):
         return self.pos < len(self.s) or self.count > 0
+
+
+def decode_string(s):
+    """
+    https://leetcode.com/problems/decode-string/description/
+    给定一个词频压缩格式，还原成原始的string。
+    s = "3[a]2[bc]", return "aaabcbc".
+    s = "3[a2[c]]", return "accaccacc".
+    s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
+    需要遍历每个char，判断是否为数字，还是[]，或者是letter，然后用Stack来表示当前需要解压的string，以及对应的个数
+    """
+    stack = list([["", 1]])  # [char, k]
+    num = ""
+    for c in s:
+        if c.isdigit():
+            # number 可能之后还有number，需要先加到num中去，继续找下一个
+            num += c
+        elif c == '[':
+            # 那么此时num到头了
+            stack.append(["", int(num)])
+            num = ""
+        elif c == ']':
+            # 新的一个词频压缩结束，出栈后，更新新的top的string值
+            st, k = stack.pop()
+            stack[-1][0] += st * k
+        else:
+            # 单纯的字母，加入到stack top中的string去
+            stack[-1][0] += c
+    return stack[0][0]

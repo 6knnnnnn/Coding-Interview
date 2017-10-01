@@ -155,6 +155,7 @@ def add_two_strings(num1, num2):
 
 
 def add_binary(a, b):
+    # https://leetcode.com/problems/add-binary/description/
     if not a or len(a) == 0:
         return b
     if not b or len(b) == 0:
@@ -171,6 +172,7 @@ def add_binary(a, b):
             res.append('0')
             carry = 1
         elif carry == 3:
+            # 特殊情况，即加起来的和=3，此时需要当前bit为1，切下一bit位carry为1
             res.append('1')
             carry = 1
         i, j = i - 1, j - 1
