@@ -51,9 +51,8 @@ def letter_combinations_phone_number(numbers):
                 for c in phone_map[numbers[start]]:
                     new = "%s%s" % (curr, c)
                     result_queue.append(new)
-            if start < len(numbers) - 1:
-                # start还没有到最后一个
-                dfs(numbers, start + 1, result_queue, phone_map)
+            # start还没有到最后一个，就继续
+            dfs(numbers, start + 1, result_queue, phone_map)
 
     phone_map = {"2": "abc", "3": "edf", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
     result_list = deque([])

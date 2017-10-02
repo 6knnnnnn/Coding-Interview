@@ -3,13 +3,16 @@
 
 def merge_intervals(intervals):
     """
+    https://leetcode.com/problems/merge-intervals/description/
     返回merge后的结果，输入并没有排序。
 
     Test0: [1, 10], [2, 3] return [1, 10]
     Test1: [1,3],[2,6],[15,18], return [1,6],[8,10],[15,18]
     Test2: [1, 5], [6, 7], return [1, 5], [6, 7]
 
-    follow up: 如果数据结构不是array而是linked list，仍旧需要排序，其实merge sort的时候就可以进行区间合并
+    follow up:
+    1. 如果数据结构不是array而是linked list，仍旧需要排序，其实merge sort的时候就可以进行区间合并
+    2.  需要记录merge之后，每个区间，原始的interval个数？加一个field就好了
     """
     merged = list([])
     if intervals:
@@ -21,7 +24,7 @@ def merge_intervals(intervals):
             last = merged[-1]
             if last.end >= curr.start:
                 # 结果中最后的结束时间晚于当前的开始时间，此时把当前的merge到last里即可
-                # last=(1, 5) end=(2, 4)
+                # last=(1, 5) end=(2, 4) -> last=(1, 5)
                 last.end = max(last.end, curr.end)
             else:
                 # 否则，把当前的加到结果里
@@ -31,6 +34,7 @@ def merge_intervals(intervals):
 
 def insert_interval(intervals, new):
     """
+    https://leetcode.com/problems/insert-interval/description/
     input里面没有overlap的情况，而且已经排序，要求插入新的interval，必要时merge
 
     Test0: [1, 3], [8, 10], new = [4, 5] -> [1, 3], [4, 5], [8, 10]

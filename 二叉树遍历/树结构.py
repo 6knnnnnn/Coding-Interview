@@ -104,7 +104,8 @@ def symmetric_tree(root):
 def lowest_common_ancestor_binary_tree(root, p, q):
     """
     https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
-    只有两种情况：1）如果p q分别在某一个node的两端，node即是LCA；2）p和q其中一个是另一个的ancestor
+    只有两种情况：1）如果p q分别在某一个node的两端，node即是LCA
+                2）p和q其中一个是另一个的ancestor
     时间O(N)，空间平均情况O(logN)，最坏情况O(N)，即这个tree是一个unbalanced的，从root遍历到p或者q是一个chain
     Edge case: 如果不存在ancestor返回None，如果p q 相等返回p 或者 q
     """
@@ -116,8 +117,8 @@ def lowest_common_ancestor_binary_tree(root, p, q):
         # 分别去左边和右边，尝试找p和q的LCA
         left = dfs(node.left, p, q)
         right = dfs(node.right, p, q)
-        # 如果左边和右边分别找到了"LCA"（即不为None，带引号是因为不确定），只能是情况1，即root是p和q的LCA
-        # p和q在root的两侧；原因：如果p和q在同一侧，那么左边和右边有一边的"LCA"为None，不可能不是None
+        # 情况1，node是p和q的"真"LCA：如果p和q在node的两侧，那么可以从左边和右边分别找到各自的LCA（其实就是自己，且均不为None）
+        # 情况2，否则，如果p和q在同一侧，那么左边和右边有一边的LCA为None
         if left and right:
             return node
         # 情况2，返回其中一个不是None的

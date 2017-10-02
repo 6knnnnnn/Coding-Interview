@@ -2,6 +2,7 @@
 
 
 def int_to_roman(num):
+    # https://leetcode.com/problems/integer-to-roman/description/
     values = [1000, 900, 500, 400,
               100, 90, 50, 40, 10,
               9, 5, 4, 1]
@@ -26,6 +27,7 @@ for t in test1:
 
 
 def roman_to_int(roman_str):
+    # https://leetcode.com/problems/roman-to-integer/
     roman = {'M': 1000, 'D': 500,
              'C': 100, 'L': 50,
              'X': 10, 'V': 5, 'I': 1}

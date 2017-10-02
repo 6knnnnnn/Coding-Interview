@@ -46,7 +46,6 @@ def contiguous_subarray_sum_to_multiple_k(nums, k):
     """
 
 
-
 def minimum_size_sub_array_sum(nums, k):
     """
     https://leetcode.com/problems/minimum-size-subarray-sum/description/

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from collections import deque
+
 
 class NestedWeightSum(object):
     # https://leetcode.com/problems/nested-list-weight-sum/description/

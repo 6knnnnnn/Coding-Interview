@@ -12,6 +12,7 @@ from collections import defaultdict
 
 def is_one_edit_distance(s, t):
     # https://leetcode.com/problems/one-edit-distance/description/
+    # 分情况：如果长度相等，看是否能够modified？如果长度差一，看是否能够delete？否则肯定是False
     def is_one_modified(s, t):
         modified = False
         for i in xrange(len(t)):

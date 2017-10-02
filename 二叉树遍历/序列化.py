@@ -93,6 +93,22 @@ def subtree_of_another_tree(tree1, tree2):
                                /
                               6
     M N 为两棵树的节点数
-    解法1：纯暴力，每次从tree1的root开始遍历，看是否能跟tree2匹配，时间复杂度O(M*N)
-    解法2：序列化两棵树，用KMP来看较短的是否是较长的substring，时间复杂度O(M+N)，要用额外空间M+N
+    解法1：纯暴力，每次从tree1的root开始遍历，看是否能跟tree2匹配，时间复杂度O(M*N)，空间复杂度O(N)，即tree2的节点数
+    解法2：preorder序列化两棵树，用KMP来看较短的是否是较长的substring
+    但此时即便是subtring也不一定是subtree，需要有特殊的字符来表示左右节点为null的情况（LN v.s. RN），以及node.val
+    详情：https://leetcode.com/problems/subtree-of-another-tree/solution/
+    时间复杂度O(M+N+K)，K即为KMP的算法复杂度（或者别的subtring 方法API复杂度），要用额外空间M+N来表示序列化的树
     """
+    def match(s, t):
+        if not s and not t:
+            return True
+        if s and t and s.val == t.val:
+            return match(s.left, t.left) and match(s.right, t.right)
+        return False
+
+    if match(tree1, tree2):
+        return True
+    elif tree1:
+        return match(tree1.left, tree2) and match(tree1.right, tree2)
+    else:
+        return False

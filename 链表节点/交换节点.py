@@ -1,6 +1,38 @@
 # -*- coding: utf-8 -*-
 
 
+def reverse_linked_list(head):
+    # https://leetcode.com/problems/reverse-linked-list/description/
+    def recursion(head):
+        if head is None or head.next is None:
+            return head
+        next = head.next
+        head.next = None
+        new_head = recursion(next)
+        next.next = head
+        return new_head
+
+    if not head or not head.next:
+        return head
+    x = head
+    y = head.next
+    x.next = None
+    while y:
+        # ?<-x  y->z->?
+        z = y.next
+        y.next = x
+        x = y
+        y = z
+        # ?<-x<-y  z->?
+    return x
+
+
+def reverse_linked_list_range(head, m, n):
+    """
+    https://leetcode.com/problems/reverse-linked-list-ii/description/
+    """
+
+
 def reverse_every_k_nodes(head, k):
     """
     https://leetcode.com/problems/reverse-nodes-in-k-group/description/

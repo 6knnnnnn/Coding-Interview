@@ -21,26 +21,27 @@ class RandomizedSet(object):
     # 这里假设不存在重复元素
     def __init__(self):
         # an array for values, a dict for X
-        self.nums, self.pos = [], {}
+        self.nums, self.pos_dict = [], {}
 
     def insert(self, val):
-        if val in self.pos: # 已经存在了，就返回False
+        if val in self.pos_dict: # 已经存在了，就返回False
             return False
         # 插入到最后一个，所以index就是n-1
         self.nums.append(val)
-        self.pos[val] = len(self.nums) - 1
+        self.pos_dict[val] = len(self.nums) - 1
         return True
 
     def remove(self, val):
-        if val not in self.pos: return False
+        if val not in self.pos_dict:
+            return False
         # switch with the last one
-        val_idx, last_val = self.pos[val], self.nums[-1]
+        val_idx, last_val = self.pos_dict[val], self.nums[-1]
         # 分别更新最后一个元素的在nums中的位置，以及pos中的index
         self.nums[val_idx] = last_val
-        self.pos[last_val] = val_idx
+        self.pos_dict[last_val] = val_idx
         # 删除val对应的nums位置以及pos的key
         self.nums.pop()
-        self.pos.pop(val)
+        self.pos_dict.pop(val)
         return True
 
     def get_random(self):

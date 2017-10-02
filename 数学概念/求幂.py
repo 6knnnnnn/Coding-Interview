@@ -2,6 +2,7 @@
 
 
 def pow_recur(x, n):
+    # https://leetcode.com/problems/powx-n/description/
     # 暴力解法，O(N)时间，也就是一个loop，但可以记住之前的计算结果复用
     # 因为 X^N = (X*X)^n/2 = X^(N/2) * X^(N/2)
     # 那么如果知道了X^(N/2)，就不需要再次计算X^(N/2)了
@@ -56,6 +57,7 @@ def power_of_base_loop(base, value):
 
 
 def power_of_2(x):
+    # https://leetcode.com/problems/power-of-two/description/
     if x <= 0:
         return False
     # 对于2^n，第一位为1，其他n-1位为0
@@ -65,6 +67,7 @@ def power_of_2(x):
 
 
 def power_of_4(x):
+    # https://leetcode.com/problems/power-of-four/description/
     # 除了必须是2的幂次方之外，4的幂次方满足，基数位置的bit为1，偶数位置为0
     # 比如4^0 = 1, 4^1 = 100, 4^2 = 10000
     # 所以用1010101010101010101010101010101来和4做AND，结果和x一样则满足4的幂次方
@@ -75,6 +78,7 @@ def power_of_4(x):
 
 
 def power_of_3(x):
+    # https://leetcode.com/problems/power-of-three/description/
     # 所以判断一个数X是否是power of N，可以看N的最高幂次是多少，比如如果是int且N=2，则最高2^31
     # 如果N=3 则 1162261467 is 3^19,  3^20 is bigger than 2^32-1
     # 之后再用这个最大值，对X取模运算是否为0，因为如果X=N^y，那么最大值对它取模一定为0

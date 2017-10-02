@@ -10,8 +10,6 @@ def target_sum(nums, target):
     http://www.cnblogs.com/grandyang/p/6395843.html
     dp[i][j]表示从0到第i-1个数字，且和为j的情况总数
     初始化dp[0][0]=1，即只有一种方式
-    :param target:
-    :return:
     """
     def backtracking(nums, target, start_i, dp):
         if start_i == len(nums):

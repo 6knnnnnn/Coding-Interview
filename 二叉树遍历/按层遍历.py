@@ -122,13 +122,11 @@ def binary_tree_vertical_order_traversal_dfs(root):
     def dfs(node, col_index_table, col_index):
         if not node:
             return
-        if col_index not in col_index_table:
-            col_index_table[col_index] = list([])
         col_index_table[col_index].append(node.val)
         dfs(node.left, col_index_table, col_index - 1)
         dfs(node.right, col_index_table, col_index + 1)
 
-    col_index_table = {}
+    col_index_table = defaultdict(list)
     result_list = []
     dfs(root, col_index_table, 0)
     # 按照column number顺序，也就是table key
@@ -218,11 +216,12 @@ class SumLeftLeaves(object):
                 stack = list([(root, 0)])
                 while stack:
                     n, is_left = stack.pop()
-                    if not n.left and not n.right:
-                        if is_left:
-                            total += n.val
-                    if n.left: stack.append((n.left, 1))
-                    if n.right: stack.append((n.right, 0))
+                    if not n.left and not n.right and is_left:
+                        total += n.val
+                    if n.left:
+                        stack.append((n.left, 1))
+                    if n.right:
+                        stack.append((n.right, 0))
             return total
 
         self.total = 0
@@ -309,8 +308,8 @@ def populating_next_right_pointers_in_each_node(root):
                 has_next_level = 0
 
     def bfs_constant_space_complete_tree(root):
-        # 对于某一个满二叉树node来说，如果不是leaf，那么必有left and right，而且left.next = right
-        # 但是对于right.next来说，需要根据当前node.next来判断：如果node.next存在，那么node.right.next = node.next.left
+        # 对于某一个满二叉树node来说，如果不是leaf，那么必有left and right，而且node.left.next = node.right
+        # 但是对于node.right.next来说，需要根据当前node.next来判断：如果node.next存在，那么node.right.next = node.next.left
         # 所以需要两个变量，一个记录当前层的开始节点level_start，另一个是当前层的遍历节点curr。
         level_start = root
         while level_start:

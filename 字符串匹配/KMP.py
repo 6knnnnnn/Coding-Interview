@@ -5,7 +5,8 @@ def find_substring(s, t):
     """
     https://leetcode.com/problems/implement-strstr/description/
     在s中找是否有substring等于t，如果有，返回最开始的index，否则返回-1
-    最简单的方法，双层for loop
+    最简单的方法，双层for loop，时间复杂度O(M*N)
+    KMP：O(N)
     """
     if not s and not t:
         return 0

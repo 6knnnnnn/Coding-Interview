@@ -11,7 +11,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Kth Smallest Element In A Sorted Matrix
 	Search A 2D Matrix
 	Search A 2D Matrix II
-#### 二分搜索/非排序BS
+#### 二分搜索/非排序二分
 	Find Peak Element
 	First Bad Version
 	Valid Perfect Square
@@ -28,6 +28,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Flatten Binary Tree To Doubly Linked List
 	Flatten Binary Tree To Linked List
 #### 二叉树遍历/序列化
+	Problems
 	Serialize And Deserialize Binary Tree
 	Serialize And Deserialize Bst
 	Subtree Of Another Tree
@@ -68,15 +69,15 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 位运算/汉明距离
 	Hamming Distance
 	Total Hamming Distance
-#### 位进制转换/CountAndSay
-	Count And Say
-#### 位进制转换/DecodeWays
-	Decode Ways
 #### 位进制转换/Excel表格
+	Decode Ways
 	Excel Sheet Column Number
 	Excel Sheet Column Title
 #### 位进制转换/整数英文单词
 	Integer To English Words
+#### 位进制转换/罗马数字转换
+	Integer To Roman
+	Roman To Integer
 #### 位进制转换/翻转整数
 	Add Digits
 	Reverse Integer
@@ -110,6 +111,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 动态规划/递增子序列
 	Increasing Triplet Subsequence
 	Longest Continuous Increasing Subsequence
+	Number Of Longest Increasing Subsequence
+#### 区间/区间合并
+	Insert Interval
+	Merge Intervals
 #### 区间/区间搜索
 	Search For A Range
 #### 区间/参加会议
@@ -231,6 +236,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Merge Sorted Array
 	Sort List
 #### 排序/计数排序
+	Maximum Swap
 	Sort Characters By Frequency
 	Sort Colors
 #### 数学概念/乘法
@@ -247,6 +253,11 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Sqrtx
 	Sum Of Square Numbers
 	Valid Perfect Square
+#### 数学概念/求幂
+	Power Of Four
+	Power Of Three
+	Power Of Two
+	Powx N
 #### 数学概念/矩阵乘法
 	Sparse Matrix Multiplication
 #### 数学概念/素数
@@ -314,6 +325,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 走棋盘/Dungeon游戏
 	Dungeon Game
 #### 链表节点/交换节点
+	Reverse Linked List
+	Reverse Linked List II
 	Reverse Nodes In K Group
 #### 链表节点/删除节点
 	Remove Duplicates From Sorted List II
@@ -328,6 +341,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Linked List Random Node
 	Linked List Random Target
 	Random Pick Index
+#### 频率统计/CountAndSay
+	Count And Say
 #### 频率统计/DNA序列
 	Repeated Dna Sequences
 #### 频率统计/单一数字

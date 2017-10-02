@@ -54,7 +54,7 @@ def remove_duplicates_from_sorted_array_at_most_twice(nums):
     关键点：这个index pointer何时更新？
 
     根据条件可以断定，最后的结果，排序数组A，所有的数字A[i]，都需要满足A[i] > A[i-2]，即只关心i-2而非上一道题的i-1
-    所以每次先移动遍历数组的value pointer，跟nums[i-2]比较大小来更新index，如果大于nums[i-2]，说明nums[i]
+    所以每次先移动遍历数组的value pointer，跟nums[i-2]比较大小来更新index，如果大于nums[i-2]，说明nums[i]没重复过2次
 
     1st: 1 2 3 3 3 4        2nd: 1 2 3 3 3 4        3rd: 1 2 3 3 3 4  此时，n == nums[i-2]，即i位置重复次数超过2
              i                         i                         i
