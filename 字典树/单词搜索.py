@@ -12,6 +12,7 @@ def word_search(board, word):
     ['A','D','E','E']
     空间O(W)，即word的长度（递归调用最多W次）；时间O(M * N * W * 4)，每个字母都要遍历四个方向
     可能的edge case：如果word的长度W > M*N，那就不需要找了
+    Follow up: 如果8个方向呢？即对角线也成立？改变for循环的条件，
     """
     def dfs(b, x, y, word, start):
         # 判断坐标(x, y)是否等于word在start位置的letter，如果是，继续下一层搜索
@@ -91,4 +92,19 @@ def word_search_multiple_words(board, words):
         for i in xrange(len(board)):
             for j in xrange(len(board[0])):
                 dfs(board, i, j, tree.root, res)
+    return res
+
+
+def get_adj(x, y, diagonal=False):
+    # 给定矩阵中的一个x和y坐标，返回相邻cell的坐标（无论是否越界），如果对角线为True，返回8个方向的坐标
+    res = list([])
+    if diagonal:
+        for i in (-1, 0, 1):
+            for j in (-1, 0, 1):
+                if i == j == 0:
+                    continue
+                res.append((x+i, y+j))
+    else:
+        for i, j in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            res.append((x + i, y + j))
     return res

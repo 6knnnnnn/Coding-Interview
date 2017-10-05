@@ -65,11 +65,16 @@ def max_rectangle(matrix):
     return ma
 
 
-def max_square(matrix):
+def maximum_square(matrix):
     """
     https://leetcode.com/problems/maximal-square/description/
-    类似于max_rectangle的解法，但是此时限定条件为，必须可以组成一个正方形。
+    找到一个只包含01的矩阵中，能够形成的最大的正方形面积，比如下图，面积为4
+    1 0 1 0 0
+    1 0 1 1 1
+    1 1 1 1 1
+    1 0 0 1 0
 
+    类似于max_rectangle的解法，但是此时限定条件为，必须可以组成一个正方形。
     暴力解法：从顶点开始，把它当做是正方形的top-left-point，也就是查看这个点开始，能够组成的正方形的最大边长为多少，即最大面积
     解法2：类似于max rectangle的解法：对于每一行，求出每一列的累加和，然后对这个累加和数组进行判断：
         对于每个位置的累加和k，如果能够从两边extend，找到连续k-1个累加和，满足>=k，也就相当于是，找到了一个边长为k的正方形
@@ -112,4 +117,4 @@ def test_matrix():
         ["1010", "1011", "1011", "1111"]
     ]
     for m in matrix:
-        print max_square(m)
+        print maximum_square(m)

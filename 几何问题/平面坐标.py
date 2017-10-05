@@ -18,13 +18,9 @@ def valid_square(p1, p2, p3, p4):
     return len(key_set) == 2 and 2 in value_set and 4 in value_set
 
 
-def maximum_square(matrix):
+def skyline_problem(buildings):
     """
-    https://leetcode.com/problems/maximal-square/description/
-    找到一个只包含01的矩阵中，能够形成的最大的正方形面积，比如下图，面积为4
-    1 0 1 0 0
-    1 0 1 1 1
-    1 1 1 1 1
-    1 0 0 1 0
-    解法和Maximal Rectangle那道题目类似，都是以某一行
+
+    :param buildings:
+    :return:
     """

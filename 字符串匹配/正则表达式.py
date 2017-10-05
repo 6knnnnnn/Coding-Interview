@@ -59,7 +59,10 @@ def regular_expression_matching_recursion(regex, word):
                 else:
                     break
             return False
-        return True
+        elif regex[0] == word[0] or regex[0] == '.':
+            # 第一个不包括*，而且第一个跟word的第一个匹配
+            return match(regex[1:], word[1:])
+        return False
 
     regex2 = list([])
     k = 0
@@ -76,14 +79,20 @@ def regular_expression_matching_recursion(regex, word):
 
 def test_regex():
     test = [
-        ("wor.", "word"), ("word.", "word"), (".ord", "word"), (".word", "word")
-        ,("w*", "word"), ("wor*d", "word"), ("word*", "word"), ("*word", "word")
-        ,(".*", "word"), ("wo.*d", "word"), ("word.*", "word"), ("w.*", "word")
-        ,(".w*", "word"), ("wo*d", "word"), ("word*", "word"), ("wor*d", "worrrrd"), ("wo*.d", "word")
+        ("wor.", "word", True), ("word.", "word", False), (".ord", "word", True), (".word", "word", False)
+        ,("w*", "word", False), ("wor*d", "word", True), ("word*", "word", True), (".*ord", "word", True)
+        ,(".*", "word", True), ("wo.*d", "word", True), ("word.*", "word", True), ("w.*", "word", True)
+        ,(".w*", "word", False), ("wo*d", "word", False), ("word*", "word", True), ("wor*d", "worrrrd", True)
+        ,("wo*.d", "word", True)
     ]
 
-    for regex, word in test:
-        print regex, word, regular_expression_matching_recursion(regex, word)
+    for regex, word, matched in test:
+        res = regular_expression_matching_recursion(regex, word)
+        if res != matched:
+            print regex, word, res
+            regular_expression_matching_recursion(regex, word)
+
+test_regex()
 
 
 def regular_expression_matching_dp(e, s):

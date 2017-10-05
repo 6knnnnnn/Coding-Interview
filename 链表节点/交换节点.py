@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# 很多链表节点问题都可以用stack来处理，只不过要用额外的空间，或者类似的递归方法
+
 
 def reverse_linked_list(head):
     # https://leetcode.com/problems/reverse-linked-list/description/

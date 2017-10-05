@@ -4,9 +4,12 @@ from collections import deque
 
 
 class NestedWeightSum(object):
-    # https://leetcode.com/problems/nested-list-weight-sum/description/
-    # top-down depth/weight 顺序
-    # 其实就是类似于graph level traversal
+    """
+    https://leetcode.com/problems/nested-list-weight-sum/description/
+    top-down depth/weight 顺序
+    Given the list [1,[4,[6]]], return 27: 1*1 + 4*2 + 6*3 = 27)
+    其实就是类似于graph level traversal
+    """
     @staticmethod
     def dfs(nested_list):
         def dfs_helper(node, depth, dMap):
@@ -32,6 +35,7 @@ class NestedWeightSum(object):
         queue = deque([])
         result = 0
         for n in nested_list:
+            # 第一层的node 以及对应的depth=1
             queue.append((n, 1))
         while queue:
             node, d = queue.popleft()
@@ -76,6 +80,7 @@ class NestedWeightSumReverse(object):
         queue = deque([])
         result = 0
         for n in nested_list:
+            # 第一个元素为node，第二个元素为depth
             queue.append((n, 1))
         max_depth = -1
         queue2 = deque([])
@@ -84,14 +89,15 @@ class NestedWeightSumReverse(object):
             node, d = queue2[-1]
             new_depth = d + 1
             if not node.isInteger():
-                for i in node.getList():
+                for n in node.getList():
                     max_depth = max(max_depth, new_depth)
-                    queue.append((i, new_depth))
+                    queue.append((n, new_depth))
         while queue2:
+            # 跟上边的top-down一样了
             node, d = queue2.popleft()
             if node.isInteger():
                 result += (max_depth-d+1) * node.getInteger()
             else:
-                for i in node.getList():
-                    queue2.append((i, d+1))
+                for n in node.getList():
+                    queue2.append((n, d+1))
         return result

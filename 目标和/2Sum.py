@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collections import deque
+from collections import deque, defaultdict
 
 
 def two_sum_hash(nums, target):
@@ -59,20 +59,19 @@ def two_sum_sorted(nums, target):
 class TwoSum(object):
     # Two sum data structure design
     # https://leetcode.com/problems/two-sum-iii-data-structure-design/description/
-    # 还是用哈希，因为可能有重复元素，但是目标是重复元素的两倍
+    # 还是用哈希 word count
+    # 可能有重复元素，但是目标是重复元素的两倍，比如4 = 2 + 2，原始输入中有两个2的情况，需要返回他们的index
     def __init__(self):
-        self.num_count_map = {}
+        self.num_count_map = defaultdict(int)
 
     def add(self, num):
-        self.num_count_map[num] = self.num_count_map.get(num, 0) + 1
+        self.num_count_map[num] += 1
 
     def find(self, val):
-        for k, v in self.num_count_map.items():
-            diff = val - k
-            if k == diff:
-                if v > 1:  # 重复元素，看个数
-                    return True
-            elif diff in self.num_count_map:
+        for num, count in self.num_count_map.items():
+            diff = val - num
+            if diff in self.num_count_map and (num != diff or (num == diff and count > 1)):
+                # 如果diff在map中，而且k和diff非重复，或者他们想等但是count > 1，返回True
                 return True
         return False
 
