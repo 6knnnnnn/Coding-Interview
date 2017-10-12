@@ -154,7 +154,7 @@ def number_of_connected_components_in_undirected_graph(edges, n):
     Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1.
     找到联通分量的个数，类似于friend circles，只是friend circles的输入是matrix而这里是array
     暴力解法：把array转化为matrix，然后遍历，空间O(N * N)，时间O(E)，也就是edges的数量
-    优化解法：用相邻list或者哈希set map表示edge，时间均为O(E)
+    优化解法：用相邻list或者哈希set map表示edge，时间空间均为O(E)
     """
     def bfs(edges, n):
         # use adj list to represent graph

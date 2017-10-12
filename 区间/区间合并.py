@@ -12,7 +12,7 @@ def merge_intervals(intervals):
 
     follow up:
     1. 如果数据结构不是array而是linked list，仍旧需要排序，其实merge sort的时候就可以进行区间合并
-    2.  需要记录merge之后，每个区间，原始的interval个数？加一个field就好了
+    2. 需要记录merge之后，每个区间，原始的interval个数？加一个field就好了
     """
     merged = list([])
     if intervals:
@@ -24,7 +24,7 @@ def merge_intervals(intervals):
             last = merged[-1]
             if last.end >= curr.start:
                 # 结果中最后的结束时间晚于当前的开始时间，此时把当前的merge到last里即可
-                # last=(1, 5) end=(2, 4) -> last=(1, 5)
+                # last=(1, 5) curr=(2, 4) -> last=(1, 5)，last肯定比curr早开始，因为已经排好序了
                 last.end = max(last.end, curr.end)
             else:
                 # 否则，把当前的加到结果里

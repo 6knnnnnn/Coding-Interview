@@ -29,14 +29,14 @@ def search_for_range(nums, key):
     end_l, start_r = mid - 1, mid + 1
     while end_l >= 0:
         mid_l = binary_search(nums, 0, end_l, key)
-        if mid_l != -1:  # find key in left side, index_range[0]=L index
+        if mid_l != -1:  # find key in left side, 即为index_range[0]
             index_range[0] = mid_l
             end_l = mid_l - 1
         else:
             break
     while start_r <= len(nums)-1:
         mid_r = binary_search(nums, start_r, len(nums) - 1, key)
-        if mid_r != -1:  # find key in right side, index_range[1]=R index
+        if mid_r != -1:  # find key in right side, 即为index_range[1]
             index_range[1] = mid_r
             start_r = mid_r + 1
         else:

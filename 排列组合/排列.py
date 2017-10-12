@@ -12,18 +12,19 @@ def permutation_distinct(nums):
     """
     https://leetcode.com/problems/permutations/description/
     给定一个数组里面不包含任何重复，返回其中的所有可能的排列情况
-    如果nums里面没有任何元素，即0！= 1，返回一种结果，即[[]]，需要三重for loop
+    需要三重for loop
+    如果nums里面没有任何元素，即0! = 1，返回一种结果，即[[]]
     对于nums里面的每一个元素n，对于已经存在于res的排列，即从第1个到n-1的排列，把n插入到每个排列的每一个位置上去
     """
     all_perm = [[]] # 0！= 1 的结果
     for n in nums:
         # 根据已有的res，来创建出当前的permutation，然后代替已有的res
         curr_perm = []
-        for prev_perm in all_perm:
-            for i in xrange(len(prev_perm)+1):
+        for exist_perm in all_perm:
+            for i in xrange(len(exist_perm)+1):
                 # 分别把n插入到prev_perm的每一个位置上去，即 left + n + right
-                # i需要访问到len(prev_perm)，因为到最后一个元素的时候，n要插入到最后 [...] + [n] + []
-                new_perm = prev_perm[:i] + [n] + prev_perm[i:]
+                # i需要访问到len(exist_perm)，因为到最后一个元素的时候，n要插入到最后 [...] + [n] + []
+                new_perm = exist_perm[:i] + [n] + exist_perm[i:]
                 curr_perm.append(new_perm)
         all_perm = curr_perm
     return all_perm
@@ -36,7 +37,7 @@ def permutation_duplicated(nums):
     关键点：如果将某个数字k加入到某一个排列中 [ ...j, k, k, l...]，那么连续的k只需要插进去一次就好
     即[ ...j, k, k, k, l...]，之后跳过这段连续的k，继续到l
     """
-    all_perm = [[]] # 0！= 1 的结果
+    all_perm = [[]]
     for n in nums:
         # 根据已有的res，来创建出当前的permutation，然后代替已有的res
         curr_perm = []

@@ -5,7 +5,7 @@ from collections import deque
 def binary_tree_upside_down(root):
     """
     https://leetcode.com/problems/binary-tree-upside-down/description/
-    对于每一个node，如果有右节点必为叶子节点，如果有right那么必有left；但可能没有right的同时有left
+    题目的假设，对于每一个node，如果它是其parent的右节点，那么1）parent必有左节点 2）这个node本身是叶子节点
     将这个二叉树翻转，left -> root -> right 结果为 right为left，left变为root，root变为right
             1           4   1           4
            / \         / \ / \         / \
@@ -63,7 +63,8 @@ def symmetric_tree(root):
         return False
 
     def bfs(root):
-        """否则需要知道node的index，过于麻烦
+        """
+        BFS需要知道node的index，过于麻烦
         用两个queue，第一个queue保持当前层的所有节点从左往右的遍历顺序，比如第三层就是[3, 4, 4, 3]
         然后每次拿出这个queue的前后两头，如果两个node都是none，或者不是none但是value相等，就说明这两个node是对称的
         之后再次把这两个node的left right children以对称的方式，加入到第二个queue，也就是下次要处理的queue中
@@ -76,10 +77,10 @@ def symmetric_tree(root):
             if not curr_queue:
                 # 当前queue空了，交换
                 curr_queue, next_queue = next_queue, curr_queue
+            # 对称必须是偶数个node
+            if len(curr_queue) % 2 != 0:
+                return False
             while curr_queue:
-                # 对称必须是偶数个node
-                if len(curr_queue) % 2 != 0:
-                    return False
                 # 首尾各自pop出要检查的在当前层的位置上对称的node
                 head, tail = curr_queue.popleft(), curr_queue.pop()
                 if not head and not tail:
@@ -98,7 +99,6 @@ def symmetric_tree(root):
                     return False
         return True
     return bfs(root)
-    # return not root or bottom_up_get_depth(root.left, root.right)
 
 
 def lowest_common_ancestor_binary_tree(root, p, q):
@@ -111,16 +111,16 @@ def lowest_common_ancestor_binary_tree(root, p, q):
     """
     def dfs(node, p, q):
         if node is None or node == p or node == q:
-            # 如果root为None，不存在LCA，返回None
-            # 或者，此时的root为p和q的任意一个，那么对应的root就是LCA（情况2）
+            # 如果node为None，即以node为root的树，100%不存在LCA，返回None
+            # 或者，此时的root为p和q的任意一个，即node走到了p或者q，那么对应的node就是LCA（情况2）
             return node
         # 分别去左边和右边，尝试找p和q的LCA
         left = dfs(node.left, p, q)
         right = dfs(node.right, p, q)
         # 情况1，node是p和q的"真"LCA：如果p和q在node的两侧，那么可以从左边和右边分别找到各自的LCA（其实就是自己，且均不为None）
-        # 情况2，否则，如果p和q在同一侧，那么左边和右边有一边的LCA为None
         if left and right:
             return node
-        # 情况2，返回其中一个不是None的
+        # 情况2，否则，如果p和q在同一侧，那么左边和右边有一边的LCA为None，返回其中一个不是None的
+        # 如果都是None，那就代表不存在LCA
         return left if left else right
 

@@ -36,6 +36,37 @@ def is_one_edit_distance(s, t):
         else is_one_delete(t, s)
 
 
+def shortest_distance_one_time_no_space(words, w1, w2):
+    """
+    O(1) space and O(N) time complexity，此时的关键点就是，如何处理edge case：
+    1）重复的连续一段序列，找到最后一个
+    2）再找到w1的last index i之后，需要找w2 first index j，此时i和j中间的位置k，不能再次出现w1，如果有的话，需要从k再次开始loop
+    """
+    # use two pointers
+    i, res = 0, len(words) + 1
+    while i < len(words):
+        while i < len(words) and words[i] != w1 and words[i] != w2:
+            i += 1
+        if i < len(words):
+            if words[i] == w2:
+                w1, w2 = w2, w1
+            # swap w1 and w2 so we now find w1 and need to find w2
+            while i < len(words) - 1 and words[i + 1] == w1:
+                # move i to the last w1 in current segment of duplicated w1
+                i += 1
+            # now i is the last w1, i+1 != w1, let's find the next w2
+            # if we meet another w1 during this process, i.e. since i+2 to current k
+            # we have another w1 but no w2 yet, have to stop and start over to the next loop
+            j = i + 1
+            while j < len(words) and words[j] != w2 and words[j] != w1:
+                j += 1
+            if j < len(words) and words[j] == w2:
+                # now we find the first w2 after the last w1, and no w1 in between
+                res = min(res, j - i)
+            i = j  # update i by j position
+    return res
+
+
 def shortest_distance_one_time(words, w1, w2):
     """
     For example, assume that words = ["practice", "makes", "perfect", "coding", "makes"].
@@ -104,4 +135,3 @@ class WordDistance(object):
         for i in xrange(len(index_list)-1):
             res = min(res, index_list[i+1]-index_list[i])
         return res
-

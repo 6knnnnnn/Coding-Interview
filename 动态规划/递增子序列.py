@@ -45,3 +45,10 @@ def number_of_longest_increasing_subsequence(nums):
     """
     https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/
     """
+
+
+def longest_increasing_subsequence(nums):
+    """
+    https://leetcode.com/problems/longest-increasing-subsequence/description/
+    """
+

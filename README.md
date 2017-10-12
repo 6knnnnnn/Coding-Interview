@@ -58,11 +58,32 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 二叉树遍历/迭代器
 	Binary Search Tree Iterator
 	Inorder Successor In Bst
-#### 优先队列/数组第K个
-	Kth Largest Element In An Array
-#### 优先队列/有序合并K
-	Merge K Sorted Arrays
-	Merge K Sorted Lists
+#### 代数问题/乘法
+	Complex Number Multiplication
+	Multiply Strings
+	Sparse Matrix Multiplication
+#### 代数问题/加法
+	Add Binary
+	Add Strings
+	Add Two Numbers
+	Add Two Numbers II
+	Plus One Linked List
+#### 代数问题/平方
+	Happy Number
+	Sqrtx
+	Sum Of Square Numbers
+	Valid Perfect Square
+#### 代数问题/求幂
+	Power Of Four
+	Power Of Three
+	Power Of Two
+	Powx N
+#### 代数问题/素数
+	Count Primes
+	Ugly Number
+	Ugly Number II
+#### 代数问题/运算符解析
+	Evaluate Reverse Polish Notation
 #### 位运算/基本位运算
 	Number Complement
 	Reverse Bits
@@ -83,10 +104,10 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Reverse Integer
 #### 几何问题/岛屿周长
 	Island Perimeter
-#### 几何问题/正方形
-	Maximal Square
+#### 几何问题/平面坐标
 	Valid Square
 #### 几何问题/点和直线
+	Max Points On A Line
 	The Skyline Problem
 #### 几何问题/直方图面积
 	Largest Rectangle In Histogram
@@ -103,11 +124,18 @@ A repo for popular coding interview problems mainly from Leetcode.
 	House Robber
 	House Robber II
 	House Robber III
+#### 动态规划/博弈论游戏
+	Can I Win
+	Nim Game
 #### 动态规划/最大乘积子数组
+	Maximum Product Subarray
 	Product Of Array Except Self
+#### 动态规划/最大和子数组
+	Maximum Subarray
 #### 动态规划/粉刷墙
 	Paint Fence
 	Paint House
+	Paint House II
 #### 动态规划/递增子序列
 	Increasing Triplet Subsequence
 	Longest Continuous Increasing Subsequence
@@ -162,12 +190,18 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Implement Strstr
 #### 字符串匹配/单词拆分
 	Word Break
+#### 字符串匹配/字符串窗口
+	Find All Anagrams In A String
+	Group Anagrams
+	Minimum Window Substring
 #### 字符串匹配/括号处理
 	Generate Parentheses
+	Remove Invalid Parentheses
 	Valid Parentheses
 #### 字符串匹配/格式检查
 	Compare Version Numbers
 	Restore Ip Addresses
+	Text Justification
 	Valid Number
 	Validate Ip Address
 #### 字符串匹配/模式匹配
@@ -177,9 +211,6 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 字符串匹配/正则表达式
 	Regular Expression Matching
 	Wildcard Matching
-#### 字符串窗口/Anagram
-	Find All Anagrams In A String
-	Group Anagrams
 #### 字符串编辑/单词反转
 	Reverse Words In A String
 	Reverse Words In A String II
@@ -187,16 +218,14 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 字符串编辑/单词缩写
 	Unique Word Abbreviation
 	Valid Word Abbreviation
-#### 字符串编辑/字符串压缩
-	Decode String
-	Design Compressed String Iterator
-#### 字符串编辑/字符串序列化
-	Text Justification
-#### 字符串编辑/编辑距离
+#### 字符串编辑/单词距离
 	One Edit Distance
 	Shortest Word Distance
 	Shortest Word Distance II
 	Shortest Word Distance III
+#### 字符串编辑/字符串压缩
+	Decode String
+	Design Compressed String Iterator
 #### 嵌入式结构/嵌入式求和
 	Nested List Weight Sum
 	Nested List Weight Sum II
@@ -235,37 +264,15 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Count Of Smaller Numbers After Self
 	Merge Sorted Array
 	Sort List
+#### 排序/数组第K个
+	Kth Largest Element In An Array
+#### 排序/有序合并K
+	Merge K Sorted Arrays
+	Merge K Sorted Lists
 #### 排序/计数排序
 	Maximum Swap
 	Sort Characters By Frequency
 	Sort Colors
-#### 数学概念/乘法
-	Complex Number Multiplication
-	Multiply Strings
-#### 数学概念/加法
-	Add Binary
-	Add Strings
-	Add Two Numbers
-	Add Two Numbers II
-	Plus One Linked List
-#### 数学概念/平方
-	Happy Number
-	Sqrtx
-	Sum Of Square Numbers
-	Valid Perfect Square
-#### 数学概念/求幂
-	Power Of Four
-	Power Of Three
-	Power Of Two
-	Powx N
-#### 数学概念/矩阵乘法
-	Sparse Matrix Multiplication
-#### 数学概念/素数
-	Count Primes
-	Ugly Number
-	Ugly Number II
-#### 数学概念/运算符解析
-	Evaluate Reverse Polish Notation
 #### 数组窗口/数组窗口统计
 	Contiguous Array
 	Sliding Window Maximum

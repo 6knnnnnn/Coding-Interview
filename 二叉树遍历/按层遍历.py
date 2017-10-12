@@ -150,6 +150,7 @@ def find_largest_value_in_each_tree_row(root):
         # row max 记录最新level max
         while queue:
             size = len(queue)
+            # 每次有新的一层，记录当前层的临时max，之后当前层每次都要更新
             row_max.append(queue[0].val)
             while size:
                 size -= 1

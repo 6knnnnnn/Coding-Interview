@@ -9,7 +9,6 @@ def subset_unique(nums):
         # 回溯法+DFS，每次把path加到结果中，然后递归
         # 新的path就是当前path加上新的一个元素i，为了避免重复，下次递归从i+1开始
         def dfs(start, path):
-            print res
             res.append(path)  # path = subset
             for i in xrange(start, len(nums)):
                 dfs(i + 1, path + [nums[i]])
@@ -25,7 +24,6 @@ def subset_unique(nums):
             for i in xrange(len(res)):
                 new_subset = [res[i] + [n]]
                 res += new_subset
-            print res
         return res
 
 
@@ -57,7 +55,7 @@ def subsets_duplicated(nums):
 
     例子：nums = [1, 2, 2, 3]，刚开始 n = 1，得到[[], [1]]
     到第1个2的时候：[[], [1], [2], [1, 2]]，此时满足 i != i-1，得到j=2，之后再创建出新的subsets
-    到第2个2的时候，j = 2，那么我们不需要考虑[], [1]，只需要考虑[2], [1, 2]，所以就有：[[], [1], [2], [1, 2], [2, 2], [1, 2, 2]]
+    到第2个2的时候，我们不需要考虑[], [1]，只需要考虑[2], [1, 2]，所以就有：[[], [1], [2], [1, 2], [2, 2], [1, 2, 2]]
     """
     res = [[]]
     nums.sort()

@@ -26,9 +26,10 @@ def product_of_array_except_itself(nums):
 
 def maximum_product_subarray(nums):
     """
+    https://leetcode.com/problems/maximum-product-subarray/description/
     DP[X]代表在X位置时，子数组[0...x] 中乘积的最大值和最小值
     DP是一维数组 所有整数
-    DP初始化就是原始输入数组的copy
+    DP初始化就是原始输入数组的copy（或者两个变量，空间压缩）
     遍历方向L->R
     状态转移：若input[X]为负，则将DP[X-1]的maxp和minp交换。DP[X]的maxp和minp就等于他们分别和input[X]相乘后，
             跟input[X]相比的最大（小）值，需要跟input[X]比较因为可能为负

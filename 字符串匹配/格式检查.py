@@ -32,8 +32,7 @@ def valid_number(s):
     把所有edge case考虑进去
     "0" => true，纯数字
     " 0.1 " => true，有小数点，只有一个，e不能和.同时出现，小数点两侧至少有一个数字，"0." ".3"
-    "abc" => false，除了e以外的字母均不行
-    "1 a" => false，除了e以外的字母均不行
+    "abc" "1 a" => false，除了e以外的字母均不行
     "2e10" => true，只有一个e，e两侧必须有数字，e不能和.同时出现
     +-号：只能在第一个，或e的后边，"+2e-10" => true
     """
@@ -55,7 +54,7 @@ def valid_number(s):
             has_e = True
             num_after_e = False
         elif c == '-' or c == '+':
-            # +-号：只能在第一个，或e的后边，"+2e-10" = > true
+            # +-号：只能在第0个，或e的后边，"+2e-10" = > true
             if i != 0 and s[i - 1] != 'e':
                 return False
         else:
@@ -105,8 +104,7 @@ def restore_ip_addresses(ip):
     https://leetcode.com/problems/restore-ip-addresses/description/
     给定一个没有分隔符的ipv4地址，尝试修复地址，并返回所有的可能，例子：
     25525511135 -> 255.255.11.135, 255.255.111.35，2552 -> 2.5.5.2
-    其实还是回溯法DFS，每次需要知道：剩下的未处理的substr，剩余的ip位数（最多为4），上一轮修复的局部ip地址，全局结果
-
+    其实还是回溯法DFS，每次需要知道：剩下的未处理的sub str，剩余的ip位数（最多为4），上一轮修复的局部ip地址，全局结果
     """
     def dfs(remain_s, remain_d, prev_restored, global_ips):
         if len(remain_s) <= remain_d * 3:
@@ -155,11 +153,11 @@ def text_justification(words, max_width):
         else:
             # 否则，当前word不能加入当前line，需要处理当前line，而且初始化一个新的line，把当前word加到新的当前line里面
             total_space_len = max_width - curr_line_words_len
-            # 计算出每个word之间的space，假设此时能够整除，注意space count = word_count-1，因为是word之间的空格
+            # 计算出每个word之间的space，假设此时能够整除，注意space count = word_count-1，因为是两两word之间的空格
             space_count = len(curr_line_words) - 1
             if space_count == 0:
                 # 特殊情况，即当前line目前为止只有一个word，原因是：这唯一的word长度刚好为max width，或者长度不为max width
-                # 但是和当前的word不能组成新的一行，所以把这个唯一的word加到结果的同时，还要加入必要的额外空格（即左对齐）
+                # 但是和new word不能组成新的一行，所以把这个唯一的word加到结果的同时，还要加入必要的额外空格（即左对齐）
                 curr_line_str = curr_line_words[0] + ' ' * (max_width - len(curr_line_words[0]))
             else:
                 # 先假设能够整除

@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# 找到所有，累加和为正的连续子数组分区的和（sum of positive contiguous segments of the array），其中的最大值即为结果
-# 关键点就在于，对于每一个nums[i]，判断之前subproblem的最大和子数组是否为正，如果为正，对当前i位置的problem的解有帮助
-# 也就是，如果dp[i-1]为正，能够对dp[i]有帮助（变大），那么更新dp[i]=dp[i-1]+nums[i]
-# 否则，如果dp[i-1]为负，只会帮倒忙，对dp[i]没有帮助，dp[i]即为nums[i]，无论nums[i]是正负，不需要加上dp[i-1]
+"""
+https://leetcode.com/problems/maximum-subarray/description
+
+找到所有，累加和为正的连续子数组分区的和（sum of positive contiguous segments of the array），其中的最大值即为结果
+关键点就在于，对于每一个nums[i]，判断之前subproblem的最大和子数组是否为正，如果为正，对当前i位置的problem的解有帮助
+也就是，如果dp[i-1]为正，能够对dp[i]有帮助（变大），那么更新dp[i]=dp[i-1]+nums[i]
+否则，如果dp[i-1]为负，只会帮倒忙，对dp[i]没有帮助，dp[i]即为nums[i]，无论nums[i]是正负，不需要加上dp[i-1]
+"""
 
 
 def maximum_sum_sub_array_dp(nums):
@@ -29,7 +33,7 @@ def maximum_sum_sub_array_kadane(nums):
     Kadane算法扫描一次整个数列的所有数值，在每一个扫描点计算以该点数值为结束点的子数列的最大和
     当遍历到i位置的数字，max_temp等价于DP[i-1]
     max_temp>=0，因为记录的是，累加和为正的连续子数组分区的和，不可能为<0
-    之后跟当前nums[i]相加，如果为正，说明当前n对累加和为正的连续子数组分区，有帮助，可以归到分区中区
+    之后跟当前nums[i]相加，如果为正，说明当前n对累加和为正的连续子数组分区，有帮助，可以归到分区中
     否则，max_temp=0，此时这个分区结束了，需要寻找下一个分区。
     max_final用来记录目前为止所有，累加和为正的连续子数组分区的和的最大值，即最后结果
     nums:      [-2,1,-3,4,-1,2,1,-5,4]

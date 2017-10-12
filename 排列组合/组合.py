@@ -74,16 +74,16 @@ def factor_combinations(n):
     时间复杂度取决于n有多少种可能的因子组合
     """
     def dfs(number, current_p, so_far_path, global_res):
-        # 从current_p开始，依次+1，判断是否能够被number整除，如果是，加入到so far path
-        # 直到n的平方根为止即可
-        print number, current_p, so_far_path, global_res
         """
+        从current_p开始，依次+1，判断是否能够被number整除，如果是，加入到so far path
+        直到n的平方根为止即可
+
         30 的例子，遍历的情况
         30 2 [] []
-        15 2 [2] [[2, 15]]
-        5 3 [2, 3] [[2, 15], [2, 3, 5]]
-        10 3 [3] [[2, 15], [2, 3, 5], [3, 10]]
-        6 5 [5] [[2, 15], [2, 3, 5], [3, 10], [5, 6]]
+            15 2 [2] [[2, 15]]
+                5 3 [2, 3] [[2, 15], [2, 3, 5]]
+            10 3 [3] [[2, 15], [2, 3, 5], [3, 10]]
+            6 5 [5] [[2, 15], [2, 3, 5], [3, 10], [5, 6]]
         """
         while current_p <= number ** 0.5:
             if number % current_p == 0:

@@ -51,13 +51,16 @@ def graph_valid_tree(edges, n):
     有点类似于number_of_connected_components_in_undirected_graph，但是需要两步骤：分别检查无环，和联通分量个数
     额外空间O(N)，时间O(E)
     """
-    def has_cycle(graph, visited, curr_node, parent):
-        # 从当前节点开始，判断graph里面是否有环，parent节点，即当前节点之前是从哪里访问过来的
+    def has_cycle(graph, visited, curr_node, direct_parent):
+        # 从当前节点开始，判断graph里面是否有环，direct source节点，即当前节点之前是作为哪个节点的adj访问过来的（直接相邻）
         visited.add(curr_node)
         for adj in graph[curr_node]:
             if adj in visited:
-                if parent != adj:
-                    # curr node的相邻节点adj被重复访问了，如果adj的parent不是adj自己
+                if direct_parent != adj:
+                    # 因为这里面是无向图，如果curr node的相邻节点adj被重复访问了，但adj的direct parent是adj自己，此时不算有环
+                    # 比如 1 --- 2 --- 3 从1访问2的时候，2仍然会遍历回去1，但此时2的直接父节点是1，不算是有环
+                    #       \_________/
+                    # 而如果是从2遍历到3，3却遍历回到了1（已经在visited），1却不是3的直接parent，所以有环
                     return True
             elif has_cycle(graph, visited, adj, curr_node):
                 # 判断从adj开始，是否有环
@@ -70,7 +73,8 @@ def graph_valid_tree(edges, n):
         graph[x].append(y)
         graph[y].append(x)
     visited = set([])
-    # 如果没有任意的节点（0..n-1）没有被访问过，返回TRUE
+    # 先是遍历图，判断是否有环，同时更新visited hash set，之后
+    # 如果没有任意的节点（0..n-1）没有被访问过，返回TRUE，也就是所有的node都在一个连通分量里面
     return not has_cycle(graph, visited, 0, -1) and not any(i not in visited for i in xrange(n))
 
 

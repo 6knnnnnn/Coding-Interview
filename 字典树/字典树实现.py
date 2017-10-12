@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from collections import defaultdict
+
 
 class TrieNode(object):
     def __init__(self):
         # 如果是word，不为None，而且此时word会记录之前的prefix
         self.word = None
-        self.child_node_map = dict([])
+        self.child_node_map = defaultdict(TrieNode)
 
 
 class Trie(object):
@@ -17,9 +19,7 @@ class Trie(object):
         # 插入一个新的word到字典树，需要在最后的时候，更新TrieNode word
         if word:
             node = self.root
-            for i, c in enumerate(word):
-                if c not in node.child_node_map:
-                    node.child_node_map[c] = TrieNode()
+            for c in word:
                 node = node.child_node_map[c]
             node.word = word
 
@@ -47,7 +47,7 @@ class Trie(object):
         """
         https://leetcode.com/problems/add-and-search-word-data-structure-design/
         支持search wildcard word，即'.'代表任何字符，基本跟Trie一样
-        区别是每当遇到一个'.'的时候，找到当前node的所有的child node，所以此题目不需要产生26个字母以次遍历
+        区别是每当遇到一个'.'的时候，找到当前node的所有的child node，所以此题目不需要产生26个字母遍历
         """
         def dfs(node, word):
             for i, c in enumerate(word):

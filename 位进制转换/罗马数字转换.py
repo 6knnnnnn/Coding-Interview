@@ -16,6 +16,8 @@ def int_to_roman(num):
             num -= values[i]
             # 找到对应的罗马字符
             res_list.append(chars[i])
+        if num == 0:
+            break
 
     return ''.join(res_list)
 

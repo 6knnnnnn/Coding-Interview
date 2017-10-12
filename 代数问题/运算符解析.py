@@ -7,6 +7,9 @@ def evaluate_reverse_polish_notation(tokens):
     ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
     ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
     这里面运算符没有优先级
+    Follow up可能是，如果有优先级，即 * = / > + = -，甚至是引入幂运算？
+    1 + 2 * 3 + 4，要先扫一遍，把高级运算符当做是nested list，放到stack中
+    之后扫stack，每次都先计算出每个stack top value，之后再继续
     """
     stack = list([])
     for t in tokens:

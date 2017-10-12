@@ -58,12 +58,15 @@ class LineVertical(LineRegular):
         return "None:{}".format(self.x)
 
 
-def max_points_in_a_line(points):
-    # 第一次扫，两次loop，创建所有可能的line，存到一个map里面，key为k%b，这样避免重复创建Line object
-    # LineRegular的key为k%b，LineVertical的key为"None:x"
-    # 第二次扫，根据所有点，和所有可能的line，如果点属于line，更新line point count，同时更新含有最多点的line的个数
-    # 如果是包含最多点的line，需要第三次扫
-    # 时间复杂度O(N^2)
+def max_points_on_a_line(points):
+    """
+    https://leetcode.com/problems/max-points-on-a-line/
+    第一次扫，两次loop，创建所有可能的line，存到一个map里面，key为k%b，这样避免重复创建Line object
+    LineRegular的key为k%b，LineVertical的key为"None:x"
+    第二次扫，根据所有点，和所有可能的line，如果点属于line，更新line point count，同时更新含有最多点的line的个数
+    如果是包含最多点的line，需要第二次扫更新max point的同时，更新max point line
+    时间复杂度O(N^2)
+    """
     line_table = dict([])
     for i in xrange(len(points)-1):
         for j in xrange(i+1, len(points)):

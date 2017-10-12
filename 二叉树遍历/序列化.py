@@ -6,8 +6,20 @@ from utility.entity import TreeNode
 
 
 class SerializeBT(object):
-    index = 0
-    # https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
+    """
+    https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
+    用preorder遍历tree来序列化，即root-left-right，None用#来表示
+    反序列化的时候，递归调用，每次记录string的位置index，也就是新的subtree的root
+        如果这个root是#，说明到达了叶子节点，返回None给上级
+        否则，找到了一个node.val，初始化node之后，分别再次去往node的左边和右边，最后返回node给上级
+    例子：
+            1
+        2       3
+            4       5
+    序列化后：1, 2, #, #, 3, 4, #, #, 5, #, #，那么1就是第一个root，2就是1的left，2后边都是#，2为leaf节点
+    """
+    def __init__(self):
+        self.index = 0
 
     def dfs_serialize(self, str_list, node):
         if node:

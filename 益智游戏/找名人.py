@@ -6,7 +6,8 @@ def find_celebrity(n):
     # 名人不认识任何人，所有人都认识名人
     def knows(x, y): # API
         return x == y
-    if n < 0: return 0
+    if n < 0:
+        return 0
     x, y = 0, n - 1
     # two pointers，前后扫
     while x < y:
