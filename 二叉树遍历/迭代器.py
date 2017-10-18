@@ -53,6 +53,7 @@ class IteratorBST(object):
     """
     def __init__(self, root):
         self.stack = list([])
+        # 更新当前遍历到tree的左边界
         self.push_left(root)
 
     def push_left(self, node):

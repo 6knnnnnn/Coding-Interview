@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from utility.entity import TreeNode
 
 
 class BST2GreaterTree(object):
@@ -88,3 +89,50 @@ def most_frequent_element_in_binary_search_tree(root):
     也是中序遍历，保存两个变量，当前element frequency，全部element最大frequency
     之所以中序遍历所以因为，如果有新的元素，就可以换掉当前元素了，因为是sorted
     """
+
+
+class RecoverBST(object):
+    def recover_binary_search_tree(self, root):
+        """
+        https://leetcode.com/problems/recover-binary-search-tree/description/
+        BST中两个节点n1和n2的值被交换了，导致BST不再是valid，找到这两个node，并且swap value以来恢复原始的BST
+        中序遍历，理论上必须是从大到小顺序的，如果出现之前遍历的节点的值大于当前的节点，说明找到一种可能
+        即n1和n2在中序遍历的顺序中是相邻的节点，而且刚好是被交换的节点
+        如果之后再次遇到了这种情况，说明找到了第二个节点n2，以及n1和n2并不是相邻的中序节点，需要更新n2
+        """
+        def inorder(current):
+            if not current: return
+            inorder(current.left)
+            if self.prev.val >= current.val:
+                # 找到了一个invalid的情况
+                if not self.n1:
+                    # 如果n1为空，说明prev为第一个node
+                    self.n1 = self.prev
+                # n2永远指向current
+                self.n2 = current
+            self.prev = current
+            inorder(current.right) # go to right
+
+        self.n1 = self.n2 = None
+        self.prev = TreeNode(-sys.maxint)
+        inorder(root)
+        self.n1.val, self.n2.val = self.n2.val, self.n1.val
+
+    @staticmethod
+    def recover_bfs(root):
+        # in order left < root < right, compare current with prev
+        if not root: return
+        stack = list([])
+        curr = root
+        prev = n1 = n2 = None
+        while curr or stack:
+            while curr: # left most
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            if prev and prev.val>=curr.val:
+                if not n1: n1=prev
+                n2 = curr # n1 ... n2
+            prev, curr = curr, curr.right
+        n1.val, n2.val = n2.val, n1.val
+

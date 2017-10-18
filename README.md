@@ -139,6 +139,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 动态规划/递增子序列
 	Increasing Triplet Subsequence
 	Longest Continuous Increasing Subsequence
+	Longest Increasing Subsequence
 	Number Of Longest Increasing Subsequence
 #### 区间/区间合并
 	Insert Interval
@@ -164,13 +165,14 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 图论/WordLadder
 	Word Ladder
 	Word Ladder II
-#### 图论/无向图遍历
-	Clone Graph
-	Graph Valid Tree
-#### 图论/有向图遍历
+#### 图论/拓扑排序
 	Alien Dictionary
 	Course Schedule
 	Course Schedule II
+	Sequence Reconstruction
+#### 图论/无向图遍历
+	Clone Graph
+	Graph Valid Tree
 #### 图论/连通分量
 	Friend Circles
 	Number Of Connected Components In An Undirected Graph
