@@ -37,7 +37,7 @@ class Diameter(object):
         return self.diameter
 
 
-def binary_tree_path(root):
+def binary_tree_paths(root):
     """
     https://leetcode.com/problems/binary-tree-paths/description/
     给定一个root，返回所有的root-to-leaf-path为一个list，比如 ["1->2->5", "1->3"]

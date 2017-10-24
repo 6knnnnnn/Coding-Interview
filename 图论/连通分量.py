@@ -6,7 +6,7 @@
 from collections import deque, defaultdict
 
 
-def number_islands(matrix):
+def number_of_islands(matrix):
     # https://leetcode.com/problems/number-of-islands/description/
     # 用一个DFS方法，因为只是01 cell，把所有遍历过的1变成别的flag比如2
     # 这样之后还可以把输入matrix还原。如果是变成0，无法还原
@@ -26,7 +26,7 @@ def number_islands(matrix):
     return total
 
 
-def number_islands_2(m, n, positions):
+def number_of_islands_2(m, n, positions):
     # https://leetcode.com/problems/number-of-islands-ii/description/
     # 问题关键点是，如果新加入的1，能够让两个或者多个岛屿相连怎么办？并查集
     def new_island(matrix, i, j, m, n):

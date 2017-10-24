@@ -81,8 +81,11 @@ def course_schedule_order(n, prerequisites):
             in_degree_map[adj] -= 1
             if in_degree_map[adj] == 0:
                 zero_queue.append(adj)
+                # 把入度为0的node删除掉，为了之后判断是否有环
+                in_degree_map.pop(adj)
         # 对于当前入度为0的course节点，已经遍历完了它的所有相邻节点（即更新入度），把它放到order的下一个里
         order.append(course_id)
+    # 如果此时 in_degree_map里面还有node，说明这些node无法完成top sort，代表有环
     return order if len(order) == n else []
 
 

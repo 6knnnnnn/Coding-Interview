@@ -154,7 +154,7 @@ def three_sum_smaller(nums, target):
 
 
 def four_sum_recur(nums, target):
-    # 把所有N sum的题目都变成2 sum的变体，时间复杂度为O(N^(N-1))
+    # 把所有N sum的题目都变成2 sum的变体，时间复杂度为O(M^(N-1)) M为输入元素的个数
     def find_N_sum(nums, target, N, temp, results):
         # temp 是一个临时list，每次都要从之前的新建，results是最终结果
         if len(nums) >= N >= 2 and nums[0]*N <= target<=nums[-1]*N:

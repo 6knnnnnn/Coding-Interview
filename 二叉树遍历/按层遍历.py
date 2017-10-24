@@ -89,7 +89,7 @@ def binary_tree_vertical_order_traversal_bfs(root, sort=False):
     if not root:
         return res_l
     # FIFO, i.e. 左边比右边先进队列
-    min_col, max_col = -sys.maxint, sys.maxint
+    min_col, max_col = sys.maxint, -sys.maxint
     queue = deque([(root, 0)])
     while queue:
         size = len(queue)

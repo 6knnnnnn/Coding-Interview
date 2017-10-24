@@ -34,7 +34,7 @@ def combinations(k, n):
     return results
 
 
-def letter_combinations_phone_number(numbers):
+def letter_combinations_of_a_phone_number(numbers):
     """
     https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
     给定一个电话号码，找到所有可能的字母组合，比如23，所有组合["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
@@ -55,13 +55,13 @@ def letter_combinations_phone_number(numbers):
             dfs(numbers, start + 1, result_queue, phone_map)
 
     phone_map = {"2": "abc", "3": "edf", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
-    result_list = deque([])
+    queue = deque([]) # 类似于BFS，每一层对应的是一个digit
     if numbers:
         for c in phone_map[numbers[0]]:
             # 初始化第一位的数字
-            result_list.append(c)
-        dfs(numbers, 1, result_list, phone_map)
-    return result_list
+            queue.append(c)
+        dfs(numbers, 1, queue, phone_map)
+    return queue
 
 
 def factor_combinations(n):

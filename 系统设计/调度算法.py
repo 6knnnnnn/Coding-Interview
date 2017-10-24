@@ -237,3 +237,36 @@ class LFUCache(object):
         freqNode.first = keyNode
         if freqNode.last is None:
             freqNode.last = keyNode
+
+
+def task_scheduler(tasks, cool_down_time):
+    """
+    https://leetcode.com/problems/task-scheduler/description/
+    给定一个数组，里面对应的是task的编号，以及冷却时间，进行CPU任务调度
+    对于相同的task，前后需要冷却时间为cool_down_time，在这个时间间隔内，CPU可以执行其他任务，或者等待
+    要求：找到一种调度方法，使得整体的CPU执行时间最短。
+
+    0. 最好的情况，固然是tasks的数量，即为执行的总时间
+    1. 对于出现频率数目很高的task，我们肯定要优先执行
+    因为无论怎样，CPU最起码要保证这些task执行完毕，比如taskA is max，那么意味着最少要花费(max-1)*(time+1)的时间间隔
+    2. 出现次数相同的task，我们可以把他们当做是一个整体来对待（特别是max task）
+
+    Example: AAAABBBEEFFGG 3，任务A出现了4次，频率最高，于是我们在每个A中间加入三个空位：A|||A|||A|||A
+    这三个空位可以当做是一个"任务模块"，模块的次数为任务最大次数减1，所以最后的总长度肯定至少为(max-1) * (time+1)
+
+    解法：遍历 + 词频统计
+    找到max词频，以及对应的max词频个数max_count
+    计算出根据max初始化后，每个slot的长度，比如 A|||A|||A|||A，slot长度为3，个数为3，所以剩余empty slot数目为9
+    在安排好这些max task之后，算出剩下的task数目，len(tasks) - max * max_count
+    emptySlots - taskLeft，也就等于，最后安排完的task，当中有多少个时间段是CPU空闲的
+    最后返回的是，len(tasks) + emptySlots - taskLeft，即无论如何也需要至少len(tasks)的时间来执行，再加上idle的时间
+
+        int partCnt = mx - 1;
+        int partLen = n - (mxCnt - 1);
+        int emptySlots = partCnt * partLen;
+        int taskLeft = tasks.size() - mx * mxCnt;
+        int idles = max(0, emptySlots - taskLeft);
+        return tasks.size() + idles;
+    """
+
+

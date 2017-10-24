@@ -28,7 +28,7 @@ def erase_overlap_intervals(intervals):
     return erased
 
 
-def has_meeting_overlap(interval_list):
+def meeting_rooms(interval_list):
     # https://leetcode.com/problems/meeting-rooms/description/
     # 判断一个人是否能参加所有的meeting：按照start排序后，看相邻两个interval之间有没有overlap
     sorted(interval_list, key=Interval.get_start_key)

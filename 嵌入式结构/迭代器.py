@@ -2,7 +2,7 @@
 from collections import deque
 
 
-class NestedIteratorDFS(object):
+class FlattenNestedIteratorDFS(object):
     """
     https://leetcode.com/problems/flatten-nested-list-iterator/description/
     DFS的做法就是，用一个deque，初始化的时候，把所有的元素放到deque里面
@@ -15,7 +15,7 @@ class NestedIteratorDFS(object):
                 self.queue.append(elem.getInteger())
             else:
                 # DFS 生成一个新的iterator，然后把所有元素放到queue里面
-                nested_list_iterator = NestedIteratorDFS(elem.getList())
+                nested_list_iterator = FlattenNestedIteratorDFS(elem.getList())
                 while nested_list_iterator.has_next():
                     self.queue.append(nested_list_iterator.next())
 
@@ -26,15 +26,16 @@ class NestedIteratorDFS(object):
         return self.queue.popleft()
 
 
-class NestedIteratorBFS(object):
+class FlattenNestedIteratorBFS(object):
     """
     BFS用stack，里面存放的是每个元素，以及对应的index，表示如果当前元素是list，里面的nested object index
     开始的时候，是输入的nested list，对应元素0。
     Example: [1, 2, [3, 4, [5], 6], [7, 8], 9]，stack的样子：
-    最开始：[1, 2, [3, 4, [5], 6], [7, 8], 9], 0
+    最开始，
+    [1, 2, [3, 4, [5], 6], [7, 8], 9], 0
     next之后：
     [1, 2, [3, 4, [5], 6], [7, 8], 9], 1
-    next之后：
+    next=之后：
     [1, 2, [3, 4, [5], 6], [7, 8], 9], 2
     next之后：找到了新的nested list
     [3, 4, [5], 6], 0
@@ -46,7 +47,7 @@ class NestedIteratorBFS(object):
     [3, 4, [5], 6], 2
     [1, 2, [3, 4, [5], 6], [7, 8], 9], 3
     next之后：找到了新的nested list
-    注意此时[3, 4, [5] 6]的index从2变成了3，即需要增加一位，因为2位置的已经放到了top，top结束后返回到6，也就是index=3
+    注意此时[3, 4, [5], 6]的index从2变成了3，即需要增加一位，因为2位置的已经放到了top，top结束后返回到6，也就是index=3
     [5], 0
     [3, 4, [5], 6], 3
     [1, 2, [3, 4, [5], 6], [7, 8], 9], 3

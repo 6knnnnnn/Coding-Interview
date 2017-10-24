@@ -23,6 +23,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 二叉树遍历/中序遍历
 	Convert Bst To Greater Tree
 	Most Frequent Element In Binary Search Tree
+	Recover Binary Search Tree
 	Validate Binary Search Tree
 #### 二叉树遍历/先序遍历
 	Flatten Binary Tree To Doubly Linked List
@@ -105,10 +106,9 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 几何问题/岛屿周长
 	Island Perimeter
 #### 几何问题/平面坐标
-	Valid Square
-#### 几何问题/点和直线
 	Max Points On A Line
 	The Skyline Problem
+	Valid Square
 #### 几何问题/直方图面积
 	Largest Rectangle In Histogram
 	Maximal Rectangle
@@ -124,6 +124,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	House Robber
 	House Robber II
 	House Robber III
+#### 动态规划/单词拆分
+	Word Break
 #### 动态规划/博弈论游戏
 	Can I Win
 	Nim Game
@@ -190,8 +192,6 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Design Search Autocomplete System
 #### 字符串匹配/KMP
 	Implement Strstr
-#### 字符串匹配/单词拆分
-	Word Break
 #### 字符串匹配/字符串窗口
 	Find All Anagrams In A String
 	Group Anagrams
@@ -318,6 +318,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Continuous Subarray Sum
 	Maximum Size Subarray Sum Equals K
 	Minimum Size Subarray Sum
+	Subarray Sum Equals K
 #### 目标和/运算符目标和
 	Expression Add Operators
 	Target Sum
@@ -331,8 +332,11 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 系统设计/调度算法
 	Lfu Cache
 	Lru Cache
+	Task Scheduler
 #### 走棋盘/Dungeon游戏
 	Dungeon Game
+#### 走棋盘/棋盘游戏
+	Valid Sudoku
 #### 链表节点/交换节点
 	Reverse Linked List
 	Reverse Linked List II

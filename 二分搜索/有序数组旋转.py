@@ -28,7 +28,7 @@ http://bangbingsyb.blogspot.com/2014/11/leetcode-search-in-rotated-sorted-array.
     Edge case 假设 4 2，刚开始 mid = start = 4 > end = 2
         如果 start <= target < mid 左半序列，否则右半序列
 
-所以结合edge case，我们需要通过 mid 和 end的关系来判断是左边还是右边。
+所以结合edge case，我们需要通过 mid 和 end 的关系来判断是左边还是右边。
 （mid和start的关系不确定，如果是edge case 即只有两个元素 那么 mid = (start+end) / 2 == start）
 """
 

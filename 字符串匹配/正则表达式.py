@@ -143,7 +143,7 @@ def regular_expression_matching_dp(e, s):
     return table[-1][-1]
 
 
-def wild_card_matching(regex, word):
+def wildcard_matching(regex, word):
     """
     https://leetcode.com/problems/wildcard-matching/description/
     '?' Matches any single character.

@@ -63,15 +63,15 @@ class SerializeBST(object):
         if not root:
             return ""
         res = list([])
-        s = list([root])
+        stack = list([root])
         # preorder:right FILO, left LIFO
-        while s:
-            n = s.pop()
+        while stack:
+            n = stack.pop()
             res.append(str(n.val))
             if n.right:
-                s.append(n.right)
+                stack.append(n.right)
             if n.left:
-                s.append(n.left)
+                stack.append(n.left)
         return ','.join(res)
 
     def dfs_deserialize(self, queue):

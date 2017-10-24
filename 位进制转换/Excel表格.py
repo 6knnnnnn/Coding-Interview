@@ -26,7 +26,8 @@ def decode_ways(s):
         也就是i=n-2那么dp[i]=dp[i+1]+dp[i+2]，i+2=n；所以必须是1，代表有1中合法情况需要加到dp[i=n-2]中
     反之dp长度为n，需要单独处理越界的情况
     """
-    if not s: return 0
+    if not s:
+        return 0
     if len(s) == 1:
         return 1
     dp = [0] * (len(s)+1)

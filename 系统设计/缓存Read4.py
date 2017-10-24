@@ -10,7 +10,7 @@ def read4(buf_list):
 def read(buf, n):
     # https://leetcode.com/problems/read-n-characters-given-read4
     # 想要读进来n个，返回的是最后实际读取了多少个字符，可能不到n
-    # buf: 目标 buffer list (List[str])，把字符读进去
+    # buf: 目标 buffer list，把字符读进去 List[str]
     i = 0  # 目前读取的总字符串数量
     while i < n:
         temp_buff = ['', '', '', ''] # 每次都是临时的
@@ -29,7 +29,7 @@ class ReadMultipleTime(object):
     # https://leetcode.com/problems/read-n-characters-given-read4-ii-call-multiple-times
     # 需要把多读的数据存到临时的queue里面，下次再次读取的时候先去queue里面找
     # 如果queue为空了，继续调用read4 API
-    # 队列先进先出可以保持顺序不变，为空时就进队(read4)，不为空时就出队,并把出队的元素放到目标中
+    # 队列先进先出可以保持顺序不变，为空时、或者数目不够时候，就进队(read4)，不为空时就出队，并把出队的元素放到目标中
     def __init__(self):
         from collections import deque
         self.queue = deque([])

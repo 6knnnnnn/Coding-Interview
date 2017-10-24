@@ -39,7 +39,7 @@ def rotate_list(head):
     pass
 
 
-def move_zeros(nums):
+def move_zeroes(nums):
     """https://leetcode.com/problems/move-zeroes
     把所有的0挪到数组末尾，但不改变其它非0数字的顺序
     两个指针，i负责指向当前非0元素，j指向某一段连续0元素的最后一个0，之后swap

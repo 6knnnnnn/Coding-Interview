@@ -15,18 +15,21 @@ def target_sum(nums, target):
         if start_i == len(nums):
             return target == 0
         if dp[start_i].get(target, 0) > 0:
+            # 记住之前的结果
             return dp[start_i][target]
         upper = backtracking(nums, target + nums[start_i], start_i + 1, dp)
         lower = backtracking(nums, target - nums[start_i], start_i + 1, dp)
         dp[start_i][target] = upper + lower
         return dp[start_i][target]
     dp = defaultdict(dict)
-    return backtracking(nums, target, 0, dp)
+    backtracking(nums, target, 0, dp)
+    return dp[len(nums)-1][target]
 
 
 class ExpressionTargetSum(object):
     """
     https://leetcode.com/problems/expression-add-operators/description/
+    +-*三种运算符
     "123", 6 -> ["1+2+3", "1*2*3"]
     "105", 5 -> ["1*0+5","10-5"] 所以可以是很多位的数字组合
     "00", 0 -> ["0+0", "0-0", "0*0"]
