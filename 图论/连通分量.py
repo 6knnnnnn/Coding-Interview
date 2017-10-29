@@ -160,8 +160,8 @@ def number_of_connected_components_in_undirected_graph(edges, n):
         # use adj list to represent graph
         graph = defaultdict(list)
         for x, y in edges:
-            graph[x].append(y)
-            graph[y].append(x)
+            graph[x].add(y)
+            graph[y].add(x)
         total = 0
         for i in xrange(n):
             # 如果i在graph中，说明是一个新的source
@@ -186,8 +186,8 @@ def number_of_connected_components_in_undirected_graph(edges, n):
     # adj list represent a graph
     graph = defaultdict(list)
     for x, y in edges:
-        graph[x].append(y)
-        graph[y].append(x)
+        graph[x].add(y)
+        graph[y].add(x)
     total = 0
     for i in xrange(n):
         # if not visited, not connected from all previous trees/components

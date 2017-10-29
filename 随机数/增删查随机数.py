@@ -65,7 +65,7 @@ class RandomizedCollection(object):
         # 把val对应的一个index找到，把最后的last val挪到这个index上去
         # 把last val之前的index=n-1删掉改为val X
         if val in self.index_map:
-            remove_index, last_val = self.index_map[val].pop(), self.val_list[-1]
+            remove_index, last_val = self.index_map[val].poll(), self.val_list[-1]
             self.val_list[remove_index] = last_val
             if last_val in self.index_map:
                 self.index_map[last_val].add(remove_index)

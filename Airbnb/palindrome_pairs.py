@@ -13,7 +13,6 @@ def is_palindrome(word):
 
 def palindrome_pairs(words):
     """
-    https://leetcode.com/problems/palindrome-pairs/description/
     给定一组word 数组，找到里面所有可能的两两组合为一个palindrome pairs，返回pair index，要讲究顺序
     words = ["abcd", "dcba", "lls", "s", "sssll"]，返回的是index：[[0, 1], [1, 0], [3, 2], [2, 4]]
     即The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]

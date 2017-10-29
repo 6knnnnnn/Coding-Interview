@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from utility import TreeNode
+from utility.entity import TreeNode
 
 
 class ArrayNode(object):
@@ -34,7 +34,7 @@ class SortedArrayToBST(object):
 
     @staticmethod
     def bfs_solution(nums):
-        # 其实就是用了stack来模拟recursion
+        # 其实就是用了stack来模拟recursion，里面每个元素都是一个array node
         if not nums:
             return None
         root = TreeNode(nums[(len(nums)-1) >> 1])
@@ -43,10 +43,12 @@ class SortedArrayToBST(object):
             array_node = stack.pop()
             start, end, mid, tree_node = array_node.get_all()
             if mid-1 >= start:
-                tree_node.left = TreeNode(nums[(mid-1+start) >> 1])
+                i = (mid-1+start) >> 1
+                tree_node.left = TreeNode(nums[i])
                 stack.append(ArrayNode(start, mid-1, tree_node.left))
             if mid + 1 <= end:
-                tree_node.right = TreeNode(nums[(mid+1+end) >> 1])
+                j = (mid+1+end) >> 1
+                tree_node.right = TreeNode(nums[j])
                 stack.append(ArrayNode(mid + 1, end, tree_node.right))
         return root
 

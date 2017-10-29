@@ -98,7 +98,7 @@ def binary_tree_vertical_order_traversal_bfs(root, sort=False):
             # 更新column index的值域
             min_col = min(min_col, col_index)
             max_col = max(max_col, col_index)
-            col_index_table[col_index].append(node.val)
+            col_index_table[col_index].add(node.val)
             size -= 1
             if node.left:
                 queue.append((node.left, col_index - 1))
@@ -122,7 +122,7 @@ def binary_tree_vertical_order_traversal_dfs(root):
     def dfs(node, col_index_table, col_index):
         if not node:
             return
-        col_index_table[col_index].append(node.val)
+        col_index_table[col_index].add(node.val)
         dfs(node.left, col_index_table, col_index - 1)
         dfs(node.right, col_index_table, col_index + 1)
 

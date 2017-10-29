@@ -35,6 +35,7 @@ def merge_k_sorted_array(arrays):
     https://leetcode.com/problems/merge-k-sorted-arrays/description/
     给定一个array，里面有K个sorted array，merge他们
     用一个priority queue，里面每一个node有三个信息：元素的值，目前所属于的array index，在这个array里面属于第几个元素
+    由于PQ的大小为最多为k，而每次插入的复杂度是log k，一共插入过nk个节点。时间复杂度为O(nklogk)，空间复杂度为O(k)
     """
     k = len(arrays)
     pq = PriorityQueue(k)

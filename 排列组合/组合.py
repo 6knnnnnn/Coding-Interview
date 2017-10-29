@@ -22,12 +22,12 @@ def combinations(k, n):
         """
         if k == len(curr_combination):
             # 当前组合是一个结果，copy生成一个新的加入到全局中
-            global_results.append(list(curr_combination))
+            global_results.add(list(curr_combination))
         elif len(curr_combination) < k:
             for i in xrange(start, n+1):
-                curr_combination.append(i)
+                curr_combination.add(i)
                 dfs(global_results, curr_combination, i + 1, n, k)
-                curr_combination.pop()
+                curr_combination.poll()
     results = list([])
     if 0 < k <= n and n > 0:
         dfs(results, [], 1, n, k)
@@ -50,7 +50,7 @@ def letter_combinations_of_a_phone_number(numbers):
                 curr = result_queue.popleft()
                 for c in phone_map[numbers[start]]:
                     new = "%s%s" % (curr, c)
-                    result_queue.append(new)
+                    result_queue.add(new)
             # start还没有到最后一个，就继续
             dfs(numbers, start + 1, result_queue, phone_map)
 
@@ -89,7 +89,7 @@ def factor_combinations(n):
             if number % current_p == 0:
                 the_other_p = number / current_p
                 # 生成一个新的path result，因为此时找到了一个新的可能组合
-                global_res.append(so_far_path + [current_p, the_other_p])
+                global_res.add(so_far_path + [current_p, the_other_p])
                 # 下一层，此时number变为了number / candidate_p
                 dfs(the_other_p, current_p, so_far_path + [current_p], global_res)
             current_p += 1

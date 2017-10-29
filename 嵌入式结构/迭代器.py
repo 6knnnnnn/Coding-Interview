@@ -123,7 +123,7 @@ class Flatten2DVector(object):
         self.remove_flag = True
         return self.vec[self.row][self.col]
 
-    def hasNext(self):
+    def has_next(self):
         return self.row < self.total_row and self.col < len(self.vec[self.row])
 
     def remove(self):

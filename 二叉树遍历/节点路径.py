@@ -52,7 +52,7 @@ def binary_tree_paths(root):
         if node:
             curr_path = "%s->%s" % (curr_path, node.val)
             if not node.left and not node.right:
-                res_list.append(curr_path)
+                res_list.add(curr_path)
             else:
                 dfs(node.left, res_list, curr_path)
                 dfs(node.right, res_list, curr_path)

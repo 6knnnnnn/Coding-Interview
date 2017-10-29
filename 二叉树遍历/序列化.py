@@ -24,11 +24,11 @@ class SerializeBT(object):
     def dfs_serialize(self, str_list, node):
         if node:
             # 这里用的pre-order遍历方式
-            str_list.append(str(node.val))
+            str_list.add(str(node.val))
             self.dfs_serialize(str_list, node.left)
             self.dfs_serialize(str_list, node.right)
         else:
-            str_list.append("#")
+            str_list.add("#")
 
     def serialize(self, root):
         str_list = []

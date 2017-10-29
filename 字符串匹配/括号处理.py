@@ -26,7 +26,7 @@ def generate_parentheses(n):
     """
     def dfs(curr_p, left, right, results):
         if not right:  # end this sequence
-            results.append(curr_p)
+            results.add(curr_p)
             return
         if left:
             dfs(curr_p + '(', left - 1, right, results)

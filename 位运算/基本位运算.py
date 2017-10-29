@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def reverse_bit(n):
+def reverse_bits(n):
     """
     https://leetcode.com/problems/reverse-bits/description/
     Reverse bits of a given 32 bits unsigned integer. 最简单的方式就是reverse bit string。

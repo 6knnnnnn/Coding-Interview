@@ -11,7 +11,7 @@ def compare_version_numbers(v1, v2):
     """
     def remove_tail_zero(vL):
         while len(vL) > 0 and int(vL[-1]) == 0:
-            vL.pop()
+            vL.poll()
         return vL
     vL1 = remove_tail_zero(v1.split('.'))
     vL2 = remove_tail_zero(v2.split('.'))
@@ -110,7 +110,7 @@ def restore_ip_addresses(ip):
         if len(remain_s) <= remain_d * 3:
             if remain_d == 0:
                 # no more substr to process, add to global
-                global_ips.append(prev_restored[:]); return
+                global_ips.add(prev_restored[:]); return
             left = min(3, len(remain_s) - remain_d + 1) # left < = 3
             for i in xrange(left):
                 # each digit < 255, no leading 0 of digit

@@ -14,7 +14,7 @@ def find_k_smallest_in_binary_search_tree(root, k):
             if node.left and len(in_order_list) < k:
                 dfs(node.left, in_order_list)
             if len(in_order_list) < k:
-                in_order_list.append(node.val)
+                in_order_list.add(node.val)
                 if node.right and len(in_order_list) < k:
                     dfs(node.right, in_order_list)
 

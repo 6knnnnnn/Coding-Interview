@@ -15,7 +15,7 @@ def missing_ranges(A, lower, upper):
     result = []
     # 如果upper是最大的，要考虑到upper+1，inclusive
     # 即便不是最大，而是在A中间，那么之后比较的时候会忽略掉，因为真正的upper在最后
-    A.append(upper + 1)
+    A.add(upper + 1)
     # 如果lower是最小的，从lower-1开始考虑，inclusive
     # 即便不是最小，而是在A中间，那么之后比较的时候会忽略掉，因为真正的lower在最前
     prev = lower - 1

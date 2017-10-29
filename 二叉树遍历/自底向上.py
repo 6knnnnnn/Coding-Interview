@@ -33,13 +33,13 @@ class FindLeavesBinaryTree(object):
                 return -1
             if len(results) < curr_level:
                 # 当前level超过了results所包含的level，新建一个
-                results.append(list([]))
+                results.add(list([]))
             left = add_to_level(results, node.left, curr_level+1)
             right = add_to_level(results, node.right, curr_level+1)
             # 如果当前node为最底（开始）层的叶子节点，那么left=right=-1，所以他们对应的index就是-1+1=0
             # 否则当前node为当前层的"叶子"节点，加入到对应的index结果里面
             index = max(left, right) + 1
-            results[index].append(node.val)
+            results[index].add(node.val)
             # 将当前node的index返回给上一级，也就是它的parent
             # 那么parent的在结果里面的位置就是index+1（需要取最大值，因为可能parent有两个child，找其中最大的index）
             return index

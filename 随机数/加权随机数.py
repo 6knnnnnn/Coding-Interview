@@ -83,7 +83,7 @@ class RandomWeightHash(RandomWeight):
         if not self.key_list:
             return
         last_val = self.key_list[-1]
-        key_index = self.pos_map[key].pop()
+        key_index = self.pos_map[key].poll()
         self.key_list[key_index] = last_val
         self.key_list.pop()
 

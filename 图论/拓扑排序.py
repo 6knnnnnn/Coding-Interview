@@ -55,11 +55,12 @@ def course_schedule_order(n, prerequisites):
     类似上边的题，这里要返回的是，可能的一种选课的顺序，如果不能完成，返回一个空的list即可。
     这道题目跟alien dictionary区别是，这个可以是多个source，而那道题是单个source
     关键点是每次需要找到入度为0的节点，把它放到order里面之前，需要对于这个节点的相邻节点，更新他们的入度-1
+    时间复杂度 O(N+E)，即需要遍历所有的node，以及edge
     """
     graph = defaultdict(list)
     for c1, c2 in prerequisites:
         # c2 -> c1
-        graph[c2].append(c1)
+        graph[c2].add(c1)
     in_degree_map = defaultdict(int)
     # 更新每个course的入度，即根据c2->c1来更新c1的入度
     for course_id, adj_list in graph.items():
@@ -99,7 +100,7 @@ def test():
         print course_schedule_order(n, preq)
 
 
-def alien_dictionary(words):
+def alien_dictionary_dfs(words):
     """
     https://leetcode.com/problems/alien-dictionary/description/
     给定一组单词，已经按照外星人的规则排序好的，求出这个外星人词典的字母顺序
@@ -127,7 +128,7 @@ def alien_dictionary(words):
         # 当前node visiting结束，加入到visited，同时，把对应的node放入到order中去
         visiting.remove(node)
         visited.add(node)
-        order.append(node)
+        order.add(node)
 
     # build adj list graph，这里面key node = 字母，value 就是 adj list，这里的adj是direct adj
     graph = {node: [] for node in set(''.join(words))}
@@ -138,7 +139,7 @@ def alien_dictionary(words):
         for i in xrange(min(len(v), len(w))):
             if v[i] != w[i]:
                 # 这里就是把对应index的w加入到v的adj中去，代表v[i] -> w[i]，即v[i]在前
-                graph[v[i]].append(w[i])
+                graph[v[i]].add(w[i])
                 break
     # 用topological sort返回最后的order
     order, visited, visiting = [], set([]), set([])
@@ -148,6 +149,54 @@ def alien_dictionary(words):
             return ''
     # 此时order记录的是逆序，所以返回的是再次逆序order之后的正序结果
     return ''.join(order[::-1])
+
+
+def alien_dictionary_bfs(words):
+    # build graph by edges
+    graph = {node: [] for node in set(''.join(words))}
+    for i, w1 in enumerate(words[:-1]):
+        for j in xrange(i + 1, len(words)):
+            w2 = words[j]
+            for k in xrange(min(len(w1), len(w2))):
+                c1, c2 = w1[k], w2[k]
+                if c1 != c2:
+                    graph[c1].add(c2)
+                    break
+    # build in-degree map
+    in_degree_map = defaultdict(int)
+    for node, adj_list in graph.items():
+        for adj_node in adj_list:
+            in_degree_map[adj_node] += 1
+    # put 0-in-degree node to queue
+    zero_queue = deque([])
+    for node in graph.keys():
+        if node not in in_degree_map:
+            zero_queue.append(node)
+    # iterate each node in queue, update in-degree and order
+    order = list([])
+    while zero_queue:
+        node = zero_queue.popleft()
+        order.append(node)
+        adj_list = graph[node]
+        for adj in adj_list:
+            in_degree_map[adj] -= 1
+            if in_degree_map[adj] == 0:
+                zero_queue.append(adj)
+                in_degree_map.pop(adj)
+    # return order, if in-degree-map not empty, cricle
+    return "".join(order) if len(in_degree_map) == 0 else ""
+
+
+a = [
+  "wrt",
+  "wrf",
+  "er",
+  "ett",
+  "rftt"
+]
+
+print alien_dictionary_dfs(a)
+print alien_dictionary_bfs(a)
 
 
 def sequence_reconstruction(org, seqs):

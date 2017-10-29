@@ -31,3 +31,72 @@ def evaluate_reverse_polish_notation(tokens):
         else:
             stack.append(int(t))
     return stack.pop()
+
+number = "0123456789"
+operator = "+-*/"
+
+
+def basic_calculator(s):
+    """
+    https://leetcode.com/problems/basic-calculator/description/
+    其实和下边的一个道理，只不过这里面只有加减法，以及可能会有括号
+    "(1+(4+5+2)-3)+(6+8)" = 23
+    """
+
+
+def basic_calculator_ii(s):
+    """
+    https://leetcode.com/problems/basic-calculator-ii/description/
+
+    给定一个string表达式，里面只包含有非负整数，以及加减乘除运算符，或者空格，解析表达式的最后的结果
+
+    "3+2*2" = 7，" 3/2 " = 1，" 3+5 / 2 " = 5
+    用stack模拟，这里面stack存放的都是需要做"加法"的元素，最后stack求和即可：
+        即如果遇到了乘除法，把他们的结果计算出来，压缩成为一个数字，放到stack里面
+        而如果只是加减法，把对应的符号加入到stack里面，下次遇到的数字跟这个符号相乘，就是最后需要"加上"的元素值
+        注意正负号的处理，特别是python的负数除法
+    """
+    def find_number(s, start):
+        # return the number that beginning from start index
+        end = start + 1
+        while end < len(s) and s[end] in number:
+            end += 1
+        num = int(s[start: end])
+        # return end as the new starting index
+        return num, end
+    s = s.replace(" ", "")
+    # 需要初始化stack为[1]，即第一位数字永远是乘以1
+    stack, i = list([1]), 0
+    # i用来指向运算符，j用来找数字digit
+    while i < len(s):
+        if s[i] in number:
+            num, i = find_number(s, i)
+            stack[-1] *= num
+        elif s[i] in operator:
+            if s[i] in "+-":
+                # 此时加入后边元素的符号，因为我们一直都在做"加法"
+                stack.append(-1 if s[i] == "-" else 1)
+                i += 1
+            elif s[i] in "*/":
+                # 需要进行压缩，即把所有乘除法操作的component计算出来
+                a = stack.pop()
+                while i < len(s) and s[i] in "*/":
+                    op = s[i]
+                    b, i = find_number(s, i+1)
+                    if op == "*":
+                        a *= b
+                    elif op == "/":
+                        # 需要注意的是，在python里面，负数除法的特殊性，即-3/2=-2，但其实是-1
+                        if a >= 0:
+                            a /= b
+                        else:
+                            a /= -b
+                            a = -a
+                # 压缩完毕，加入到stack中
+                stack.append(a)
+    return sum(stack)
+
+samples = [ "14-3/2", "1 + 1", "1 + 2 * 3", "3+2*2", "3/2", "3 + 5 / 2", "123", "1 + 1"]
+
+for t in samples:
+    print basic_calculator_ii(t)

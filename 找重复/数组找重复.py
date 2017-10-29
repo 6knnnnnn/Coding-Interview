@@ -13,7 +13,7 @@ def find_duplicated_number(nums):
     """
 
 
-def contain_duplicates(nums):
+def contains_duplicates(nums):
     """
     https://leetcode.com/problems/contains-duplicate/description/
     最简单的版本，几种做法：
@@ -24,7 +24,7 @@ def contain_duplicates(nums):
     return len(set(nums)) == len(nums)
 
 
-def contain_duplicates_within_k(nums, k):
+def contains_duplicates_within_k(nums, k):
     """
     https://leetcode.com/problems/contains-duplicate-ii/description/
     找到两个索引i和j，判断是否满足nums[i]=nums[j]以及i和j的距离<=k
@@ -41,7 +41,7 @@ def contain_duplicates_within_k(nums, k):
     return False
 
 
-def contain_duplicates_within_k_t(nums, k, t):
+def contains_duplicates_within_k_t(nums, k, t):
     """
     https://leetcode.com/problems/contains-duplicate-ii/description/
     找到两个索引i和j，判断是否满足nums[i]和nums[j]的距离<=t，以及i和j的距离<=k，即坐标差不能大于k，值差不能大于t（可能会有负数）

@@ -84,6 +84,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Ugly Number
 	Ugly Number II
 #### 代数问题/运算符解析
+	Basic Calculator
+	Basic Calculator II
 	Evaluate Reverse Polish Notation
 #### 位运算/基本位运算
 	Number Complement
@@ -113,6 +115,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Largest Rectangle In Histogram
 	Maximal Rectangle
 	Maximal Square
+	Rectangle Area
 #### 几何问题/蓄水池容积
 	Container With Most Water
 	Trapping Rain Water
@@ -162,6 +165,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Palindrome Permutation
 	Valid Palindrome
 	Valid Palindrome II
+#### 回文/回文分割
+	Palindrome Pairs
 #### 回文/回文子串
 	Palindromic Substrings
 #### 图论/WordLadder

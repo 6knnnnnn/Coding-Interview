@@ -163,7 +163,7 @@ def four_sum_recur(nums, target):
                 while l < r:
                     s = nums[l]+nums[r]
                     if s == target:
-                        results.append(temp + [nums[l], nums[r]])
+                        results.add(temp + [nums[l], nums[r]])
                         l += 1
                         while l < r and nums[l] == nums[l-1]:
                             l += 1 # 去重复

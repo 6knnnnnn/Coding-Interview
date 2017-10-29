@@ -20,7 +20,7 @@ def clone_graph(original):
         node_map[clone.label] = clone
         for adj in node.neighbors:
             clone_adj = dfs(adj, node_map)
-            node.neighbors.append(clone_adj)
+            node.neighbors.add(clone_adj)
         return clone
 
     # BFS, 类似于DFS，也是用map，不同的是，如果某个node不存在于map中，加入到待处理queue
@@ -37,7 +37,7 @@ def clone_graph(original):
                 cloned_map[adj.label] = UndirectedGraphNode(adj.label)
                 clone_queue.append(adj)
             adj_clone = cloned_map[adj.label]
-            cloned_map[node.label].neighbors.append(adj_clone)
+            cloned_map[node.label].neighbors.add(adj_clone)
     return new_original
 
 
@@ -70,8 +70,8 @@ def graph_valid_tree(edges, n):
     # adj list represent a graph
     graph = defaultdict(list)
     for x, y in edges:
-        graph[x].append(y)
-        graph[y].append(x)
+        graph[x].add(y)
+        graph[y].add(x)
     visited = set([])
     # 先是遍历图，判断是否有环，同时更新visited hash set，之后
     # 如果没有任意的节点（0..n-1）没有被访问过，返回TRUE，也就是所有的node都在一个连通分量里面

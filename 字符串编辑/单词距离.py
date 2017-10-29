@@ -109,7 +109,7 @@ class WordDistance(object):
         # 默认为list，如果key不存在就初始化一个empty list
         self.word_index_map = defaultdict(list)
         for i, w in enumerate(words):
-            self.word_index_map[w].append(i)
+            self.word_index_map[w].add(i)
         self.length = len(words)
 
     def shortest_distance(self, word1, word2):

@@ -53,7 +53,7 @@ def main(input_lines, page_size):
             # process the current page
             if curr_house.house_id not in curr_page_house_id_set:
                 # first time, not duplicated
-                curr_page.append(str(curr_house))
+                curr_page.add(str(curr_house))
                 curr_page_house_id_set.add(curr_house.house_id)
                 # remove current house from the linked list, and continue to its next
                 curr_house = curr_house.de_link()
@@ -65,7 +65,7 @@ def main(input_lines, page_size):
             # then we start over from the head to get any house node (if any, as last page doesn't have to be full)
             curr_house = house_head.next
             while curr_house and len(curr_page) < page_size:
-                curr_page.append(str(curr_house))
+                curr_page.add(str(curr_house))
                 curr_house = curr_house.de_link()
     for page in page_list:
         for curr_house in page:

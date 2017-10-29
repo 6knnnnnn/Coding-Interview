@@ -101,7 +101,8 @@ class AddLinkedList(object):
         shorter = l2 if len1 > len2 else l1
         new_head.next = recursion(longer, shorter, abs(len1 - len2))
         if new_head.next and new_head.next.val >= 10:
-            # 如果new head之后的值大于10，carry=1加到当前new head，此时new head就是结果，否则是new head得下一个
+            # 如果new head之后的值大于10，carry=1加到当前new head，此时new head就是结果
+            # 否则是new head.next才是最后真正的结果
             new_head.next.val -= 10
             new_head.val += 1
             return new_head

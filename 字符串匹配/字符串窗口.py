@@ -67,7 +67,7 @@ def group_anagrams_sort(str_list):
     for s in str_list:
         sort = "".join(sorted(s))
         if sort in d:
-            d[sort].append(s)
+            d[sort].add(s)
         else:
             d[sort] = list([s])
     return d.values()
@@ -86,7 +86,7 @@ def group_anagrams_prime(str_list):
             product *= primes[ord(c)-97]
         if product not in ana_map:
             ana_map[product] = list([])
-        ana_map[product].append(s)
+        ana_map[product].add(s)
     return ana_map.values()
 
 

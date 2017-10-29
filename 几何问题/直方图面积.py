@@ -65,7 +65,7 @@ def max_rectangle(matrix):
     return ma
 
 
-def maximum_square(matrix):
+def maximal_square(matrix):
     """
     https://leetcode.com/problems/maximal-square/description/
     找到一个只包含01的矩阵中，能够形成的最大的正方形面积，比如下图，面积为4
@@ -84,30 +84,32 @@ def maximum_square(matrix):
     解法3：DP，时间复杂度O(N^2)
     """
     def find_max_edge(columns):
-        max_edge = 0
-        for i, edge in enumerate(columns):
-            if 0 < edge <= len(columns):
-                # 如果edge比column的长度还大，比如8行5列，但是某一列的累加和为6，比5大，不可能组成正方形
-                edge_count = 1
+        max_edge, total_col = 0, len(columns)
+        for i, col_height in enumerate(columns):
+            # 如果某一个column height比总col长度还大，比如8行5列，但是某一列的累加和为6，比5大，不可能组成正方形
+            if 0 < col_height <= total_col:
+                # new_edge_len，因为我们找的是正方形，对于每一个col height，一旦遇到new edge len == col height，意味着
+                # 以col height为edge的正方形找到了，不需要早继续找了（否则不可能是正方形了，只可能是矩形）
+                new_edge_len = 1
                 j = i + 1
                 # 首先向右边走
-                while j < len(columns) and edge_count < edge <= columns[j]:
+                while j < total_col and new_edge_len < col_height <= columns[j]:
                     j += 1
-                    edge_count += 1
+                    new_edge_len += 1
                 # 接着向左边走
-                j = i - 1
-                while j >= 0 and edge_count < edge <= columns[j]:
-                    j -= 1
-                    edge_count += 1
-                if edge_count == edge:
-                    max_edge = max(max_edge, edge)
+                k = i - 1
+                while k >= 0 and new_edge_len < col_height <= columns[j]:
+                    k -= 1
+                    new_edge_len += 1
+                if new_edge_len == col_height:
+                    max_edge = max(max_edge, col_height)
         return max_edge
     max_edge_global = 0
     if matrix and matrix[0]:
-        running_h = [0] * len(matrix[0])
+        running_columns = [0] * len(matrix[0])
         for row in matrix:
-            parse_column(row, running_h)
-            max_edge_global = max(max_edge_global, find_max_edge(running_h))
+            parse_column(row, running_columns)
+            max_edge_global = max(max_edge_global, find_max_edge(running_columns))
     return max_edge_global * max_edge_global
 
 
@@ -117,4 +119,22 @@ def test_matrix():
         ["1010", "1011", "1011", "1111"]
     ]
     for m in matrix:
-        print maximum_square(m)
+        print maximal_square(m)
+
+
+def rectangle_area(A, B, C, D, E, F, G, H):
+    """
+    https://leetcode.com/problems/rectangle-area/description/
+    给定八个点，找到矩形的overlap面积，如果有的话
+           ________________  (C, D)
+          |                |
+          |         _______|______  (G, H)
+          |        |              |
+          |--------|              |
+        (A, B)     |______________|
+                (E, F)
+    """
+    x = max(min(C, G) - max(A, E), 0)
+    y = max(min(D, H) - max(B, F), 0)
+    overlap = x * y
+    return overlap
