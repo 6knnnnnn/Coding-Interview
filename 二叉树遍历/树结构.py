@@ -124,3 +124,18 @@ def lowest_common_ancestor_of_a_binary_tree(root, p, q):
         # 如果都是None，那就代表不存在LCA
         return left if left else right
 
+
+def lowest_common_ancestor_of_a_binary_search_tree(root, p, q):
+    """
+    https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
+    """
+    def dfs(root_node, n1, n2):
+        if n1 and n2 and root_node:
+            v0, v1, v2 = root_node.val, n1.val, n2.val
+            if v1 == v0 or v2 == v0 or min(v1,v2) < v0 < max(v1,v2):
+                return root_node
+            if v1 > v0 and v2 > v0:
+                return dfs(root_node.right, n1, n2)
+            if v1 < v0 and v2 < v0:
+                return dfs(root_node.left, n1, n2)
+        return None

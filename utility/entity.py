@@ -29,6 +29,13 @@ class ListNode(object):
         return head.next
 
 
+class RandomListNode(object):
+    def __init__(self, x):
+        self.label = x
+        self.next = None
+        self.random = None
+
+
 class Interval(object):
     # 一般都需要将区间按照start从小到大排序，很少会按照end排序
     def __init__(self, start, end):

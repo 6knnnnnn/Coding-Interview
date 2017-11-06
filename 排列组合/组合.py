@@ -44,8 +44,9 @@ def letter_combinations_of_a_phone_number(numbers):
     def dfs(numbers, start, result_queue, phone_map):
         if start < len(numbers):
             # numbers从start位置开始，作为当前组合的起始点
-            so_far = len(result_queue)
-            for i in xrange(so_far):
+            size = len(result_queue)
+            while size:
+                size -= 1
                 # 需要pop left作为排列组合的起始点，用queue可以不需要从新生成一个temp list加到结果里
                 curr = result_queue.popleft()
                 for c in phone_map[numbers[start]]:

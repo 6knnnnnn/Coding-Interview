@@ -44,6 +44,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Sum Of Left Leaves
 #### 二叉树遍历/树结构
 	Binary Tree Upside Down
+	Lowest Common Ancestor Of A Binary Search Tree
 	Lowest Common Ancestor Of A Binary Tree
 	Symmetric Tree
 #### 二叉树遍历/树高度
@@ -168,6 +169,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 回文/回文分割
 	Palindrome Pairs
 #### 回文/回文子串
+	Longest Palindromic Substring
 	Palindromic Substrings
 #### 图论/WordLadder
 	Word Ladder
@@ -296,6 +298,8 @@ A repo for popular coding interview problems mainly from Leetcode.
 	Spiral Matrix II
 #### 栈与队列/函数调用时间
 	Exclusive Time Of Functions
+#### 栈与队列/实现数据结构
+	Min Stack
 #### 栈与队列/文件路径
 	Longest Absolute File Path
 	Simplify Path
@@ -343,6 +347,7 @@ A repo for popular coding interview problems mainly from Leetcode.
 #### 走棋盘/棋盘游戏
 	Valid Sudoku
 #### 链表节点/交换节点
+	Copy List With Random Pointer
 	Reverse Linked List
 	Reverse Linked List II
 	Reverse Nodes In K Group
