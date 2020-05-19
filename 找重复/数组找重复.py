@@ -123,4 +123,18 @@ def intersection_2_arrays(nums1, nums2):
         return resL
 
 
+def set_mismatch(nums):
+    """
+    https://leetcode.com/problems/set-mismatch
+    """
+    nums_set = set(nums)
+    missing = 0
+    for i in xrange(1, len(nums) + 1):
+        if missing == 0 and i not in nums_set:
+            missing = i
+            break
+    s_actual = sum(nums)
+    s_expected = len(nums) * (len(nums) + 1) / 2
+    dup = s_actual - s_expected + missing
+    return [dup, missing]
 

@@ -1,6 +1,22 @@
 # -*- coding: utf-8 -*-
 
 
+def is_subsequence(s, t):
+    """
+    https://leetcode.com/problems/is-subsequence/
+    两个指针进行match
+    """
+    i = j = 0
+    while i < len(t) and j < len(s):
+        if t[i] == s[j]:
+            # char matched, check the next of s
+            j += 1
+        # either case move i by 1
+        i += 1
+    # check if all chars of s are matched by t
+    return i <= len(t) and j == len(s)
+
+
 def isomorphic_strings(s, t):
     """
     https://leetcode.com/problems/isomorphic-strings/description/
@@ -58,6 +74,32 @@ def word_pattern_no_delimiter(pattern, words):
     https://leetcode.com/problems/word-pattern-ii/description/
     如果words里面没有分隔符，如何判断是否匹配？
     """
-    if len(words) < len(pattern):
-        return False
+    def is_matched(pattern, words, charMap, prefixMap):
+        print pattern, words, charMap, prefixMap
+        if len(words) < len(pattern):
+            return False
+        if len(pattern) == 0:
+            return len(words) == 0
+        char = pattern[0]
+        if char in charMap:
+            # prefix exists for this char in the pattern
+            prefix = charMap[char]
+            if not words.startwith(prefix):
+                # not start with the prefix
+                return False
+            # 每次挪动pattern都是一位
+            return is_matched(pattern[1:], words[len(prefix):], charMap, prefixMap)
+        for i in xrange(1, len(words)+1):
+            prefix = words[0:i]
+            if prefix not in prefixMap:
+                # first time this prefix is met on this path
+                charMap[char] = prefix
+                prefixMap[prefix] = char
+                # 每次挪动pattern都是一位
+                if is_matched(pattern[1:], words[i:], charMap, prefixMap):
+                    return True
+                charMap.pop(char)
+                prefixMap.pop(prefix)
 
+        return False
+    return is_matched(pattern, words, {}, {})

@@ -2,6 +2,7 @@
 
 from collections import deque, defaultdict
 import sys
+from utility.entity import TreeNode
 
 
 def level_order_traversal(root):
@@ -338,3 +339,20 @@ def populating_next_right_pointers_in_each_node(root):
                     queue.append(node.right)
                 # 如果queue空了，说明本层遍历结束，当前node的下一个为None
                 node.next = queue[0] if size else None
+
+
+def merge_two_binary_trees(t1, t2):
+    """
+    https://leetcode.com/problems/merge-two-binary-trees/submissions/
+    """
+    if t1 and t2:
+        new_root = TreeNode(t1.val + t2.val)
+        new_root.left = merge_two_binary_trees(t1.left, t2.left)
+        new_root.right = merge_two_binary_trees(t1.right, t2.right)
+        return new_root
+    elif t1 is not None and t2 is None:
+        return t1
+    elif t1 is None and t2 is not None:
+        return t2
+    else:
+        return None
