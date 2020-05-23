@@ -116,7 +116,7 @@ def regular_expression_matching_dp(e, s):
     table[0][0] = True
 
     # Update the corner case of when s is an empty string but p is not.
-    # Since each '*' can eliminate the charter before it, the table is
+    # Since each '*' can eliminate the char before it, the table is
     # vertically updated by the one before previous.
 
     for i in xrange(2, len(e) + 1):

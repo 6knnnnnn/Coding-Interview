@@ -84,7 +84,7 @@ def word_pattern_no_delimiter(pattern, words):
         if char in charMap:
             # prefix exists for this char in the pattern
             prefix = charMap[char]
-            if not words.startwith(prefix):
+            if not words[:len(prefix)] == prefix:
                 # not start with the prefix
                 return False
             # 每次挪动pattern都是一位
@@ -100,6 +100,8 @@ def word_pattern_no_delimiter(pattern, words):
                     return True
                 charMap.pop(char)
                 prefixMap.pop(prefix)
-
         return False
     return is_matched(pattern, words, {}, {})
+
+
+word_pattern_no_delimiter("aba", "rexre")
