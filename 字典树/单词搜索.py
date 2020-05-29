@@ -14,20 +14,20 @@ def word_search(board, word):
     可能的edge case：如果word的长度W > M*N，那就不需要找了
     Follow up: 如果8个方向呢？即对角线也成立？改变for循环的条件，
     """
-    def dfs(b, x, y, word, start):
-        # 判断坐标(x, y)是否等于word在start位置的letter，如果是，继续下一层搜索
-        if start >= len(word):
+    def dfs(b, x, y, word, word_index):
+        # 判断坐标(x, y)是否等于word在word_index位置的letter，如果是，继续下一层搜索
+        if word_index >= len(word):
             # 如果到头了，说明找到了一个匹配的走法，返回True
             # 如果需要记录path，多两个变量，分别为current and global_list，此时把curr加到global里面
             return True
         found = False
         if 0 <= x < len(b) and 0 <= y < len(b[0]):
-            if b[x][y] == word[start]:
-                copy, b[x][y], start = b[x][y], "#", start + 1
+            if b[x][y] == word[word_index]:
+                copy, b[x][y], word_index = b[x][y], "#", word_index + 1
                 for i, j in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
                     if found:
                         break
-                    found = dfs(b, i, j, word, start)
+                    found = dfs(b, i, j, word, word_index)
                 b[x][y] = copy  # reset back to original
         return found
 

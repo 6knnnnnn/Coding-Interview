@@ -22,7 +22,7 @@ def course_schedule(n, prerequisites):
                         3）之前已经在访问另一个source的时候，访问过了这个节点，用1表示，此时不再用考虑这个节点了
     时间空间复杂度均为 O(V+E)
     """
-    def dfs(graph, visited, course_id):
+    def dfsNoCycle(graph, visited, course_id):
         if visited[course_id] == -1:
             return False
         if visited[course_id] == 1:
@@ -30,7 +30,7 @@ def course_schedule(n, prerequisites):
         visited[course_id] = -1 # 即当前course正在被访问中
         adj_list = graph[course_id]
         for adj_course_id in adj_list:
-            if not dfs(graph, visited, int(adj_course_id)):
+            if not dfsNoCycle(graph, visited, int(adj_course_id)):
                 return False
         visited[course_id] = 1 # 即当前course已经被访问过了
         return True
@@ -44,7 +44,7 @@ def course_schedule(n, prerequisites):
         # c2 is a preq of c1
         graph[c1].append(c2)
     for course_id in xrange(n):
-        if not dfs(graph, visited, course_id):
+        if not dfsNoCycle(graph, visited, course_id):
             return False
     return True
 
@@ -106,7 +106,7 @@ def alien_dictionary_dfs(words):
     给定一组单词，已经按照外星人的规则排序好的，求出这个外星人词典的字母顺序
     比如["wrt","wrf","er","ett","rftt"] => 那么字母顺序就是 "wertf"
     可能会有多个结果，即有几个字母的顺序无法决定（同一层），那么返回其中一个可能结果即可。如果有环，则返回 empty string
-    1. 根据输入的word，创建graph；
+    1. 根据输入的word，创建graph
     2. DFS or BFS，找到topological顺序
     这道题目只存在一个联通分量，也就是整个图，因为给的input是word list，每个char都是存在于graph里面的
     而且这道题目是single source，也就是第一个word的第一个letter

@@ -46,6 +46,62 @@ def sliding_window_max(nums, k):
     return result
 
 
+def sliding_window_max_dp(nums, k):
+    n = len(nums)
+    if n * k == 0: return []
+    if k == 1: return nums
+    left, right = [0] * n, [0] * n
+    left[0], right[-1] = nums[0], nums[-1]
+    for i in xrange(1, n):
+        # from left to right
+        if i % k == 0: left[i] = nums[i] # new block
+        else: left[i] = max(left[i-1], nums[i])
+        # from right to left
+        j = n - i - 1
+        if (j + 1) % k == 0: right[j] = nums[j] # block ends
+        else: right[j] = max(right[j+1], nums[j])
+    print nums
+    print left
+    print right
+
+    output = []
+    for i in xrange(n-k+1):
+        output.append(max(left[i+k-1], right[i]))
+    return output
+
+
+print sliding_window_max_dp([1,3,-1,-3,5,3,6,7,8], 3)
+
+
+def sliding_window_min_dp(nums, k):
+    n = len(nums)
+    if n * k == 0: return []
+    if k == 1: return nums
+    left, right = [0] * n, [0] * n
+    left[0], right[-1] = nums[0], nums[-1]
+    for i in xrange(1, n):
+        # from left to right
+        if i % k == 0:
+            left[i] = nums[i] # new block
+        else:
+            left[i] = min(left[i-1], nums[i])
+        # from right to left
+        j = n - i - 1
+        if (j + 1) % k == 0: right[j] = nums[j] # block ends
+        else: right[j] = min(right[j+1], nums[j])
+
+    print nums
+    print left
+    print right
+    output = []
+    for i in xrange(n-k+1):
+        output.append(min(right[i+k-1], left[i]))
+    return output
+
+
+# print sliding_window_min_dp([1,3,-1,-3,5,3,6,7,8], 3)
+
+
 def sliding_window_median(nums, k):
     pass
 
