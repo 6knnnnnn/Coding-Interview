@@ -60,7 +60,7 @@ def course_schedule_order(n, prerequisites):
     graph = defaultdict(list)
     for c1, c2 in prerequisites:
         # c2 -> c1
-        graph[c2].add(c1)
+        graph[c2].append(c1)
     in_degree_map = defaultdict(int)
     # 更新每个course的入度，即根据c2->c1来更新c1的入度
     for course_id, adj_list in graph.items():
@@ -128,7 +128,7 @@ def alien_dictionary_dfs(words):
         # 当前node visiting结束，加入到visited，同时，把对应的node放入到order中去
         visiting.remove(node)
         visited.add(node)
-        order.add(node)
+        order.append(node)
 
     # build adj list graph，这里面key node = 字母，value 就是 adj list，这里的adj是direct adj
     graph = {node: [] for node in set(''.join(words))}
@@ -139,7 +139,7 @@ def alien_dictionary_dfs(words):
         for i in xrange(min(len(v), len(w))):
             if v[i] != w[i]:
                 # 这里就是把对应index的w加入到v的adj中去，代表v[i] -> w[i]，即v[i]在前
-                graph[v[i]].add(w[i])
+                graph[v[i]].append(w[i])
                 break
     # 用topological sort返回最后的order
     order, visited, visiting = [], set([]), set([])
@@ -152,11 +152,13 @@ def alien_dictionary_dfs(words):
 
 
 def alien_dictionary_bfs(words):
-    # build graph by edges
-    graph = {node: [] for node in set(''.join(words))}
+    # build graph by edges, char -> list of adj char
+    graph = {node: set([]) for node in set(''.join(words))}
     for i, w1 in enumerate(words[:-1]):
         for j in xrange(i + 1, len(words)):
             w2 = words[j]
+            # 对每两个相邻的word，找到相同位置上第一个不相同的char
+            # 比如w1=wrf, w2=wrt 可知f->t，但仅限于此，因为不能知道f、t后边的char的关系了
             for k in xrange(min(len(w1), len(w2))):
                 c1, c2 = w1[k], w2[k]
                 if c1 != c2:

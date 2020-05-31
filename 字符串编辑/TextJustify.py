@@ -8,6 +8,7 @@ class LineNode(object):
         self.maxWidth = maxWidth
 
     def addWord(self, word):
+        # return T/F if the new word is added
         canAddWord = self.nonSpaceCount + len(self.words) + len(word) <= self.maxWidth
         if canAddWord:
             self.words.append(word)
@@ -32,7 +33,7 @@ def fullJustify(words, maxWidth):
     while i < len(words):
         lineNode = LineNode(words[i], maxWidth)
         j = i + 1
-        # add this word to line node if after that the total char len plus one space <= max
+        # add this word to line node if possible
         while j < len(words) and lineNode.addWord(words[j]):
             j += 1
         # finish one line, process it
@@ -51,7 +52,7 @@ def fullJustify(words, maxWidth):
                 k += 1
             # after assigning one extra space to words of this line, concatenate all those words
             lineRes = (" " * lineNode.getSpaceDiviedByGap()).join(lineNode.words)
-        # finish one line
+
         results.append(lineRes)
         i = j
     return results
