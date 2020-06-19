@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from utility.entity import TreeNode
 
 def flatten_binary_tree_to_linked_list(root):
     """
@@ -50,3 +50,23 @@ def flatten_binary_tree_to_doubly_linked_list(root):
     https://leetcode.com/problems/flatten-binary-tree-to-doubly-linked-list/description/
     """
 
+
+def binary_search_tree_from_preorder(preorder):
+    def recur(preorder, startIndex, endIndex):
+        if startIndex >= len(preorder) or endIndex >= len(preorder) or startIndex > endIndex:
+            return None
+
+        root = TreeNode(preorder[startIndex])
+        i = startIndex + 1
+        while i <= endIndex:
+            if preorder[i] > root.val:
+                break
+            i += 1
+        # end of comparsion, go to left/right recursively
+        root.left = recur(preorder, startIndex + 1, i - 1)
+        root.right = recur(preorder, i, endIndex)
+        return root
+
+    if not preorder:
+        return None
+    return recur(preorder, 0, len(preorder) - 1)
