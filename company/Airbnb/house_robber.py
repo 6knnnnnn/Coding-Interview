@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Provide a set of positive integers (an array of integers).
-Each integer represents number of nights user request on Airbnb.com.
+Each integer represents numbers of nights user request on Airbnb.com.
 If you are a host, you need to design and implement an algorithm to find out
-the maximum number of nights you can accommodate.
+the maximum numbers of nights you can accommodate.
 The constrain is that you have to reserve at least one day between each request,
 so that you have time to clean the room.
 

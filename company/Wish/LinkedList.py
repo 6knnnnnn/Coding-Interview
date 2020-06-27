@@ -1,3 +1,37 @@
+class Node(object):
+    def __init__(self, val, nextNode=None):
+        self.val = val
+        self.nextNode = nextNode
+
+    def __repr__(self):
+        return "{}->{}".format(self.val, self.nextNode)
+
+
+def removeNodeGTX(head, x):
+    if not head:
+        return head
+    if not head.nextNode:
+        return None if head.val > x else head
+    dummyHead = Node(0, head)
+    p1, p2 = dummyHead, head
+    while p2:
+        # check p2
+        while p2 and p2.val > x:
+            p2 = p2.nextNode
+        p1.nextNode = p2
+        p1 = p2
+        p2 = p2.nextNode if p2 else None
+
+    return dummyHead.nextNode
+
+def test1():
+    n = head = Node(0)
+    for i in [1, 2, 3, 5, 6, 7, 5, 4, 5]:
+        n.nextNode = Node(i)
+        n = n.nextNode
+    head = head.nextNode
+    print head
+    print removeNodeGTX(head, 4)
 
 
 def intersection_of_2_linked_list(headA, headB):

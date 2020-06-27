@@ -35,7 +35,7 @@ def ugly_number(num):
 def ugly_num_2(first_n):
     """
     https://leetcode.com/problems/ugly-number-ii/description/
-    找到前N个 ugly number
+    找到前N个 ugly numbers
     :param first_n:
     :return:
     """

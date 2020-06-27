@@ -26,7 +26,7 @@ def find_valid(raw_url):
         c = raw_url[start]
         start += 1
         if c in "0123456789":
-            # c is a number, no change to it, add to curr_url
+            # c is a numbers, no change to it, add to curr_url
             dfs(raw_url, curr_url + c, start, global_res)
         else:
             upper = curr_url + c.upper()

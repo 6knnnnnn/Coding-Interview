@@ -46,13 +46,13 @@ def contains_duplicates_within_k_t(nums, k, t):
     https://leetcode.com/problems/contains-duplicate-ii/description/
     找到两个索引i和j，判断是否满足nums[i]和nums[j]的距离<=t，以及i和j的距离<=k，即坐标差不能大于k，值差不能大于t（可能会有负数）
     解法1：两层循环 + 双指针，O(N^2)时间 O(1)空间
-    解法2：hash map，key仍旧是某一个number，但是这样子每次都要判断[number-t, number, number+t]是否存在，时间复杂度O(N*T)
+    解法2：hash map，key仍旧是某一个number，但是这样子每次都要判断[numbers-t, numbers, numbers+t]是否存在，时间复杂度O(N*T)
     解法3：维持一个大小为K的 TreeMap 窗口，每次新的元素进来，挪出去index最小的元素，加入最新的元素，同时判断新的数值是否能够找到
-    number - t 或者 number + t的存在，如果有就返回True。时间复杂度O(N * logK) 空间O(K)
+    numbers - t 或者 numbers + t的存在，如果有就返回True。时间复杂度O(N * logK) 空间O(K)
     解法4：bucket sort，每个slot的值域是[a, a+t]，每个slot对应的bucket只存放一个元素，即属于这个slot的数字的最近的index
     对于某个数X，首先求得其对应的slot，即第 X / t，比如t=4，X=1~4为一个slot，5~9为一个slot，10~14为一个slot
     所以对于属于同一个slot里面的任意两个元素 X and Y，他们的差值最大也只是t，即|X-Y|<=t
-    关键点就是要保证，bucket中总共的元素数量<=K，即如果key的数量超过K，需要删除掉expired number，也就是当前index往前数K个数字
+    关键点就是要保证，bucket中总共的元素数量<=K，即如果key的数量超过K，需要删除掉expired numbers，也就是当前index往前数K个数字
     如果X对应的slot里面有元素Y，而我们每次遍历元素又保证只记录最新的K个数字，此时这两个数X和Y的距离<=K，满足条件
     如果X对应的slot里面没有元素，然而相邻的上下的slot里面有满足要求的数组的数字，也满足条件。否则，把X放到bucket中。
     时间O(N)，空间O(K)因为只有最新的K个元素在bucket里面

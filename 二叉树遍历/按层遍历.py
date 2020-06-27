@@ -77,7 +77,7 @@ def binary_tree_vertical_order_traversal_bfs(root, sort=False):
       / \  / \
      4  0 1   7
     遍历结果：[ [4], [9], [3,0,1], [8], [7]]，要按照column number的顺序来打印结果
-    根据root的左右子树，找到一个相对的column number，用一个hash table记录所有column number一样的节点
+    根据root的左右子树，找到一个相对的column numbers，用一个hash table记录所有column number一样的节点
     如果题目不要求顺序输出，比如上边的[3,0,1]，如果是[1, 0, 3]输出没问题的话也可以用DFS
     但如果要求顺序，DFS比较难以实现，BFS可以用stack，每个元素包括node.val column index
     以及用一个hash table记录 column index -> list of target value

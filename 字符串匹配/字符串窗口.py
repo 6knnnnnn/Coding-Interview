@@ -74,7 +74,7 @@ def group_anagrams_sort(str_list):
 
 
 def group_anagrams_prime(str_list):
-    # 26个字母，每一个安排一个prime number，不同字母组合的乘积，肯定不一样
+    # 26个字母，每一个安排一个prime numbers，不同字母组合的乘积，肯定不一样
     # 所以算出所有str的素数乘积，乘积相等的就是anagrams，时间O(M * N)
     # 可能的问题是，单词过长，导致乘积过大，overflow
     primes = [2, 3, 5, 7, 11 ,13, 17, 19, 23, 29, 31, 37, 41, 43, 47,

@@ -2,7 +2,7 @@
 
 from utility.entity import Interval
 
-# Given a collection of intervals, find the min number of intervals need to remove
+# Given a collection of intervals, find the min numbers of intervals need to remove
 # to make the rest of the intervals non-overlapping.
 # 其实就是经典的activity selection问题，按照end时间排序后，贪心算法
 # Find the activity compatible with the previous selected activity and with the earliest finishing time,

@@ -6,7 +6,7 @@
 
 def single_number_twice(nums):
     """
-    有一个数字只出现了一次，其他的都出现了两次，找到这个single number
+    有一个数字只出现了一次，其他的都出现了两次，找到这个single numbers
     https://leetcode.com/problems/single-number/description/
     对于任意两个相同的数字的每一个bit位，异或运算结果均为False
     对于任意两个不同的数字的每一个bit位，异或运算结果看情况，00或者11就是0，否则1

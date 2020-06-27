@@ -37,7 +37,7 @@ def course_schedule(n, prerequisites):
 
     # 这里 adj list代表对于某个课程，它是哪些课程的先修课
     # 因为在graph中，如果a是b的先修课，那么a->b，即a指向b，所以需要从a访问到b
-    graph = [[] for _ in xrange(n)]
+    graph = defaultdict(list)
     visited = [0 for _ in xrange(n)]
     # 首先，把edge list转换为adj list
     for c1, c2 in prerequisites:
@@ -198,7 +198,6 @@ a = [
 ]
 
 print alien_dictionary_dfs(a)
-print alien_dictionary_bfs(a)
 
 
 def sequence_reconstruction(org, seqs):

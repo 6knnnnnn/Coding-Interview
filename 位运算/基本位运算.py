@@ -6,7 +6,7 @@ def reverse_bits(n):
     https://leetcode.com/problems/reverse-bits/description/
     Reverse bits of a given 32 bits unsigned integer. 最简单的方式就是reverse bit string。
     对于一个number，向左移1位，变为number * 2，向右移1位，变为number / 2
-    number & 1，得到的是最后一位本身，即 whatever1 & 1=1，whatever0 & 1 = 0
+    numbers & 1，得到的是最后一位本身，即 whatever1 & 1=1，whatever0 & 1 = 0
     所以如果是reverse 32位的，先左移结果，再累加上n的每一位bit 1/0
     可能的follow up，如果是有符号的？记住负号；如果需要call 很多次？
     """

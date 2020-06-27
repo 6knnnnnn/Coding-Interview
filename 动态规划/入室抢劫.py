@@ -7,7 +7,7 @@ def house_robber_liner(houses):
     https://leetcode.com/problems/house-robber/description/
     一排房子，里面有不同的钱，入室抢劫拿到尽可能多的钱，限制条件是，不能连续进入两间房间，否则警报会响
     DP[X] 到当前house X为止最大的抢劫钱数，是一个一维数组，最小值0，从左向右遍历
-    初始化：DP[0]=money0, DP[1]=max(money0, money1)，状态转移：DP[X] = max( DP[X-2] + money[x], DP[X-1] )
+    初始化：DP[0]=money0, DP[1]=max(money0, money1)，状态转移：DP[X] = max(DP[X-2] + money[x], DP[X-1])
     可以压缩空间为两个变量，分别记录DP[X-2] DP[X-1]
     Test case: [0], [0,0,0], [1,2], [1,2,1], [2,5,4], [2,3,0], [1,2,3,4,5,6,7]
     """

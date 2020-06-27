@@ -83,7 +83,7 @@ def decode_string(s):
     num = ""
     for c in s:
         if c.isdigit():
-            # number 可能之后还有number，需要先加到num中去，继续找下一个
+            # numbers 可能之后还有number，需要先加到num中去，继续找下一个
             num += c
         elif c == '[':
             # 那么此时num到头了

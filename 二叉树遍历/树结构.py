@@ -139,3 +139,93 @@ def lowest_common_ancestor_of_a_binary_search_tree(root, p, q):
             if v1 < v0 and v2 < v0:
                 return dfs(root_node.left, n1, n2)
         return None
+
+
+def uni_value_tree(root):
+    # https://leetcode.com/problems/univalued-binary-tree/
+    if not root:
+        return True
+    queue = deque([root])
+    value = root.val
+    while queue:
+        node = queue.popleft()
+        if node.val != value:
+            return False
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+    return True
+
+
+class TreeNode(object):
+    def __init__(self, label, val, left=None, right=None):
+        self.val = val
+        self.label = label
+        self.left = left
+        self.right = right
+
+    def __str__(self):
+        return "{}=({})".format(self.label, self.val)
+
+
+def find_all_uni_val_subtree(root):
+    def recur(node, results):
+        if node.left is None and node.right is None:
+            return True
+        leftSubtree = node.left is not None and recur(node.left, results)
+        rightSubtree = node.right is not None and recur(node.right, results)
+        if leftSubtree and rightSubtree:
+            if node.val == node.left.val and node.val == node.right.val:
+                return True
+            results.append(node.left)
+            results.append(node.right)
+            return False
+        if node.left and leftSubtree:
+            results.append(node.left)
+        if node.right and rightSubtree:
+            results.append(node.right)
+
+        return False
+
+    results = list([])
+    if recur(root, results):
+        results.append(root)
+    for res in results:
+        print res
+    print len(results)
+
+
+def test1():
+    root = TreeNode("root", 2)
+    n1 = TreeNode("n1", 3)
+    n2 = TreeNode("n2", 4)
+    n3 = TreeNode("n3", 3)
+    n4 = TreeNode("n4", 3)
+    root.left = n1
+    root.right = n2
+    n1.left = n3
+    n1.right = n4
+
+    find_all_uni_val_subtree(root)
+
+
+def is_cousin_in_binary_tree(root, x, y):
+    # https://leetcode.com/problems/cousins-in-binary-tree/
+    queue = deque([(root, None, 0)])
+    xinfo = yinfo = None
+    # BFS to check parent + level info
+    while queue:
+        node, parent, level = queue.popleft()
+        if node.val == x:
+            xinfo = [parent, level]
+        if node.val == y:
+            yinfo = [parent, level]
+        if xinfo and yinfo: # find both x and y
+            return xinfo[0] != yinfo[0] and xinfo[1] == yinfo[1]
+        if node.left:
+            queue.append((node.left, node, level + 1))
+        if node.right:
+            queue.append((node.right, node, level + 1))
+    # cannot find x and/or y
+    return False

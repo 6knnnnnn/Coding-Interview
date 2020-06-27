@@ -6,7 +6,7 @@
 
 
 def ipToVal(ip):
-    # 256-based number to 10-based, e.g. 255.0.0.7 -> 4278190087
+    # 256-based numbers to 10-based, e.g. 255.0.0.7 -> 4278190087
     ip = ip.split(".")
     val = 0
     for x in ip:

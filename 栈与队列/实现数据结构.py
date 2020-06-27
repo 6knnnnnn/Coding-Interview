@@ -35,3 +35,25 @@ class MinStack(object):
         if self.min_so_far:
             return self.min_so_far[-1]
 
+
+class MinStackOneDS(object):
+    def __init__(self):
+        self.data = list([])
+
+    def push(self, x):
+        # record[0] = actual value, record[1] = min so far
+        min_so_far = min(x, self.data[-1][1]) if self.data else x
+        self.data.append((x, min_so_far))
+
+    def pop(self):
+        if self.data:
+            result = self.data.pop()
+            return result[0]
+
+    def top(self):
+        if self.data:
+            return self.data[-1][0]
+
+    def get_min(self):
+        if self.data:
+            return self.data[-1][1]

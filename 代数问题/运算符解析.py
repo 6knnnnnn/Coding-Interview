@@ -32,8 +32,8 @@ def evaluate_reverse_polish_notation(tokens):
             stack.append(int(t))
     return stack.pop()
 
-number = "0123456789"
-operator = "+-*/"
+numbers = "0123456789"
+operators = "+-*/"
 
 
 def basic_calculator(s):
@@ -42,6 +42,48 @@ def basic_calculator(s):
     其实和下边的一个道理，只不过这里面只有加减法，以及可能会有括号
     "(1+(4+5+2)-3)+(6+8)" = 23
     """
+    # pre-process input s
+    i, j = 0, len(s)-1
+    while i < j and s[i] != '(':
+        i += 1
+    while i < j and s[j] != ')':
+        j -= 1
+    if i < j and s[i] == '(' and s[j] == ')':
+        # find a parenthesis pair
+        nestedRes = basic_calculator(s[i+1:j])
+        newExpression = "{}{}{}".format(s[:i], nestedRes, s[j+1:])
+        return basic_calculator(newExpression)
+    else:
+        # no parenthesis
+        numStack, operStack, i = [], [], 0
+        while i < len(s):
+            c = s[i]
+            if c in operators:
+                operStack.append(c)
+                i += 1
+            elif c in numbers:
+                j = i
+                while j < len(s) and s[j] in numbers:
+                    j += 1
+                num = int(s[i:j])
+                numStack.append(num)
+                i = j
+    # now calculate values from two stacks
+    while operStack and numStack:
+        operator = operStack.pop()
+        n1 = numStack.pop()
+        n2 = numStack.pop() if numStack else 0
+        if operator == '-':
+            numStack.append(n2 - n1)
+        elif operator == "+":
+            numStack.append(n2 + n1)
+    return numStack[-1]
+
+
+print basic_calculator("(1+2)")
+print basic_calculator("(1+2)+3")
+print basic_calculator("(1+2)+(4-5)")
+print basic_calculator("1+2-4")
 
 
 def basic_calculator_ii(s):
@@ -57,9 +99,9 @@ def basic_calculator_ii(s):
         注意正负号的处理，特别是python的负数除法
     """
     def find_number(s, start):
-        # return the number that beginning from start index
+        # return the numbers that beginning from start index
         end = start + 1
-        while end < len(s) and s[end] in number:
+        while end < len(s) and s[end] in numbers:
             end += 1
         num = int(s[start: end])
         # return end as the new starting index
@@ -69,10 +111,10 @@ def basic_calculator_ii(s):
     stack, i = list([1]), 0
     # i用来指向运算符，j用来找数字digit
     while i < len(s):
-        if s[i] in number:
+        if s[i] in numbers:
             num, i = find_number(s, i)
             stack[-1] *= num
-        elif s[i] in operator:
+        elif s[i] in operators:
             if s[i] in "+-":
                 # 此时加入后边元素的符号，因为我们一直都在做"加法"
                 stack.append(-1 if s[i] == "-" else 1)
@@ -96,7 +138,7 @@ def basic_calculator_ii(s):
                 stack.append(a)
     return sum(stack)
 
-samples = [ "14-3/2", "1 + 1", "1 + 2 * 3", "3+2*2", "3/2", "3 + 5 / 2", "123", "1 + 1"]
 
-for t in samples:
-    print basic_calculator_ii(t)
+def test1():
+    samples = [ "14-3/2", "1 + 1", "1 + 2 * 3", "3+2*2", "3/2", "3 + 5 / 2", "123", "1 + 1"]
+    for t in samples: print basic_calculator_ii(t)

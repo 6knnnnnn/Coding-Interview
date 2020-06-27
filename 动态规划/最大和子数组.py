@@ -66,7 +66,7 @@ def maximum_sum_sub_array_kadane_index(nums):
             # 更新max_final start_final end_final，即此时找到了新的分区
             max_final = max_temp
             start_final = start_temp
-            end_final = i # update end, so won't be -1 if there is any positive number
+            end_final = i # update end, so won't be -1 if there is any positive numbers
     if end_final == -1:
         # 初始化为-1，如果遍历完整个数组后仍旧为负数，表明所有数字都是负数，所以找到数组中最大的index
         start_final = 0

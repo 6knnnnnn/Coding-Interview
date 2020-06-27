@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
- * Given a directed graph, find the minimal number of vertices that can traverse all the vertices from them.
+ * Given a directed graph, find the minimal numbers of vertices that can traverse all the vertices from them.
  * For example
  * 2->3->1->2->0, 4->5
  * Then we need [1, 4] (or [2, 4], [3, 4]) to traverse all the vertices.
