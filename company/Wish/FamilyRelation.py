@@ -4,10 +4,10 @@
 #            ['Marge', 'wife',     'Homer'    ],
 #            ['Lisa',  'daughter', 'Homer'   ]    ]
 #
-#        i.e. inner lists have len == 3 and are in form name1, relationship, name2
+#        i.e. inner lists have len == 3 and are in form startName, relationship, endName
 #
 # Given a series of relationships as a list of lists, and given two names, return
-# all known "sequences" of relationships from name1 to name2
+# all known "sequences" of relationships from startName to endName
 #
 # e.g. with the lists above as input, with input names 'Bart' and 'Homer', you should return:
 #    ['Bart son Homer', 'Bart brother Lisa daughter Homer']
@@ -24,30 +24,56 @@ class FamilyGraph(object):
             name1, relation, name2 = input
             self.graph[name1][name2] = relation
 
-    def findRelation(self, name1, name2):
-        # return all possible relations between name1 and name2
-        if name1 == name2:
+    def dfs(self, name, endName):
+        if name == endName:
+            self.result.append(' '.join(self.relation_path))
+            return
+
+        if name in self.graph:
+            self.visited.add(name)
+            for adjName, relation in self.graph[name].items():
+                if adjName not in self.visited:
+                    newRP = "{} {}".format(relation, adjName)
+                    self.relation_path.append(newRP)
+                    self.dfs(adjName, endName)
+                    self.relation_path.pop()
+            self.visited.remove(name)
+
+    def dfsCache(self, name, endName, cache):
+        if name == endName:
+            self.result.append(' '.join(self.relation_path))
+            return
+
+        if name in self.graph:
+            self.visited.add(name)
+            for adjName, relation in self.graph[name].items():
+                if adjName not in self.visited:
+                    if adjName in cache and endName in cache[adjName]:
+                    # cache stores all the paths from name to endName
+                        cachedPaths = cache[adjName][endName]
+                    else:
+                        newRP = "{} {}".format(relation, adjName)
+                        self.relation_path.append(newRP)
+                        self.dfs(adjName, endName)
+                        cachedPaths[adjName][endName] = []
+                        self.relation_path.pop()
+            self.visited.remove(name)
+
+
+    def findRelation(self, startName, endName):
+        if startName == endName or startName not in self.graph:
             return []
-        result = []
-        # name + relation path so far
-        queue = deque([(name1, [name1])])
-        while queue:
-            name, relation_path = queue.popleft()
-            if name == name2:
-                # find one relation path from name1 to name2
-                result.append(" ".join(relation_path))
-            else:
-                relatives = self.graph[name]
-                for rName, relation in relatives.items():
-                    new_relation_path = list(relation_path)
-                    new_relation_path.append(relation)
-                    new_relation_path.append(rName)
-                    queue.append((rName, new_relation_path))
-
-        return result
+        self.visited = set([])
+        self.relation_path = list([])
+        self.result = []
+        self.relation_path = []
+        self.dfs(startName, endName)
+        for i in xrange(len(self.result)):
+            self.result[i] = "{} {}".format(startName, self.result[i])
+        return self.result
 
 
-def nocycle_test():
+def test1():
     inputs = [ ['Bart',  'brother',   'Lisa'    ],
                ['Bart',  'son',      'Homer'    ],
                ['Marge', 'wife',     'Homer'    ],
@@ -56,25 +82,18 @@ def nocycle_test():
     family = FamilyGraph(inputs)
     print family.findRelation("Bart", "Lisa")
     print family.findRelation("Bart", "Homer")
-
-
-def cyclic_test():
     inputs = [
-        ["A", "friend", "B"],
-        ["B", "brother", "C"],
-        ["C", "brother", "A"],
-        ["A", "son", "D"],
-        ["D", "father", "B"]
-        # ["B", "brother", "A"],
+        ["A", "ab", "B"],
+        ["B", "bc", "C"],
+        ["C", "ca", "A"],
+        ["A", "ad", "D"],
+        ["D", "db", "B"]
     ]
     family = FamilyGraph(inputs)
     members = ["A", "B", "C", "D"]
     for i in members:
         for j in members:
             print i, j, ": ", family.findRelation(i, j)
-
-cyclic_test()
-
 
 
 class FamilyGraphDuplicates(object):
@@ -88,39 +107,51 @@ class FamilyGraphDuplicates(object):
                 self.graph[name1][name2] = list([])
             self.graph[name1][name2].append(relation)
 
-    def findRelation(self, name1, name2):
-        # return all possible relations between name1 and name2
-        result = []
-        # name + relation path so far
-        queue = deque([(name1, [name1])])
-        while queue:
-            name, relation_path = queue.popleft()
-            if name == name2:
-                # find one relation path from name1 to name2
-                result.append(" ".join(relation_path))
-            else:
-                relatives = self.graph[name]
-                for rName, relations in relatives.items():
-                    for relation in relations:
-                        new_relation_path = list(relation_path)
-                        new_relation_path.append(relation)
-                        new_relation_path.append(rName)
-                        queue.append((rName, new_relation_path))
+    def dfs(self, name, endName):
+        if name == endName:
+            self.result.append(' '.join(self.relation_path))
+            return
 
-        return result
+        if name in self.graph:
+            self.visited.add(name)
+            for adjName, relation_list in self.graph[name].items():
+                if adjName not in self.visited:
+                    for relation in relation_list:
+                        newRP = "{} {}".format(relation, adjName)
+                        self.relation_path.append(newRP)
+                        self.dfs(adjName, endName)
+                        self.relation_path.pop()
+            self.visited.remove(name)
+
+    def findRelation(self, startName, endName):
+        if startName == endName or startName not in self.graph:
+            return []
+        self.visited = set([])
+        self.relation_path = list([])
+        self.result = []
+        self.relation_path = []
+        self.dfs(startName, endName)
+        for i in xrange(len(self.result)):
+            self.result[i] = "{} {}".format(startName, self.result[i])
+        return self.result
 
 
-def nocycle_dup_test():
-    inputs = [ ['Bart',  'brother',   'Lisa'    ],
-               ['Bart',  'son',      'Homer'    ],
-               ['Marge', 'wife',     'Homer'    ],
-               ['Lisa',  'daughter', 'Homer'   ],
-               ['Bart', 'friend', 'Homer']
-               ]
-
+def test2():
+    inputs = [
+        ["A", "ab1", "B"],
+        ["A", "ab2", "B"],
+        ["A", "ab3", "B"],
+        ["B", "bc", "C"],
+        ["C", "ca", "A"],
+        ["A", "ad1", "D"],
+        ["A", "ad2", "D"],
+        ["D", "db", "B"]
+    ]
     family = FamilyGraphDuplicates(inputs)
-    print family.findRelation("Bart", "Lisa")
-    print family.findRelation("Bart", "Homer")
+    members = ["A", "B", "C", "D"]
+    for i in members:
+        for j in members:
+            print i, j, ": ", family.findRelation(i, j)
 
 
-nocycle_dup_test()
+test2()

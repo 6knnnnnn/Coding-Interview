@@ -70,9 +70,11 @@ def paint_house_k_colors(hc_costs):
     """
     if not hc_costs or not hc_costs[0]:
         return 0
+    # 最开始的时候，两个min都是0 - dp[0] 初始化条件
     min1 = min2 = 0
     prev_house_color_idx = -1
-    # costs = N*K 矩阵，那么len(costs)=N, len(costs[i]) = K
+    # costs = N*K 矩阵
+    # DP[i] -> 当前house i，成本最小的color index + cost (min1)，成本第二小的 cost (min2)
     for house_color_cost in hc_costs:
         curr_min1 = curr_min2 = sys.maxint
         curr_house_color_idx = -1
@@ -80,7 +82,7 @@ def paint_house_k_colors(hc_costs):
             # 如果当前color index和上一次的house color index相同，需要选择min2
             color_cost += min2 if color_idx == prev_house_color_idx else min1
             if color_cost < curr_min1:
-                # color_cost < curr_min1 < curr_min2, swap 1, 2 with new, 1
+                # curr_house_color_cost < curr_min1 < curr_min2, swap 1, 2 with new, 1
                 curr_min2, curr_min1 = curr_min1, color_cost
                 curr_house_color_idx = color_idx
             elif color_cost < curr_min2:

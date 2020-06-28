@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class LRUListNode(object):
+class Node(object):
     # 基本数据结构需要定义一个doubly linked list node，里面的key用来查找cache
     def __init__(self, key, value):
         self.key = key
@@ -23,7 +23,7 @@ class LRUCache(object):
         self.cap = capacity
         self.d = {}
         # head 和 tail 只是placeholder，并没有实际作用，"假头"
-        self.head, self.tail = LRUListNode(1, 1), LRUListNode(-1, -1)
+        self.head, self.tail = Node(1, 1), Node(-1, -1)
         self.head.next = self.tail
         self.tail.prev = self.head
 
@@ -60,7 +60,7 @@ class LRUCache(object):
             self.update_most_recent(node)
         else:
             # node第一次进入cache中去
-            node = LRUListNode(key, value)
+            node = Node(key, value)
             self.d[key] = node
             if len(self.d) == self.cap+1:
                 # remove last node from tail.prev

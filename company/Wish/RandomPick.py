@@ -27,6 +27,7 @@ class RandomPickWeight(object):
             else:
                 l = mid + 1
 
+
 def test1():
     rpw = RandomPickWeight([3, 5, 3, 9])
     wc = defaultdict(int)
@@ -48,13 +49,14 @@ class KeyWeight(object):
 class RandomPickWeightKey(object):
     def __init__(self, inputs):
         # inputs = [KeyWeight(abc, 12)...]
-        self.roll_sum = [inputs[0]]
+        self.roll_sum = []
         self.keys = set([])
-        for i in xrange(1, len(inputs)):
-            accuKW = self.roll_sum[i-1]
+        for i in xrange(0, len(inputs)):
+            accuKW = self.roll_sum[i-1] if i >= 1 else KeyWeight('', 0)
             oldKW = inputs[i]
             newKw = KeyWeight(oldKW.key, oldKW.weight + accuKW.weight)
             self.roll_sum.append(newKw)
+            self.keys.add(oldKW.key)
 
     def pickIndex(self):
         target = random.randint(1, self.roll_sum[-1].weight)
@@ -81,20 +83,38 @@ class RandomPickWeightKey(object):
     def setKey(self, key, weight):
         if key not in self.keys:
             # insert new one
-            kw = KeyWeight(key, weight)
+            self.keys.add(key)
+            kw = KeyWeight(key, weight + self.roll_sum[-1].weight if self.roll_sum else 0)
+            self.roll_sum.append(kw)
+        else:
+            # find the key and update the roll sum
+            i = 0
+            while self.roll_sum[i].key != key:
+                i += 1
+            diff = self.roll_sum[i].weight - weight if i == 0 else\
+                self.roll_sum[i].weight - self.roll_sum[i-1].weight - weight
+            while i < len(self.roll_sum):
+                self.roll_sum[i].weight -= diff
+                i += 1
 
 
 def test2():
-    rpw = RandomPickWeightKey([KeyWeight("k0", 3),
-                               KeyWeight("k1", 5),
-                               KeyWeight("k2", 3),
-                               KeyWeight("k3", 9)])
-    wc = defaultdict(int)
-    for i in xrange(1000):
-        r = rpw.pickIndexKey()
-        wc[r] += 1
-    print wc
+    def printWC(rpw):
+        wc = defaultdict(int)
+        for i in xrange(1000):
+            r = rpw.pickIndexKey()
+            wc[r] += 1
+        print wc
 
+    rpw = RandomPickWeightKey([KeyWeight("k0", 3),
+                               KeyWeight("k1", 3),
+                               KeyWeight("k2", 5),
+                               KeyWeight("k3", 9)])
+    printWC(rpw)
+    rpw.setKey("k0", 23)
+    printWC(rpw)
+    rpw.setKey("k4", 40)
+    printWC(rpw)
 
 
 test2()
