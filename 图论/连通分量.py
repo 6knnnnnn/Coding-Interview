@@ -8,7 +8,7 @@ from collections import deque, defaultdict
 
 def number_of_islands(matrix):
     # https://leetcode.com/problems/number-of-islands/description/
-    # 用一个DFS方法，因为只是01 cell，把所有遍历过的1变成别的flag比如2
+    # 用一个DFS方法，因为只是01 moveToCell，把所有遍历过的1变成别的flag比如2
     # 这样之后还可以把输入matrix还原。如果是变成0，无法还原
     def sink(lands, i, j):
         if 0 <= i < len(lands) and 0 <= j < len(lands[0]) and lands[i][j] == '1':

@@ -13,9 +13,10 @@ https://leetcode.com/problems/maximum-subarray/description
 def maximum_sum_sub_array_dp(nums):
     # nums: [-2,1,-3,4,-1,2,1,-5,4]
     # DP:   [-2,1,-2,4, 3,5,6, 1,5]
-    # dp[i]就是以i为结尾的子数组最大和，和子问题dp[i-1]依赖关系为
-    # 若dp[i-1]>0，则dp[i]需要加上dp[i-1]，即之前子数组的解对当前问题的解有帮助（增加了sum）
-    # 否则，dp[i]就是对应的nums[i]的值，不需要加dp[i-1]因为只会帮倒忙
+    # dp[i]就是以i为结尾的子数组最大和，但最后结果不一定是最后一个n-1结尾，是藏在dp里面的某个值
+    # 和子问题dp[i-1]依赖关系为：
+    #   若dp[i-1]>0，则dp[i]需要加上dp[i-1]，即之前子数组的解对当前问题的解有帮助（增加了sum）
+    #   否则，dp[i]就是对应的nums[i]的值，不需要加dp[i-1]因为只会帮倒忙
     # dp中存的只是以i结尾的子数组最大和，最后的结果是dp中最大的值
     dp = [0] * len(nums)
     dp[0] = nums[0] # 初始值为nums[0]
@@ -25,6 +26,7 @@ def maximum_sum_sub_array_dp(nums):
             dp[i] = nums[i] + dp[i - 1]
     # 若nums只有一个，就是nums[0]
     # 若nums均为负数，那么就是其中最大的
+    # 如果是找到最后的index range，其实就是，dp里面max val的j，和之前的第一个负数的i：[i+1, j]
     return max(dp)
 
 
@@ -37,16 +39,16 @@ def maximum_sum_sub_array_kadane(nums):
     否则，max_temp=0，此时这个分区结束了，需要寻找下一个分区。
     max_final用来记录目前为止所有，累加和为正的连续子数组分区的和的最大值，即最后结果
     nums:      [-2,1,-3,4,-1,2,1,-5,4]
-    max_temp  0, 0 1  0 4  3 5 6  1 5
-    max_final 0, 0 1  1 4  4 5 6  6 6
+    max_local  0, 0 1  0 4  3 5 6  1 5
+    max_global 0, 0 1  1 4  4 5 6  6 6
     """
-    max_temp = max_final = 0
+    max_local = max_global = 0
     for n in nums:
-        max_temp += n
-        if max_temp < 0:
-            max_temp = 0
-        max_final = max(max_final, max_temp)
-    return max_final
+        max_local += n
+        if max_local < 0:
+            max_local = 0
+        max_global = max(max_global, max_local)
+    return max_global
 
 
 def maximum_sum_sub_array_kadane_index(nums):

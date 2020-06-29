@@ -28,6 +28,7 @@ def longest_consecutive_sequence(nums):
 
 def longest_mountain_in_array(nums):
     # https://leetcode.com/problems/longest-mountain-in-array/
+    # 左边一直在increasing 右边一直在decreasing
     def findIncreasingRange(nums, i):
         while i < len(nums) - 1 and nums[i] < nums[i + 1]: i += 1
         return i
@@ -42,7 +43,8 @@ def longest_mountain_in_array(nums):
         i = 0
         while i < len(nums):
             j = findIncreasingRange(nums, i)
-            if j == len(nums) - 1: break
+            if j < len(nums) - 1:
+                break
             k = findDecreasingRange(nums, j)
             if i < j < k:
                 # mountains.append(nums[i:k + 1])
@@ -63,7 +65,7 @@ def test1():
         print longest_mountain_in_array(nums)
 
 
-def shorestSubarray(nums, k):
+def shortestSubarray(nums, k):
     i = total = 0
     while i < len(nums) and total < k:
         total += nums[i]
@@ -87,5 +89,6 @@ def shorestSubarray(nums, k):
             inNum = nums[i]
             outNum = queue[0]
             if inNum <= 0:
+                pass
 
     return shortestSize

@@ -15,7 +15,7 @@ def minimum_path(grid):
         for col in xrange(len(grid[row])):
             if row == 0 and col == 0 or (row != 0 and col != 0):
                 dp[row][col] = PathSum(grid[row][col], row, col)
-            # 初始化第一列和第一行 非 0，0 cell
+            # 初始化第一列和第一行 非 0，0 moveToCell
             elif row == 0:
                 dp[row][col] = PathSum(grid[row][col] + grid[row][col-1], 0, col-1)
             elif col == 0:
