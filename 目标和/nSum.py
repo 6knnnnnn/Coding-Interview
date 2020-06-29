@@ -46,6 +46,7 @@ def two_sum_sorted(nums, target):
                 mid = (l + r) >> 2
                 if numbers[mid] == diff:
                     # 如果是所有的pair，此时应该加到结果中，并break
+                    # results.append([i+1, mid+1])
                     return [i + 1, mid + 1]
                 elif numbers[mid] < diff:
                     l = mid + 1
@@ -70,8 +71,8 @@ class TwoSum(object):
     def find(self, val):
         for num, count in self.num_count_map.items():
             diff = val - num
-            if diff in self.num_count_map and (num != diff or (num == diff and count > 1)):
-                # 如果diff在map中，而且k和diff非重复，或者他们想等但是count > 1，返回True
+            if diff in self.num_count_map and (num != diff or count > 1):
+                # 如果diff在map中，而且k和diff非重复，或者count > 1，返回True
                 return True
         return False
 
@@ -155,9 +156,34 @@ def three_sum_smaller(nums, target):
 
 def four_sum_recur(nums, target):
     # 把所有N sum的题目都变成2 sum的变体，时间复杂度为O(M^(N-1)) M为输入元素的个数
+    def nSumRecur(nums, start, N, results, prev_index):
+        if N == 2:
+            l, r = start, len(nums)-1
+            while l < r:
+                s = nums[l] + nums[r]
+                if s == target:
+                    results.append(prev_index + [l, r])
+                    l += 1
+                    while l < r and nums[l] == nums[l-1]:
+                        l += 1
+                elif s < target:
+                    l += 1
+                else:
+                    r -= 1
+        else:
+            i = start
+            # remove duplcates
+            while i < len(nums)-1:
+                if nums[i] == nums[i+1]:
+                    i += 1
+            if len(nums) - i + 1 >= N:
+                # if there are enough numbers after ignoring duplicates
+                prev_index.append(i)
+                nSumRecur(nums, i, N-1, results, prev_index)
+                prev_index.pop()
+
     def find_N_sum(nums, target, N, temp, results):
         # temp 是一个临时list，每次都要从之前的新建，results是最终结果
-        if len(nums) >= N >= 2 and nums[0]*N <= target<=nums[-1]*N:
             if N == 2: # two pointers solve sorted 2-sum problem
                 l,r = 0,len(nums)-1
                 while l < r:
@@ -173,11 +199,13 @@ def four_sum_recur(nums, target):
                         r -= 1
             else: # recursively reduce N
                 for i in range(len(nums)-N+1):
-                    if i == 0 or (i > 0 and nums[i-1] != nums[i]):
+                    if i == 0 or nums[i-1] != nums[i]:
                         find_N_sum(nums[i+1:], target-nums[i], N-1, temp+[nums[i]], results)
 
     results = []
-    find_N_sum(sorted(nums), target, 4, [], results)
+    N = 4
+    if len(nums) >= N and nums[0] * N <= target <= nums[-1] * N:
+        find_N_sum(sorted(nums), target, 4, [], results)
     return results
 
 

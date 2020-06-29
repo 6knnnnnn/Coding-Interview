@@ -99,3 +99,49 @@ class Solution(object):
             return True
         # 否则，删除left，匹配剩下的s[left+1:right]，或者删除right，匹配剩下的s[left:right-1]
         return is_palindrome(s, left+1, right) or is_palindrome(s, left, right-1)
+
+
+def squares_of_sorted_array(nums):
+    # https://leetcode.com/problems/squares-of-a-sorted-array/
+    # 两个指针，找到negative v.s. non negative，左边从右往左遍历，右边从左往右
+    res = []
+    p2 = 0
+    while p2 < len(nums) and nums[p2] < 0:
+        p2 += 1
+    # now [p1..p2] all negative, [p2:] all non neg
+    p3, p1 = p2, p2 - 1
+    p1 = p2 - 1
+    while p1 >= 0 or p3 < len(nums):
+        if p1 >= 0 and p3 < len(nums):
+            s1, s3 = nums[p1] * nums[p1], nums[p3] * nums[p3]
+            if s1 < s3:
+                res.append(s1)
+                p1 -= 1
+            else:
+                res.append(s3)
+                p3 += 1
+        elif p1 >= 0:
+            res.append(nums[p1] * nums[p1])
+            p1 -= 1
+        else:
+            res.append(nums[p3] * nums[p3])
+            p3 += 1
+    return res
+
+
+def testSquare():
+    nums = [
+        [1, 2, 3, 4, 5],
+        [-4, -2, 0, 3, 5],
+        [-4, -3, -2, -1, 0],
+    ]
+    for num in nums:
+        print squares_of_sorted_array(num)
+
+
+def moveZeros(nums):
+    # https://leetcode.com/problems/move-zeroes/
+    # 2 pointers: 0...i -> all non zero values, i+1...j -> all zero values
+    # j+1 not zero, swap it with i+1, then move j until a non zero value
+    pass
+

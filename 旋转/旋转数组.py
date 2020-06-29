@@ -50,6 +50,7 @@ def move_zeroes(nums):
             j += 1
             if j == len(nums):
                 return
+
         nums[i], nums[j] = nums[j], nums[i]
         i, j = i+1, j+1
     return nums

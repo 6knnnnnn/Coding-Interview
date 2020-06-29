@@ -34,7 +34,7 @@ def number_of_islands_2(m, n, positions):
             if 0<=x<m and 0<=y<n and matrix[x][y] == 1:
                 return False
         return True
-
+    # 初始化islands with all water
     matrix = [[0] * n for _ in xrange(m)]
     result = list([])
     curr = 0
