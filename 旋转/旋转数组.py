@@ -43,7 +43,11 @@ def move_zeroes(nums):
     """https://leetcode.com/problems/move-zeroes
     把所有的0挪到数组末尾，但不改变其它非0数字的顺序
     两个指针，i负责指向当前非0元素，j指向某一段连续0元素的最后一个0，之后swap
-    """
+    0...i all non-zero area
+    i+1...j all zero area
+    j+1 first non zero after j
+    j+2...n-1 unknown area
+    when j == len(nums): return i as the new size    """
     i = j = 0
     while i < len(nums) and j < len(nums):
         while nums[j] == 0:

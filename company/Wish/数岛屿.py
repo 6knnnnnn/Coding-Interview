@@ -40,22 +40,20 @@ def islandsArea(matrix):
 
 
 def islandsPerimeter(matrix):
-    def sideContribution(lands, i, j):
+    def sideContribution(matrix, i, j):
         # check the contribution this moveToCell can make, by number of '0' surrounded it
-        if lands[i][j] == '0':
+        if matrix[i][j] == '0':
             return 0
         contribution = 0
-        if (i == 0 or i == len(lands)-1) and (j == 0 or j == len(matrix[i])-1):
+        firstLastR, firstLastC = [0, len(matrix) - 1], [0, len(matrix[0]) - 1]
+        if i in firstLastR and j in firstLastC:
             # 四个角，top left, top right, bottom left, bottom right 每个都奉献2
-            return 2
-        elif i == 0 or i == len(lands)-1:
-            # the 1st or last row
-            contribution = 1
-        elif j == 0 or j == len(matrix[i])-1:
-            # the 1st or last column 只在一条edge上边
+            contribution = 2
+        elif i in firstLastR or j in firstLastC:
+            # the 1st or last row, or the 1st or last column 只在一条edge上边
             contribution = 1
         for k1, k2 in [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]:
-            if 0 <= k1 < len(lands) and 0 <= k2 < len(lands[i]) and lands[k1][k2] == '0':
+            if 0 <= k1 < len(matrix) and 0 <= k2 < len(matrix[i]) and matrix[k1][k2] == '0':
                 contribution += 1
         return contribution
 

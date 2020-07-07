@@ -92,9 +92,6 @@ class GameLogic(object):
             matrix[cell.x][cell.y] = cell.val
         return matrix
 
-    def __str__(self):
-        return self.__repr__()
-
 
 moveList = [[1, 1], [0, 1]]
 game = GameLogic(4, 4)
@@ -114,4 +111,4 @@ while not game.isBoardFull() or not game.has2048() and moveIndex < len(moveList)
     print "move {} to {}".format(starter, moveToCell)
     game.mergeCell(starter, moveToCell)
     print "new board:"
-    print game, "\n--------"
+    print game.__repr__(), "\n--------"

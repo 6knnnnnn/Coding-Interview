@@ -130,7 +130,7 @@ def text_justification(words, max_width):
     """
     https://leetcode.com/problems/text-justification/description/
     给定一组word，将所有的word按行打印，每一行满足Justification，也就是"居中对齐"
-    words: ["This", "is", "an", "example", "of", "text", "justification."], max width=16，结果：
+    sentences: ["This", "is", "an", "example", "of", "text", "justification."], max width=16，结果：
         "This    is    an",
         "example  of text",
         "justification.  "

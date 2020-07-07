@@ -45,4 +45,5 @@ def word_break(s, word_dict):
 def word_break_all_possible_path(s, word_dict):
     """
     判断是否能够组成s的同时，找到所有可能的组合
+    https://leetcode.com/problems/word-break-ii/discuss/718628/Using-Word-Break-I-solution-as-a-check-to-prune-the-solution-to-Word-Break-II
     """

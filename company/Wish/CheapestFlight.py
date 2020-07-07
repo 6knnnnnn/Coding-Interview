@@ -47,6 +47,14 @@ class Solution(object):
 
     def findCheapestPriceDP(self, n, flights, src, dst, K):
         """
+            A -> B -> C
+              \______/
+            k stop in between -> src .. k stops.. dst -> total = k + 2 cities
+            A -> C: A->C or a->B->C or any other path from A->c
+            DP[stop i][city j] -> from src to city j, i stops at most, the min cost
+            i = 0...k+1, when j == dst -> src k stops dst (k+1) -> return dp[k+1][dst] as the min cost
+            how to update the dp[i][j]?
+
         DP[stop i][city j] -> from src to city j, i stop at most, the min cost
         DP[i][src] -> from src to src, no matter i, all 0 cost
         DP[K+2][dst] -> from src to dst, K stops at most (src->.. K stops..->dst), the min cost

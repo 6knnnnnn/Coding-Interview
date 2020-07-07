@@ -3,6 +3,17 @@
 # N个唯一的数，包含空集的子集数2^N，不包含全集的真子集 2^N-1
 
 
+def subset_bfs(nums):
+    res = [[]]
+    for num in nums:
+        size = len(res)
+        for i in xrange(size):
+            new = list(res[i])
+            new.append(num)
+            res.append(new)
+    return res
+
+
 def subset_unique(nums):
     # https://leetcode.com/problems/subsets-ii/description/
     def subsets_unique_recur(nums):

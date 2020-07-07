@@ -69,7 +69,7 @@ def shortest_distance_one_time_no_space(words, w1, w2):
 
 def shortest_distance_one_time(words, w1, w2):
     """
-    For example, assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+    For example, assume that sentences = ["practice", "makes", "perfect", "coding", "makes"].
     Given word1 = “coding”, word2 = “practice”, return 3.
     Given word1 = "makes", word2 = "coding", return 1.
     https://leetcode.com/problems/shortest-word-distance
@@ -93,7 +93,7 @@ def shortest_distance_one_time(words, w1, w2):
             i += 1
         else:
             j += 1
-    # 如果res没有更新过，仍旧是len(words)+1，也就是一个极值
+    # 如果res没有更新过，仍旧是len(sentences)+1，也就是一个极值
     return -1 if res == len(words) + 1 else res
 
 

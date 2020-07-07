@@ -25,7 +25,7 @@ print findLongestPalidrome('aabbccddde')
 def binary_tree_max_value_per_level(root):
     res = []
     if root:
-        queue = deque([root.val])
+        queue = deque([root])
         while queue:
             size = queue
             currMax = -sys.maxint
@@ -39,6 +39,17 @@ def binary_tree_max_value_per_level(root):
 
 
 def proudct_of_array_except_itself(nums):
+    """
+    https://leetcode.com/problems/product-of-array-except-self/description/
+    可以用数组预处理的方式来计算，也可以节省空间，第一轮处理
+         p:  1  n1  n1n2    n1n2n3
+    output:  1  n1  n1n2    n1n2n3
+    第二轮，逆序遍历
+    output:  1       n1     n1n2    n1n2n3
+         p:  n2n3n4  n3n4   n4      1
+    output:  n2n3n4  n1n3n4 n1n2n4  n1n2n3
+
+    """
     p = 1
     pei = []
     for n in nums:
@@ -51,6 +62,37 @@ def proudct_of_array_except_itself(nums):
         p = p * nums[i]
 
     return pei
+
+
+def product2(nums):
+    """
+    nums:    n0         n1          n2          n3
+    res:  n1n2n3    n0n2n3      n0n1n3      n0n1n2
+
+    rolling product array, p1 and p2
+    1st: l->r
+    p1:      1           n0        n0n1      n0n1n2 (except n3)
+
+    2nd: r->l
+    p2:  n1n2n3        n2n3        n3     1
+
+    res:  n1n2n3    n0n2n3      n0n1n3      n0n1n2
+    output: p1[i] * p2[i] -> res[i]
+    """
+    p1 = [1]
+    for i in xrange(len(nums) - 1):
+        p1.append(p1[-1] * nums[i])
+
+    from collections import deque
+    p2 = deque([1])
+    for i in xrange(len(nums) - 1, 0, -1):
+        p2.appendleft(p2[-1] * nums[i])
+
+    res = []
+    for i in xrange(len(nums)):
+        res.append(p1[i] * p2[i])
+
+    return res, p1, p2
 
 
 def trailing_zero(n):
@@ -82,7 +124,7 @@ def valid_palindrome(s):
 
 
 class Solution(object):
-    def validPalindrome(self, s):
+    def validPalindromeOneDeletion(self, s):
         def is_palindrome(s, i, j):
             while i < j:
                 if s[i] == s[j]:
@@ -102,30 +144,28 @@ class Solution(object):
 
 
 def squares_of_sorted_array(nums):
-    # https://leetcode.com/problems/squares-of-a-sorted-array/
-    # 两个指针，找到negative v.s. non negative，左边从右往左遍历，右边从左往右
+    """
+    https://leetcode.com/problems/squares-of-a-sorted-array/
+    两个指针，找到negative v.s. non negative，左边从右往左遍历，右边从左往右
+    Use 2 pointers, [0...p1] all negaitive [p2...n-1] all non negative
+    Merge sort the square of negative subarray v.s. non negative subarray
+    """
     res = []
-    p2 = 0
-    while p2 < len(nums) and nums[p2] < 0:
-        p2 += 1
-    # now [p1..p2] all negative, [p2:] all non neg
-    p3, p1 = p2, p2 - 1
-    p1 = p2 - 1
-    while p1 >= 0 or p3 < len(nums):
-        if p1 >= 0 and p3 < len(nums):
-            s1, s3 = nums[p1] * nums[p1], nums[p3] * nums[p3]
-            if s1 < s3:
-                res.append(s1)
-                p1 -= 1
-            else:
-                res.append(s3)
-                p3 += 1
-        elif p1 >= 0:
-            res.append(nums[p1] * nums[p1])
-            p1 -= 1
+    p1 = 0
+    while p1 < len(nums) and nums[p1] < 0:
+        p1 += 1
+    # now 0...p1-1 all negative, p1...n-1 all non negative
+    p2, p1 = p1, p1 - 1
+    while p1 >= 0 or p2 < len(nums):
+        s1 = nums[p1] * nums[p1] if p1 >= 0 else float('inf')
+        s2 = nums[p2] * nums[p2] if p2 < len(nums) else float('inf')
+        if s1 > s2:
+            res.append(s2)
+            p2 += 1
         else:
-            res.append(nums[p3] * nums[p3])
-            p3 += 1
+            res.append(s1)
+            p1 -= 1
+
     return res
 
 

@@ -3,8 +3,29 @@ from collections import deque
 
 
 def longest_increasing_subsequence(nums):
-    # https://leetcode.com/problems/longest-increasing-subsequence/
-    pass
+    """
+    https://leetcode.com/problems/longest-increasing-subsequence/
+    https://www.cnblogs.com/grandyang/p/4938187.html
+    dp[i] 表示在i位置时，可以找到的LIS的长度，初始dp[x] = 1，即每一个单个元素也可以当作是LIS不过size=1
+    i >= 1 时候 dp[i]更新方式：
+    1、找到0...i-1所有nums[j]，若nums[i]>nums[j], 说明i可以被加到以j为结尾的LIS当中，所以更新dp[i]为dp[j]+1
+    2、处理完所有的0...i-1，找到其中最大的dp[j]+1的值
+    所以每一个i，都要遍历之前的0...i-1，时间复杂度为O(N^2) 空间为O(N)
+    """
+    if not nums:
+        return 0
+    dp = []
+    for i in xrange(len(nums)):
+        # default value 1 since a single value is also a LIS
+        dp.append(1)
+        for j in xrange(i):
+            if nums[i] > nums[j] and dp[j] + 1 > dp[i]:
+                # find one candidate, record the index
+                dp[i] = dp[j]+1
+    return max(dp), dp
+
+
+print longest_increasing_subsequence([1,4,3,2,6,5])
 
 
 def longest_consecutive_sequence(nums):
@@ -38,20 +59,18 @@ def longest_mountain_in_array(nums):
         return j
 
     longest = 0
-    # mountains = []
+    mountains = []
     if nums:
         i = 0
         while i < len(nums):
             j = findIncreasingRange(nums, i)
-            if j < len(nums) - 1:
-                break
             k = findDecreasingRange(nums, j)
             if i < j < k:
-                # mountains.append(nums[i:k + 1])
+                mountains.append(nums[i:k + 1])
                 longest = max(longest, k - i + 1)
             # update i as either k or i+1 if k == i
             i = max(i+1, k)
-    return longest
+    return longest, mountains
 
 
 def test1():
@@ -64,6 +83,8 @@ def test1():
     ]:
         print longest_mountain_in_array(nums)
 
+
+test1()
 
 def shortestSubarray(nums, k):
     i = total = 0

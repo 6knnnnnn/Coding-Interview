@@ -12,7 +12,7 @@
 # e.g. with the lists above as input, with input names 'Bart' and 'Homer', you should return:
 #    ['Bart son Homer', 'Bart brother Lisa daughter Homer']
 
-from collections import defaultdict, deque
+from collections import defaultdict
 
 
 class FamilyGraph(object):

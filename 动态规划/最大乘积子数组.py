@@ -38,8 +38,7 @@ def maximum_product_subarray(nums):
     if not nums:
         return 0
     # 正（负）找之前的最大（小）值
-    max_p, min_p = nums[0], nums[0]
-    res = nums[0]
+    res = max_p = min_p = nums[0]
     for n in nums[1:]:
         if n < 0:  # 此时为负值，交换
             max_p, min_p = min_p, max_p

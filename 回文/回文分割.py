@@ -15,7 +15,7 @@ def palindrome_pairs(words):
     """
     https://leetcode.com/problems/palindrome-pairs/description/
     给定一组word 数组，找到里面所有可能的两两组合为一个palindrome pairs，返回pair index，要讲究顺序
-    words = ["abcd", "dcba", "lls", "s", "sssll"]，返回的是index：[[0, 1], [1, 0], [3, 2], [2, 4]]
+    sentences = ["abcd", "dcba", "lls", "s", "sssll"]，返回的是index：[[0, 1], [1, 0], [3, 2], [2, 4]]
     即The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
     暴力解法：对于所有可能的pair，判断是否为回文，所有的pair数量为N^N，假设每个word的平均长度为M，那么一个pair就是2M
     之后再检查是否是回文M时间，所以总的时间复杂度为O(M*N^2)

@@ -50,7 +50,7 @@ def fullJustify(words, maxWidth):
                 lineNode.words[k] += " "
                 remainingSpacesCount -= 1
                 k += 1
-            # after assigning one extra space to words of this line, concatenate all those words
+            # after assigning one extra space to sentences of this line, concatenate all those sentences
             lineRes = (" " * lineNode.getSpaceDiviedByGap()).join(lineNode.words)
 
         results.append(lineRes)
