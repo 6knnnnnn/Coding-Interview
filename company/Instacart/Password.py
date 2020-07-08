@@ -59,26 +59,40 @@
 #
 # Please write a program that reads from STDIN and prints the answer to STDOUT. Use the "Run Tests"
 # button to check your solution against the test cases.
-
-
-def parsePassword(inputs):
-    inputs = inputs.split("\n")
-    if not inputs:
-        return None
-    positions = inputs[0]
+import sys
 
 
 def parseOneChunk(matrix, x, y):
-    lenX = len(matrix)
-    line = matrix[lenX-x-1]
-    return line[y] if len(line) > y else ""
+    lineX = matrix[len(matrix)-1-x]
+    return lineX[y]
 
 
-matrix = """AFKPU
-BGLQV
-CHMRW
-DINSX
-EJOTY""".split("\n")
-for i in xrange(len(matrix)):
-    for j in xrange(len(matrix[i])):
-        print i, j, parseOneChunk(matrix, i, j)
+def parseParameters(inputs):
+    # index = inputs[0]
+    line0 = inputs[0]
+    x, y = line0.replace("[", "").replace("]", "").split(",")
+    matrix = inputs[1:]
+    return matrix, int(x), int(y)
+
+
+def consolidateCache(cache):
+    return "".join(cache)
+
+
+def main():
+    cache = [] # cache = {}
+    inputs = []
+    while True:
+        val = sys.stdin.readline()
+        if val == "END\n":
+            return consolidateCache(cache)
+        if val == "\n":
+            # new chunk found, get the parameters first
+            matrix, x, y = parseParameters(inputs)
+            cache.append(parseOneChunk(matrix, x, y))
+            # cache[index] = parseOneChunk(matrix, x, y)
+            inputs = []
+        else:
+            inputs.append(val)
+
+print main()

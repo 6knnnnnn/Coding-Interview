@@ -6,10 +6,10 @@
 #
 #        i.e. inner lists have len == 3 and are in form startName, relationship, endName
 #
-# Given a series of relationships as a list of lists, and given two names, return
+# Given a series of relationships as a list of lists, and given two inputs, return
 # all known "sequences" of relationships from startName to endName
 #
-# e.g. with the lists above as input, with input names 'Bart' and 'Homer', you should return:
+# e.g. with the lists above as input, with input inputs 'Bart' and 'Homer', you should return:
 #    ['Bart son Homer', 'Bart brother Lisa daughter Homer']
 
 from collections import defaultdict
