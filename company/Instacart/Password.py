@@ -75,17 +75,15 @@ def parseParameters(inputs):
     return matrix, int(x), int(y)
 
 
-def consolidateCache(cache):
-    return "".join(cache)
-
-
 def main():
     cache = [] # cache = {}
     inputs = []
     while True:
         val = sys.stdin.readline()
         if val == "END\n":
-            return consolidateCache(cache)
+            # consolidate all the pwd found so far
+            print "".join(cache)
+            break
         if val == "\n":
             # new chunk found, get the parameters first
             matrix, x, y = parseParameters(inputs)
@@ -95,4 +93,3 @@ def main():
         else:
             inputs.append(val)
 
-print main()
